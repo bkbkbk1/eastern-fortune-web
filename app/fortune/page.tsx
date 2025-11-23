@@ -50,6 +50,8 @@ export default function FortunePage() {
     }
   };
 
+  console.log('Current step:', step, 'Type:', typeof step);
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-600 to-indigo-700 flex items-center justify-center p-4">
       <div className="max-w-2xl w-full bg-white rounded-3xl shadow-2xl p-8 md:p-12">
@@ -298,6 +300,8 @@ export default function FortunePage() {
         {/* Step 4: 결과 */}
         {step === 4 && result && paid && (
           <div>
+            {/* DEBUG */}
+            {console.log('Step:', step, 'Result:', !!result, 'Paid:', paid)}
             <h2 className="text-3xl font-bold text-gray-800 mb-6 text-center">🔮 2026년 병오년 운세</h2>
 
             {/* 사주팔자 */}
@@ -371,6 +375,8 @@ export default function FortunePage() {
                 setStep(1);
                 setBirthDate('');
                 setResult(null);
+                setPaid(false);
+                setTempResult(null);
               }}
               className="w-full bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-semibold py-4 rounded-full hover:shadow-lg transition-all"
             >
