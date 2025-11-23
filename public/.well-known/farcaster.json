@@ -1,0 +1,29 @@
+{
+  "accountAssociation": {
+    "header": "eyJmaWQiOjI3MDAzMCwidHlwZSI6ImF1dGgiLCJrZXkiOiIweDA3RUU1MDVjNzY2MThjQjg1ZDZhMjNmZGJhYWNiMGJFNDU3NTQ0NWEifQ",
+    "payload": "eyJkb21haW4iOiJzYWp1LTIwMjYudmVyY2VsLmFwcCJ9",
+    "signature": "MHhiNzY4ZjYwZGFhMWExMzFhZjQwZGQxOTU4YmY1NzJkZjdjMzY5NmQyNmNmZDU5NjE4Y2M3NTYwM2JiZjJiZjcxMzViNWExYzUxNGFmOGFmMWU5NzBjMWI2MzFkZjYwMWM5MjYwYzI5ZTY1NWJmMmYyOTU3YzQ4MjBlNGE0MTlhYjFi"
+  },
+  "frame": {
+    "version": "1",
+    "name": "2026년 운세",
+    "iconUrl": "https://saju-2026.vercel.app/icon.png",
+    "homeUrl": "https://saju-2026.vercel.app/api/frame",
+    "imageUrl": "https://saju-2026.vercel.app/og-welcome.png",
+    "buttonTitle": "운세 보기",
+    "splashImageUrl": "https://saju-2026.vercel.app/splash.png",
+    "splashBackgroundColor": "#667eea",
+    "webhookUrl": "https://saju-2026.vercel.app/api/frame"
+  },
+  "miniapp": {
+    "version": "1",
+    "name": "2026년 병오년 운세",
+    "slug": "saju2026",
+    "homeUrl": "https://saju-2026.vercel.app",
+    "iconUrl": "https://saju-2026.vercel.app/icon.png",
+    "subtitle": "정통 사주명리로 보는 2026년",
+    "description": "생년월일시와 성별을 입력하면 ChatGPT가 2026년 병오년 운세를 해석해드립니다. 재물운, 직업운, 건강운까지 상세하게!",
+    "primaryCategory": "lifestyle",
+    "tags": ["fortune", "saju", "2026", "astrology", "korea"]
+  }
+}
