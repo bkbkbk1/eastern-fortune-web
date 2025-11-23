@@ -23,10 +23,10 @@ function getFrameHtml(imageUrl: string, buttons: any[], postUrl?: string, inputT
 
 // GET: 초기 Frame 메타데이터
 export async function GET() {
-  const imageUrl = `${process.env.NEXT_PUBLIC_URL}/og-welcome.png`;
+  const imageUrl = `${process.env.NEXT_PUBLIC_URL}/api/welcome-image`;
 
   return new NextResponse(
-    getFrameHtml(imageUrl, [{ label: '2026년 운세 보기 🔮' }]),
+    getFrameHtml(imageUrl, [{ label: '운세 보기 시작' }]),
     { headers: { 'Content-Type': 'text/html' } }
   );
 }
@@ -43,7 +43,7 @@ export async function POST(req: NextRequest) {
 
     // Step 1: 생년월일 입력
     if (step === 1) {
-      const imageUrl = `${process.env.NEXT_PUBLIC_URL}/og-step1.png`;
+      const imageUrl = `${process.env.NEXT_PUBLIC_URL}/api/step-image?step=1`;
       const html = getFrameHtml(
         imageUrl,
         [{ label: '다음' }],
@@ -61,14 +61,14 @@ export async function POST(req: NextRequest) {
       const birthDate = untrustedData.inputText || currentState.birthDate;
 
       if (!birthDate || birthDate.length !== 8) {
-        const errorImageUrl = `${process.env.NEXT_PUBLIC_URL}/og-error.png`;
+        const errorImageUrl = `${process.env.NEXT_PUBLIC_URL}/api/step-image?step=error`;
         return new NextResponse(
           getFrameHtml(errorImageUrl, [{ label: '다시 시도' }]),
           { headers: { 'Content-Type': 'text/html' } }
         );
       }
 
-      const imageUrl = `${process.env.NEXT_PUBLIC_URL}/og-step2.png`;
+      const imageUrl = `${process.env.NEXT_PUBLIC_URL}/api/step-image?step=2`;
       const newState = JSON.stringify({ step: 3, birthDate });
 
       // 시간대 버튼 (0-23시를 4개 그룹으로)
@@ -103,7 +103,7 @@ export async function POST(req: NextRequest) {
       const hour = searchParams.get('hour') || '12';
       const birthDate = currentState.birthDate;
 
-      const imageUrl = `${process.env.NEXT_PUBLIC_URL}/og-step3.png`;
+      const imageUrl = `${process.env.NEXT_PUBLIC_URL}/api/step-image?step=3`;
       const newState = JSON.stringify({ step: 4, birthDate, hour });
 
       const html = `<!DOCTYPE html>
@@ -160,7 +160,7 @@ export async function POST(req: NextRequest) {
     return new NextResponse('Invalid step', { status: 400 });
   } catch (error) {
     console.error('Frame error:', error);
-    const errorImageUrl = `${process.env.NEXT_PUBLIC_URL}/og-error.png`;
+    const errorImageUrl = `${process.env.NEXT_PUBLIC_URL}/api/step-image?step=error`;
     return new NextResponse(
       getFrameHtml(errorImageUrl, [{ label: '다시 시도' }]),
       { headers: { 'Content-Type': 'text/html' } }
