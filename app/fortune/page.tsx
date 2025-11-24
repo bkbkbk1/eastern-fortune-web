@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAccount, useConnect, useSendTransaction } from 'wagmi';
 import { parseEther } from 'viem';
+import { sdk } from '@farcaster/miniapp-sdk';
 
 export default function FortunePage() {
   const router = useRouter();
@@ -19,6 +20,21 @@ export default function FortunePage() {
   const [result, setResult] = useState<any>(null);
   const [paid, setPaid] = useState(false);
   const [tempResult, setTempResult] = useState<any>(null);
+  const [isSDKLoaded, setIsSDKLoaded] = useState(false);
+
+  useEffect(() => {
+    const initSDK = async () => {
+      try {
+        await sdk.actions.ready();
+        setIsSDKLoaded(true);
+      } catch (error) {
+        console.error('SDK initialization error:', error);
+        setIsSDKLoaded(true); // Continue anyway for browser testing
+      }
+    };
+
+    initSDK();
+  }, []);
 
   const handleCalculate = async () => {
     if (!birthDate || birthDate.length !== 8) {
