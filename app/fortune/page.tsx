@@ -4,7 +4,6 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAccount, useConnect, useSendTransaction } from 'wagmi';
 import { parseEther } from 'viem';
-import { sdk } from '@farcaster/miniapp-sdk';
 
 export default function FortunePage() {
   const router = useRouter();
@@ -27,6 +26,7 @@ export default function FortunePage() {
       if (typeof window === 'undefined') return;
 
       try {
+        const { sdk } = await import('@farcaster/miniapp-sdk');
         await sdk.actions.ready();
         setIsSDKLoaded(true);
       } catch (error) {
