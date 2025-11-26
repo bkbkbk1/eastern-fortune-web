@@ -12,8 +12,10 @@ export default function FortunePage() {
   const { data: hash, sendTransaction, isPending, isError, error } = useSendTransaction();
 
   const [step, setStep] = useState<number | 'payment'>(1);
+  const [name, setName] = useState('');
   const [birthDate, setBirthDate] = useState('');
-  const [birthHour, setBirthHour] = useState('12'); // 기본값: 12시 (오시)
+  const [birthHour, setBirthHour] = useState('12'); // 기본값: 12시
+  const [birthMinute, setBirthMinute] = useState('00'); // 기본값: 00분
   const [gender, setGender] = useState<'남성' | '여성'>('남성');
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState<any>(null);
@@ -121,26 +123,46 @@ export default function FortunePage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-600 to-indigo-700 flex items-center justify-center p-4">
       <div className="max-w-2xl w-full bg-white rounded-3xl shadow-2xl p-8 md:p-12">
-        {/* Step 1: 생년월일 입력 */}
+        {/* Step 1: 이름과 생년월일 입력 */}
         {step === 1 && (
           <div className="text-center">
             <h1 className="text-4xl font-bold text-gray-800 mb-4">🔮 2026년 운세</h1>
-            <p className="text-xl text-gray-600 mb-8">생년월일을 입력하세요</p>
+            <p className="text-xl text-gray-600 mb-8">이름과 생년월일을 입력하세요</p>
 
-            <input
-              type="text"
-              value={birthDate}
-              onChange={(e) => setBirthDate(e.target.value.replace(/\D/g, '').slice(0, 8))}
-              placeholder="예: 19901225"
-              className="w-full max-w-md px-6 py-4 text-xl text-center border-2 border-purple-300 rounded-2xl focus:outline-none focus:border-purple-600 mb-6"
-              maxLength={8}
-            />
+            <div className="max-w-md mx-auto space-y-6 mb-8">
+              <div>
+                <label className="block text-left text-gray-700 font-medium mb-2">
+                  이름
+                </label>
+                <input
+                  type="text"
+                  value={name}
+                  onChange={(e) => setName(e.target.value.slice(0, 20))}
+                  placeholder="입력하세요 (최대 20자)"
+                  className="w-full px-6 py-4 text-xl text-center border-2 border-purple-300 rounded-2xl focus:outline-none focus:border-purple-600"
+                  maxLength={20}
+                />
+              </div>
 
-            <p className="text-sm text-gray-500 mb-8">YYYYMMDD 형식 (8자리)</p>
+              <div>
+                <label className="block text-left text-gray-700 font-medium mb-2">
+                  생년월일
+                </label>
+                <input
+                  type="text"
+                  value={birthDate}
+                  onChange={(e) => setBirthDate(e.target.value.replace(/\D/g, '').slice(0, 8))}
+                  placeholder="예: 19901225"
+                  className="w-full px-6 py-4 text-xl text-center border-2 border-purple-300 rounded-2xl focus:outline-none focus:border-purple-600"
+                  maxLength={8}
+                />
+                <p className="text-sm text-gray-500 mt-2">YYYYMMDD 형식 (8자리)</p>
+              </div>
+            </div>
 
             <button
               onClick={() => setStep(2)}
-              disabled={birthDate.length !== 8}
+              disabled={!name.trim() || birthDate.length !== 8}
               className="bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-semibold px-12 py-4 rounded-full hover:shadow-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed"
             >
               다음
@@ -152,44 +174,45 @@ export default function FortunePage() {
         {step === 2 && (
           <div className="text-center">
             <h2 className="text-3xl font-bold text-gray-800 mb-4">출생시간 입력</h2>
-            <p className="text-gray-600 mb-8">정확한 시간을 선택해주세요 (시간만)</p>
+            <p className="text-gray-600 mb-8">출생 시간을 입력해주세요</p>
 
             <div className="max-w-md mx-auto mb-8">
               <label className="block text-left text-gray-700 font-medium mb-3">
-                출생 시간 (0~23시)
+                출생시간
               </label>
-              <select
-                value={birthHour}
-                onChange={(e) => setBirthHour(e.target.value)}
-                className="w-full px-6 py-4 text-xl border-2 border-purple-300 rounded-2xl focus:outline-none focus:border-purple-600 bg-white"
-              >
-                <option value="0">00시 (자시 23:00~01:00)</option>
-                <option value="1">01시 (축시 01:00~03:00)</option>
-                <option value="2">02시 (축시)</option>
-                <option value="3">03시 (인시 03:00~05:00)</option>
-                <option value="4">04시 (인시)</option>
-                <option value="5">05시 (묘시 05:00~07:00)</option>
-                <option value="6">06시 (묘시)</option>
-                <option value="7">07시 (진시 07:00~09:00)</option>
-                <option value="8">08시 (진시)</option>
-                <option value="9">09시 (사시 09:00~11:00)</option>
-                <option value="10">10시 (사시)</option>
-                <option value="11">11시 (오시 11:00~13:00)</option>
-                <option value="12">12시 (오시)</option>
-                <option value="13">13시 (미시 13:00~15:00)</option>
-                <option value="14">14시 (미시)</option>
-                <option value="15">15시 (신시 15:00~17:00)</option>
-                <option value="16">16시 (신시)</option>
-                <option value="17">17시 (유시 17:00~19:00)</option>
-                <option value="18">18시 (유시)</option>
-                <option value="19">19시 (술시 19:00~21:00)</option>
-                <option value="20">20시 (술시)</option>
-                <option value="21">21시 (해시 21:00~23:00)</option>
-                <option value="22">22시 (해시)</option>
-                <option value="23">23시 (자시 23:00~01:00)</option>
-              </select>
+
+              <div className="flex gap-4 items-center justify-center">
+                <div className="flex-1">
+                  <select
+                    value={birthHour}
+                    onChange={(e) => setBirthHour(e.target.value)}
+                    className="w-full px-4 py-4 text-xl border-2 border-purple-300 rounded-2xl focus:outline-none focus:border-purple-600 bg-white"
+                  >
+                    {Array.from({ length: 24 }, (_, i) => (
+                      <option key={i} value={i.toString()}>
+                        {i.toString().padStart(2, '0')}시
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                <div className="flex-1">
+                  <select
+                    value={birthMinute}
+                    onChange={(e) => setBirthMinute(e.target.value)}
+                    className="w-full px-4 py-4 text-xl border-2 border-purple-300 rounded-2xl focus:outline-none focus:border-purple-600 bg-white"
+                  >
+                    {Array.from({ length: 60 }, (_, i) => (
+                      <option key={i} value={i.toString()}>
+                        {i.toString().padStart(2, '0')}분
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              </div>
+
               <p className="text-sm text-gray-500 mt-3">
-                ※ 모르시면 대략적인 시간대를 선택하세요
+                ※ 정확한 시간을 모르시면 대략적인 시간을 선택하세요
               </p>
             </div>
 
@@ -373,7 +396,8 @@ export default function FortunePage() {
         {/* Step 4: 결과 */}
         {step === 4 && result && paid && (
           <div>
-            <h2 className="text-3xl font-bold text-gray-800 mb-6 text-center">🔮 2026년 병오년 운세</h2>
+            <h2 className="text-3xl font-bold text-gray-800 mb-2 text-center">🔮 2026년 병오년 운세</h2>
+            <p className="text-xl text-purple-700 font-semibold mb-6 text-center">{name}님의 운세</p>
 
             {/* 사주팔자 */}
             <div className="bg-gradient-to-r from-purple-100 to-indigo-100 rounded-2xl p-6 mb-6">
@@ -444,7 +468,10 @@ export default function FortunePage() {
             <button
               onClick={() => {
                 setStep(1);
+                setName('');
                 setBirthDate('');
+                setBirthHour('12');
+                setBirthMinute('00');
                 setResult(null);
                 setPaid(false);
                 setTempResult(null);
