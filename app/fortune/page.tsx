@@ -260,21 +260,21 @@ export default function FortunePage() {
           </div>
         )}
 
-        {/* Step 3.5: NFT 민팅/결제 */}
+        {/* Step 3.5: 결제 */}
         {step === 'payment' && tempResult && (
           <div className="text-center">
-            <h2 className="text-3xl font-bold text-gray-800 mb-4">🎁 운세 NFT 발급</h2>
+            <h2 className="text-3xl font-bold text-gray-800 mb-4">🔮 2026년 운세 보기</h2>
             <p className="text-gray-600 mb-8">
-              당신의 2026년 운세를 NFT로 소장하세요
+              ChatGPT가 분석한 당신의 2026년 운세를 확인하세요
             </p>
 
             <div className="bg-gradient-to-r from-purple-100 to-indigo-100 rounded-2xl p-8 mb-8">
               <div className="text-6xl mb-4">🔮</div>
               <h3 className="text-2xl font-bold text-gray-800 mb-2">
-                2026년 병오년 운세 NFT
+                2026년 병오년 운세
               </h3>
               <p className="text-gray-600 mb-6">
-                사주팔자와 ChatGPT 상세 해석 포함
+                사주팔자와 ChatGPT 상세 해석
               </p>
               <div className="text-4xl font-bold text-purple-700">
                 0.0001 ETH
@@ -297,7 +297,7 @@ export default function FortunePage() {
               </div>
               <div className="flex items-center gap-3">
                 <span className="text-green-500">✓</span>
-                <span className="text-gray-700">NFT 영구 소장 가능</span>
+                <span className="text-gray-700">AI 맞춤 조언</span>
               </div>
             </div>
 
@@ -356,7 +356,7 @@ export default function FortunePage() {
                   disabled={isPending || isConfirming || !tempResult}
                   className="w-full bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-bold text-lg py-5 rounded-full hover:shadow-2xl transition-all disabled:opacity-50"
                 >
-                  {isPending ? '지갑 승인 대기 중...' : isConfirming ? '트랜잭션 확인 중...' : 'NFT 발급하고 운세 보기 →'}
+                  {isPending ? '지갑 승인 대기 중...' : isConfirming ? '트랜잭션 확인 중...' : '결제하고 운세 보기 →'}
                 </button>
               </div>
             )}
