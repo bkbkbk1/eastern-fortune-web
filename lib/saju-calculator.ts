@@ -42,11 +42,15 @@ export function calculateSaju(
       throw new Error('Solar 객체 생성 실패');
     }
 
+    console.log('Solar time:', solar.getHour(), ':', solar.getMinute());
+
     const lunar = solar.getLunar();
 
     if (!lunar) {
       throw new Error('Lunar 객체 생성 실패');
     }
+
+    console.log('Lunar hour:', lunar.getHour());
 
     const yearPillar = lunar.getYearInGanZhi();
     const monthPillar = lunar.getMonthInGanZhi();
@@ -54,6 +58,7 @@ export function calculateSaju(
     const hourPillar = lunar.getTimeInGanZhi(); // 라이브러리의 시주 계산 사용
 
     console.log('Pillars:', { yearPillar, monthPillar, dayPillar, hourPillar });
+    console.log('Expected hour pillar for 15:58 should be 辛未');
 
     if (!yearPillar || !monthPillar || !dayPillar || !hourPillar) {
       throw new Error('사주 계산 실패: 기둥 정보를 가져올 수 없습니다.');
