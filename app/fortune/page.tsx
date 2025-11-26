@@ -2,14 +2,14 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { useAccount, useConnect, useSendTransaction } from 'wagmi';
+import { useAccount, useConnect, useSendTransaction, useWaitForTransactionReceipt } from 'wagmi';
 import { parseEther } from 'viem';
 
 export default function FortunePage() {
   const router = useRouter();
   const { isConnected, address } = useAccount();
   const { connect, connectors } = useConnect();
-  const { sendTransaction } = useSendTransaction();
+  const { data: hash, sendTransaction, isPending, isError, error } = useSendTransaction();
 
   const [step, setStep] = useState<number | 'payment'>(1);
   const [birthDate, setBirthDate] = useState('');
@@ -20,6 +20,11 @@ export default function FortunePage() {
   const [paid, setPaid] = useState(false);
   const [tempResult, setTempResult] = useState<any>(null);
   const [isSDKLoaded, setIsSDKLoaded] = useState(false);
+
+  // 트랜잭션 완료 감지
+  const { isLoading: isConfirming, isSuccess: isConfirmed } = useWaitForTransactionReceipt({
+    hash,
+  });
 
   useEffect(() => {
     const initSDK = async () => {
@@ -37,6 +42,26 @@ export default function FortunePage() {
 
     initSDK();
   }, []);
+
+  // 트랜잭션 성공 시 처리
+  useEffect(() => {
+    if (isConfirmed && hash) {
+      console.log('✅ Transaction confirmed! Hash:', hash);
+      setPaid(true);
+      setResult(tempResult);
+      setStep(4);
+      setLoading(false);
+    }
+  }, [isConfirmed, hash, tempResult]);
+
+  // 트랜잭션 에러 처리
+  useEffect(() => {
+    if (isError && error) {
+      console.error('❌ Transaction error:', error);
+      alert('트랜잭션 실패: ' + error.message);
+      setLoading(false);
+    }
+  }, [isError, error]);
 
   const handleCalculate = async () => {
     if (!birthDate || birthDate.length !== 8) {
@@ -310,33 +335,28 @@ export default function FortunePage() {
                 </div>
                 <button
                   onClick={() => {
+                    console.log('=== Payment Button Clicked ===');
+                    console.log('tempResult:', tempResult);
+                    console.log('isConnected:', isConnected);
+                    console.log('address:', address);
+
+                    if (!tempResult) {
+                      alert('운세 데이터가 없습니다. 다시 시도해주세요.');
+                      setStep(1);
+                      return;
+                    }
+
                     setLoading(true);
-                    sendTransaction(
-                      {
-                        to: '0x777BEF71B74F71a97925e6D2AF3786EC08A23923',
-                        value: parseEther('0.0001'),
-                      },
-                      {
-                        onSuccess: (hash) => {
-                          console.log('Transaction hash:', hash);
-                          setPaid(true);
-                          setResult(tempResult);
-                          setStep(4);
-                          setLoading(false);
-                          alert('NFT 발급 완료! 운세 결과를 확인하세요.');
-                        },
-                        onError: (error) => {
-                          console.error('Transaction error:', error);
-                          alert('트랜잭션이 취소되었거나 실패했습니다.');
-                          setLoading(false);
-                        }
-                      }
-                    );
+
+                    sendTransaction({
+                      to: '0x777BEF71B74F71a97925e6D2AF3786EC08A23923',
+                      value: parseEther('0.0001'),
+                    });
                   }}
-                  disabled={loading}
+                  disabled={isPending || isConfirming || !tempResult}
                   className="w-full bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-bold text-lg py-5 rounded-full hover:shadow-2xl transition-all disabled:opacity-50"
                 >
-                  {loading ? '트랜잭션 진행 중...' : 'NFT 발급하고 운세 보기 →'}
+                  {isPending ? '지갑 승인 대기 중...' : isConfirming ? '트랜잭션 확인 중...' : 'NFT 발급하고 운세 보기 →'}
                 </button>
               </div>
             )}
