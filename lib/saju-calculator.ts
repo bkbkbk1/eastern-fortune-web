@@ -73,16 +73,14 @@ export function calculateSaju(
       throw new Error('일은 1-31 사이여야 합니다.');
     }
 
-    console.log('Calculating saju for:', { year, month, day, hour, minute });
+    console.log('Calculating saju for (양력):', { year, month, day, hour, minute });
 
-    // Solar 객체를 시간까지 포함해서 생성
+    // 양력을 음력으로 변환
     const solar = Solar.fromYmdHms(year, month, day, hour, minute, 0);
 
     if (!solar) {
       throw new Error('Solar 객체 생성 실패');
     }
-
-    console.log('Solar time:', solar.getHour(), ':', solar.getMinute());
 
     const lunar = solar.getLunar();
 
@@ -90,8 +88,14 @@ export function calculateSaju(
       throw new Error('Lunar 객체 생성 실패');
     }
 
-    console.log('Lunar hour:', lunar.getHour());
+    console.log('Converted to lunar:', {
+      year: lunar.getYear(),
+      month: lunar.getMonth(),
+      day: lunar.getDay(),
+      hour: lunar.getHour()
+    });
 
+    // 음력 기준으로 사주 계산
     const yearPillar = lunar.getYearInGanZhi();
     const monthPillar = lunar.getMonthInGanZhi();
     const dayPillar = lunar.getDayInGanZhi();
@@ -102,8 +106,9 @@ export function calculateSaju(
 
     const dayGan = dayPillar.charAt(0); // 일간 추출
 
-    // 직접 계산한 시주 사용
-    const hourPillar = getHourPillar(dayGan, hour, minute);
+    // 음력 시간으로 시주 계산
+    const lunarHour = lunar.getHour();
+    const hourPillar = getHourPillar(dayGan, lunarHour, minute);
 
     console.log('Pillars:', { yearPillar, monthPillar, dayPillar, hourPillar });
     console.log('Day Gan:', dayGan);

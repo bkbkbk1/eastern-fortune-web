@@ -127,11 +127,11 @@ export default function FortunePage() {
         {step === 1 && (
           <div className="text-center">
             <h1 className="text-4xl font-bold text-gray-800 mb-4">🔮 2026년 운세</h1>
-            <p className="text-xl text-gray-600 mb-8">생년월일을 입력하세요</p>
+            <p className="text-xl text-gray-600 mb-8">양력 생년월일을 입력하세요</p>
 
             <div className="max-w-md mx-auto mb-8">
               <label className="block text-left text-gray-700 font-medium mb-2">
-                생년월일
+                양력 생년월일
               </label>
               <input
                 type="text"
@@ -141,7 +141,7 @@ export default function FortunePage() {
                 className="w-full px-6 py-4 text-xl text-center border-2 border-purple-300 rounded-2xl focus:outline-none focus:border-purple-600"
                 maxLength={8}
               />
-              <p className="text-sm text-gray-500 mt-2">YYYYMMDD 형식 (8자리)</p>
+              <p className="text-sm text-gray-500 mt-2">양력 YYYYMMDD 형식 (8자리)</p>
             </div>
 
             <button
