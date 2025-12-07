@@ -4,29 +4,17 @@
     "payload": "eyJkb21haW4iOiJzYWp1LTIwMjYudmVyY2VsLmFwcCJ9",
     "signature": "ESZLXt2szaNdxxyFnvscoUYrCFf5yiGQjwAPjJFtOHJzJs0C9dM/gdLZRFJYxlm/fH3EeBJsdi268mGYUmdcLBs="
   },
-  "frame": {
+  "miniapp": {
     "version": "1",
     "name": "Saju",
     "iconUrl": "https://saju-2026.vercel.app/icon.png",
     "homeUrl": "https://saju-2026.vercel.app",
     "imageUrl": "https://saju-2026.vercel.app/og-welcome.png",
-    "buttonTitle": "Check My Fortune",
     "splashImageUrl": "https://saju-2026.vercel.app/splash.png",
     "splashBackgroundColor": "#667eea",
-    "webhookUrl": "https://saju-2026.vercel.app/api/webhook",
-    "subtitle": "Your 2026 Fortune Reading",
-    "description": "Traditional Korean fortune telling powered by AI. Discover what the Year of Fire Horse has in store for you through Yin-Yang and Five Elements analysis.",
-    "primaryCategory": "entertainment"
-  },
-  "miniapp": {
-    "version": "1",
-    "name": "Saju",
-    "slug": "saju2026",
-    "homeUrl": "https://saju-2026.vercel.app/fortune",
-    "iconUrl": "https://saju-2026.vercel.app/icon.png",
     "subtitle": "Your 2026 Fortune Reading",
     "description": "Traditional Korean fortune telling powered by AI. Discover what the Year of Fire Horse has in store for you through Yin-Yang and Five Elements analysis.",
     "primaryCategory": "entertainment",
-    "tags": ["fortune", "saju", "korean astrology", "2026", "horoscope", "divination"]
+    "tags": ["fortune", "saju", "astrology", "2026", "horoscope"]
   }
 }
