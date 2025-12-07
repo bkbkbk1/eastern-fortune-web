@@ -1,10 +1,27 @@
 'use client';
 
+import { useEffect } from 'react';
 import { useLanguage } from '@/lib/LanguageContext';
 import LanguageToggle from './components/LanguageToggle';
 
 export default function Home() {
   const { t } = useLanguage();
+
+  // Initialize Farcaster SDK
+  useEffect(() => {
+    const initSDK = async () => {
+      if (typeof window === 'undefined') return;
+
+      try {
+        const { sdk } = await import('@farcaster/miniapp-sdk');
+        await sdk.actions.ready();
+      } catch (error) {
+        console.error('SDK initialization error:', error);
+      }
+    };
+
+    initSDK();
+  }, []);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-600 to-indigo-700 flex items-center justify-center p-4">
