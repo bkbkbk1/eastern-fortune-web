@@ -97,8 +97,10 @@ export default function FortunePage() {
         return;
       }
 
-      setTempResult(data);
-      setStep('payment');
+      // Free version - skip payment, go directly to results
+      setResult(data);
+      setPaid(true);
+      setStep(4);
     } catch (error) {
       console.error('Error:', error);
       alert(t.fortune.errors.calculationError + (error instanceof Error ? error.message : ''));
