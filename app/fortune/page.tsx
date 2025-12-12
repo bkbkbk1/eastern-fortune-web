@@ -24,6 +24,7 @@ export default function FortunePage() {
   const [paid, setPaid] = useState(false);
   const [tempResult, setTempResult] = useState<any>(null);
   const [isSDKLoaded, setIsSDKLoaded] = useState(false);
+  const [loadingMessage, setLoadingMessage] = useState('사주팔자 계산 중...');
 
   // 트랜잭션 완료 감지
   const { isLoading: isConfirming, isSuccess: isConfirmed } = useWaitForTransactionReceipt({
@@ -66,6 +67,32 @@ export default function FortunePage() {
       setLoading(false);
     }
   }, [isError, error, t]);
+
+  // Loading messages animation
+  useEffect(() => {
+    if (!loading) return;
+
+    const messages = [
+      '🔮 사주팔자 계산 중...',
+      '📊 음양오행 분석 중...',
+      '✨ 2026년 병오년과의 상호작용 분석 중...',
+      '💫 십신론 적용 중...',
+      '🌟 용신 파악 중...',
+      '📅 월별 운세 계산 중...',
+      '🍀 행운의 아이템 찾는 중...',
+      '🔍 삼재 여부 확인 중...',
+      '📝 상세한 운세 작성 중...',
+      '✅ 거의 완료되었습니다...'
+    ];
+
+    let currentIndex = 0;
+    const interval = setInterval(() => {
+      currentIndex = (currentIndex + 1) % messages.length;
+      setLoadingMessage(messages[currentIndex]);
+    }, 2000);
+
+    return () => clearInterval(interval);
+  }, [loading]);
 
   const handleCalculate = async () => {
     if (!birthDate || birthDate.length !== 8) {
@@ -128,6 +155,57 @@ export default function FortunePage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-600 to-indigo-700 flex items-center justify-center p-4">
       <LanguageToggle />
+
+      {/* Loading Screen */}
+      {loading && (
+        <div className="max-w-2xl w-full bg-white rounded-3xl shadow-2xl p-8 md:p-12">
+          <div className="text-center">
+            <div className="mb-8">
+              <div className="inline-block animate-spin rounded-full h-24 w-24 border-8 border-purple-200 border-t-purple-600 mb-6"></div>
+            </div>
+
+            <h2 className="text-3xl font-bold text-gray-800 mb-4">
+              운세 분석 중
+            </h2>
+
+            <div className="bg-gradient-to-r from-purple-100 to-indigo-100 rounded-2xl p-6 mb-6">
+              <p className="text-xl text-purple-700 font-semibold mb-4 animate-pulse">
+                {loadingMessage}
+              </p>
+              <div className="w-full bg-gray-200 rounded-full h-3 overflow-hidden">
+                <div className="bg-gradient-to-r from-purple-500 to-indigo-500 h-3 rounded-full animate-pulse"
+                     style={{width: '100%', animation: 'pulse 1.5s ease-in-out infinite'}}></div>
+              </div>
+            </div>
+
+            <div className="space-y-3 text-left bg-purple-50 rounded-xl p-6">
+              <p className="text-sm text-gray-600 flex items-center gap-2">
+                <span className="text-green-500 text-lg">✓</span>
+                <span>60년 경력 사주명리학 대가가 분석합니다</span>
+              </p>
+              <p className="text-sm text-gray-600 flex items-center gap-2">
+                <span className="text-green-500 text-lg">✓</span>
+                <span>13가지 상세 운세 카테고리</span>
+              </p>
+              <p className="text-sm text-gray-600 flex items-center gap-2">
+                <span className="text-green-500 text-lg">✓</span>
+                <span>12개월 월별 운세 제공</span>
+              </p>
+              <p className="text-sm text-gray-600 flex items-center gap-2">
+                <span className="text-green-500 text-lg">✓</span>
+                <span>행운의 아이템 & 삼재 분석 포함</span>
+              </p>
+            </div>
+
+            <p className="text-gray-500 text-sm mt-6">
+              ⏱️ 보통 20-30초 정도 소요됩니다
+            </p>
+          </div>
+        </div>
+      )}
+
+      {/* Main Content */}
+      {!loading && (
       <div className="max-w-2xl w-full bg-white rounded-3xl shadow-2xl p-8 md:p-12">
         {/* Step 1: Birth Date */}
         {step === 1 && (
@@ -651,6 +729,7 @@ export default function FortunePage() {
           </div>
         )}
       </div>
+      )}
     </div>
   );
 }
