@@ -186,7 +186,7 @@ export default function FortunePage() {
               </p>
               <p className="text-sm text-gray-600 flex items-center gap-2">
                 <span className="text-green-500 text-lg">✓</span>
-                <span>13가지 상세 운세 카테고리 (각 500-600자)</span>
+                <span>13가지 상세 운세 카테고리</span>
               </p>
               <p className="text-sm text-gray-600 flex items-center gap-2">
                 <span className="text-green-500 text-lg">✓</span>
