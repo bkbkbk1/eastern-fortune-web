@@ -78,9 +78,10 @@ export default function FortunePage() {
       '✨ 2026년 병오년과의 상호작용 분석 중...',
       '💫 십신론 적용 중...',
       '🌟 용신 파악 중...',
-      '📅 월별 운세 계산 중...',
+      '💰 재물운과 투자운 분석 중...',
+      '💼 직장운과 이직운 분석 중...',
+      '💕 애정운과 결혼운 분석 중...',
       '🍀 행운의 아이템 찾는 중...',
-      '🔍 삼재 여부 확인 중...',
       '📝 상세한 운세 작성 중...',
       '✅ 거의 완료되었습니다...'
     ];
@@ -185,15 +186,15 @@ export default function FortunePage() {
               </p>
               <p className="text-sm text-gray-600 flex items-center gap-2">
                 <span className="text-green-500 text-lg">✓</span>
-                <span>13가지 상세 운세 카테고리</span>
+                <span>13가지 상세 운세 카테고리 (각 500-600자)</span>
               </p>
               <p className="text-sm text-gray-600 flex items-center gap-2">
                 <span className="text-green-500 text-lg">✓</span>
-                <span>12개월 월별 운세 제공</span>
+                <span>취업/직장/이직/투자/창업/사업 전문 분석</span>
               </p>
               <p className="text-sm text-gray-600 flex items-center gap-2">
                 <span className="text-green-500 text-lg">✓</span>
-                <span>행운의 아이템 & 삼재 분석 포함</span>
+                <span>행운의 아이템 & 운세 개선 방법 포함</span>
               </p>
             </div>
 
@@ -616,27 +617,6 @@ export default function FortunePage() {
                 <p className="text-gray-700 whitespace-pre-line">{result.fortune.academic}</p>
               </div>
 
-              {/* 월별 상세 운세 */}
-              <div className="bg-gradient-to-r from-indigo-100 to-purple-100 rounded-xl p-5">
-                <h3 className="text-xl font-bold text-gray-800 mb-4 text-center">📅 1월~12월 월별 상세 운세</h3>
-                <div className="space-y-3">
-                  {Object.entries(result.fortune.monthly || {}).map(([month, data]: [string, any]) => (
-                    <div key={month} className="bg-white rounded-lg p-4">
-                      <h4 className="font-bold text-purple-700 mb-2">{month}월</h4>
-                      <div className="text-sm space-y-1 text-gray-700">
-                        <p><strong>총운:</strong> {data.overall}</p>
-                        <p><strong>재물운:</strong> {data.wealth}</p>
-                        <p><strong>애정운:</strong> {data.love}</p>
-                        <p><strong>직장운:</strong> {data.career}</p>
-                        <p><strong>대인관계운:</strong> {data.relationships}</p>
-                        <p><strong>건강운:</strong> {data.health}</p>
-                        <p><strong>여행·이동운:</strong> {data.travel}</p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
               {/* 행운 아이템 */}
               <div className="bg-gradient-to-r from-yellow-100 to-orange-100 rounded-xl p-5">
                 <h3 className="text-xl font-bold text-gray-800 mb-4 text-center">🍀 2026년 나에게 이로운 아이템</h3>
@@ -685,20 +665,6 @@ export default function FortunePage() {
                       ))}
                     </ul>
                   </div>
-                </div>
-              </div>
-
-              {/* 삼재 풀이 */}
-              <div className="bg-white border-2 border-red-300 rounded-xl p-5">
-                <h3 className="text-xl font-bold text-gray-800 mb-4 text-center">🔮 2026년 삼재 풀이</h3>
-                <div className="space-y-3">
-                  <div className={`text-center p-3 rounded-lg ${result.fortune.samjae?.isSamjae ? 'bg-red-100' : 'bg-green-100'}`}>
-                    <p className="font-bold text-lg">
-                      {result.fortune.samjae?.isSamjae ? '⚠️ 올해는 삼재입니다' : '✅ 올해는 삼재가 아닙니다'}
-                    </p>
-                  </div>
-                  <p className="text-gray-700 whitespace-pre-line">{result.fortune.samjae?.explanation}</p>
-                  <p className="text-sm text-gray-600"><strong>내 인생의 삼재:</strong> {result.fortune.samjae?.yearsOfSamjae}</p>
                 </div>
               </div>
 
