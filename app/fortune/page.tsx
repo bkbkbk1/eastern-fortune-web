@@ -410,46 +410,227 @@ export default function FortunePage() {
               </div>
             </div>
 
-            {/* Fortune */}
+            {/* Fortune - 2026년 대박 적중 신년운세 */}
             <div className="space-y-4 mb-8">
+              {/* 총운 */}
               <div className="bg-white border-2 border-purple-200 rounded-xl p-5">
                 <div className="flex items-center gap-2 mb-2">
                   <span className="text-2xl">✨</span>
-                  <h4 className="text-lg font-semibold text-gray-800">{t.fortune.result.overall}</h4>
+                  <h4 className="text-lg font-semibold text-gray-800">2026년 총운</h4>
                 </div>
-                <p className="text-gray-700">{result.fortune.overall}</p>
+                <p className="text-gray-700 whitespace-pre-line">{result.fortune.overall}</p>
               </div>
 
-              <div className="bg-white border-2 border-purple-200 rounded-xl p-5">
+              {/* 취업운 */}
+              <div className="bg-white border-2 border-blue-200 rounded-xl p-5">
                 <div className="flex items-center gap-2 mb-2">
-                  <span className="text-2xl">💰</span>
-                  <h4 className="text-lg font-semibold text-gray-800">{t.fortune.result.wealth}</h4>
+                  <span className="text-2xl">💼</span>
+                  <h4 className="text-lg font-semibold text-gray-800">취업운 풀이</h4>
                 </div>
-                <p className="text-gray-700">{result.fortune.wealth}</p>
+                <p className="text-gray-700 whitespace-pre-line">{result.fortune.employment}</p>
               </div>
 
-              <div className="bg-white border-2 border-purple-200 rounded-xl p-5">
+              {/* 직장운 */}
+              <div className="bg-white border-2 border-blue-200 rounded-xl p-5">
                 <div className="flex items-center gap-2 mb-2">
-                  <span className="text-2xl">🏆</span>
-                  <h4 className="text-lg font-semibold text-gray-800">{t.fortune.result.career}</h4>
+                  <span className="text-2xl">🏢</span>
+                  <h4 className="text-lg font-semibold text-gray-800">직장운 풀이</h4>
                 </div>
-                <p className="text-gray-700">{result.fortune.career}</p>
+                <p className="text-gray-700 whitespace-pre-line">{result.fortune.workplace}</p>
               </div>
 
-              <div className="bg-white border-2 border-purple-200 rounded-xl p-5">
+              {/* 이직운 */}
+              <div className="bg-white border-2 border-blue-200 rounded-xl p-5">
+                <div className="flex items-center gap-2 mb-2">
+                  <span className="text-2xl">🔄</span>
+                  <h4 className="text-lg font-semibold text-gray-800">이직운 풀이</h4>
+                </div>
+                <p className="text-gray-700 whitespace-pre-line">{result.fortune.jobChange}</p>
+              </div>
+
+              {/* 대인관계운 */}
+              <div className="bg-white border-2 border-pink-200 rounded-xl p-5">
+                <div className="flex items-center gap-2 mb-2">
+                  <span className="text-2xl">👥</span>
+                  <h4 className="text-lg font-semibold text-gray-800">대인관계운 풀이</h4>
+                </div>
+                <p className="text-gray-700 whitespace-pre-line">{result.fortune.relationships}</p>
+              </div>
+
+              {/* 건강운 */}
+              <div className="bg-white border-2 border-green-200 rounded-xl p-5">
                 <div className="flex items-center gap-2 mb-2">
                   <span className="text-2xl">💚</span>
-                  <h4 className="text-lg font-semibold text-gray-800">{t.fortune.result.health}</h4>
+                  <h4 className="text-lg font-semibold text-gray-800">건강운 풀이</h4>
                 </div>
-                <p className="text-gray-700">{result.fortune.health}</p>
+                <p className="text-gray-700 whitespace-pre-line">{result.fortune.health}</p>
               </div>
 
+              {/* 애정운 */}
+              <div className="bg-white border-2 border-red-200 rounded-xl p-5">
+                <div className="flex items-center gap-2 mb-2">
+                  <span className="text-2xl">💕</span>
+                  <h4 className="text-lg font-semibold text-gray-800">애정운 풀이</h4>
+                </div>
+                <p className="text-gray-700 whitespace-pre-line">{result.fortune.love}</p>
+              </div>
+
+              {/* 결혼운 */}
+              <div className="bg-white border-2 border-red-200 rounded-xl p-5">
+                <div className="flex items-center gap-2 mb-2">
+                  <span className="text-2xl">💑</span>
+                  <h4 className="text-lg font-semibold text-gray-800">결혼운 풀이</h4>
+                </div>
+                <p className="text-gray-700 whitespace-pre-line">{result.fortune.marriage}</p>
+              </div>
+
+              {/* 금전운 */}
+              <div className="bg-white border-2 border-yellow-200 rounded-xl p-5">
+                <div className="flex items-center gap-2 mb-2">
+                  <span className="text-2xl">💰</span>
+                  <h4 className="text-lg font-semibold text-gray-800">금전운 풀이</h4>
+                </div>
+                <p className="text-gray-700 whitespace-pre-line">{result.fortune.wealth}</p>
+              </div>
+
+              {/* 투자운 */}
+              <div className="bg-white border-2 border-yellow-200 rounded-xl p-5">
+                <div className="flex items-center gap-2 mb-2">
+                  <span className="text-2xl">📈</span>
+                  <h4 className="text-lg font-semibold text-gray-800">투자운/재테크운 풀이</h4>
+                </div>
+                <p className="text-gray-700 whitespace-pre-line">{result.fortune.investment}</p>
+              </div>
+
+              {/* 창업운 */}
+              <div className="bg-white border-2 border-orange-200 rounded-xl p-5">
+                <div className="flex items-center gap-2 mb-2">
+                  <span className="text-2xl">🚀</span>
+                  <h4 className="text-lg font-semibold text-gray-800">창업운 풀이</h4>
+                </div>
+                <p className="text-gray-700 whitespace-pre-line">{result.fortune.startup}</p>
+              </div>
+
+              {/* 사업운 */}
+              <div className="bg-white border-2 border-orange-200 rounded-xl p-5">
+                <div className="flex items-center gap-2 mb-2">
+                  <span className="text-2xl">📊</span>
+                  <h4 className="text-lg font-semibold text-gray-800">사업운 풀이</h4>
+                </div>
+                <p className="text-gray-700 whitespace-pre-line">{result.fortune.business}</p>
+              </div>
+
+              {/* 소비운 */}
+              <div className="bg-white border-2 border-purple-200 rounded-xl p-5">
+                <div className="flex items-center gap-2 mb-2">
+                  <span className="text-2xl">🛍️</span>
+                  <h4 className="text-lg font-semibold text-gray-800">소비운 풀이</h4>
+                </div>
+                <p className="text-gray-700 whitespace-pre-line">{result.fortune.consumption}</p>
+              </div>
+
+              {/* 학업운 */}
+              <div className="bg-white border-2 border-blue-200 rounded-xl p-5">
+                <div className="flex items-center gap-2 mb-2">
+                  <span className="text-2xl">📚</span>
+                  <h4 className="text-lg font-semibold text-gray-800">학업운 풀이</h4>
+                </div>
+                <p className="text-gray-700 whitespace-pre-line">{result.fortune.academic}</p>
+              </div>
+
+              {/* 월별 상세 운세 */}
+              <div className="bg-gradient-to-r from-indigo-100 to-purple-100 rounded-xl p-5">
+                <h3 className="text-xl font-bold text-gray-800 mb-4 text-center">📅 1월~12월 월별 상세 운세</h3>
+                <div className="space-y-3">
+                  {Object.entries(result.fortune.monthly || {}).map(([month, data]: [string, any]) => (
+                    <div key={month} className="bg-white rounded-lg p-4">
+                      <h4 className="font-bold text-purple-700 mb-2">{month}월</h4>
+                      <div className="text-sm space-y-1 text-gray-700">
+                        <p><strong>총운:</strong> {data.overall}</p>
+                        <p><strong>재물운:</strong> {data.wealth}</p>
+                        <p><strong>애정운:</strong> {data.love}</p>
+                        <p><strong>직장운:</strong> {data.career}</p>
+                        <p><strong>대인관계운:</strong> {data.relationships}</p>
+                        <p><strong>건강운:</strong> {data.health}</p>
+                        <p><strong>여행·이동운:</strong> {data.travel}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* 행운 아이템 */}
+              <div className="bg-gradient-to-r from-yellow-100 to-orange-100 rounded-xl p-5">
+                <h3 className="text-xl font-bold text-gray-800 mb-4 text-center">🍀 2026년 나에게 이로운 아이템</h3>
+                <div className="grid grid-cols-3 gap-4">
+                  <div className="text-center">
+                    <div className="text-3xl mb-2">🎨</div>
+                    <h4 className="font-semibold mb-1">행운의 색</h4>
+                    {result.fortune.luckyColors?.map((color: string, i: number) => (
+                      <p key={i} className="text-sm text-gray-700">{color}</p>
+                    ))}
+                  </div>
+                  <div className="text-center">
+                    <div className="text-3xl mb-2">🔢</div>
+                    <h4 className="font-semibold mb-1">행운의 숫자</h4>
+                    {result.fortune.luckyNumbers?.map((num: string, i: number) => (
+                      <p key={i} className="text-sm text-gray-700">{num}</p>
+                    ))}
+                  </div>
+                  <div className="text-center">
+                    <div className="text-3xl mb-2">🧭</div>
+                    <h4 className="font-semibold mb-1">행운의 방향</h4>
+                    {result.fortune.luckyDirections?.map((dir: string, i: number) => (
+                      <p key={i} className="text-sm text-gray-700">{dir}</p>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              {/* 운의 흐름 */}
+              <div className="bg-white border-2 border-purple-200 rounded-xl p-5">
+                <h3 className="text-xl font-bold text-gray-800 mb-4 text-center">⚡ 2026년의 극과 극</h3>
+                <div className="grid md:grid-cols-2 gap-4">
+                  <div className="bg-green-50 rounded-lg p-4">
+                    <h4 className="font-bold text-green-700 mb-2">✅ 운의 흐름이 좋아집니다</h4>
+                    <ul className="text-sm space-y-1 text-gray-700">
+                      {result.fortune.goodHabits?.map((habit: string, i: number) => (
+                        <li key={i}>• {habit}</li>
+                      ))}
+                    </ul>
+                  </div>
+                  <div className="bg-red-50 rounded-lg p-4">
+                    <h4 className="font-bold text-red-700 mb-2">⚠️ 운의 흐름에 방해를 받습니다</h4>
+                    <ul className="text-sm space-y-1 text-gray-700">
+                      {result.fortune.badHabits?.map((habit: string, i: number) => (
+                        <li key={i}>• {habit}</li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              {/* 삼재 풀이 */}
+              <div className="bg-white border-2 border-red-300 rounded-xl p-5">
+                <h3 className="text-xl font-bold text-gray-800 mb-4 text-center">🔮 2026년 삼재 풀이</h3>
+                <div className="space-y-3">
+                  <div className={`text-center p-3 rounded-lg ${result.fortune.samjae?.isSamjae ? 'bg-red-100' : 'bg-green-100'}`}>
+                    <p className="font-bold text-lg">
+                      {result.fortune.samjae?.isSamjae ? '⚠️ 올해는 삼재입니다' : '✅ 올해는 삼재가 아닙니다'}
+                    </p>
+                  </div>
+                  <p className="text-gray-700 whitespace-pre-line">{result.fortune.samjae?.explanation}</p>
+                  <p className="text-sm text-gray-600"><strong>내 인생의 삼재:</strong> {result.fortune.samjae?.yearsOfSamjae}</p>
+                </div>
+              </div>
+
+              {/* 최종 조언 */}
               <div className="bg-gradient-to-r from-yellow-100 to-orange-100 border-2 border-yellow-300 rounded-xl p-5">
                 <div className="flex items-center gap-2 mb-2">
                   <span className="text-2xl">💡</span>
-                  <h4 className="text-lg font-semibold text-gray-800">{t.fortune.result.advice}</h4>
+                  <h4 className="text-lg font-semibold text-gray-800">2026년 최종 조언</h4>
                 </div>
-                <p className="text-gray-700 font-medium">{result.fortune.advice}</p>
+                <p className="text-gray-700 font-medium whitespace-pre-line">{result.fortune.advice}</p>
               </div>
             </div>
 

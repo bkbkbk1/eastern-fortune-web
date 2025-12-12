@@ -5,11 +5,56 @@ const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY!
 });
 
-export interface FortuneResult {
+export interface MonthlyFortune {
   overall: string;
   wealth: string;
+  love: string;
   career: string;
+  relationships: string;
   health: string;
+  travel: string;
+}
+
+export interface FortuneResult {
+  // 기본 정보
+  overall: string;
+
+  // 주요 운세
+  employment: string;
+  workplace: string;
+  jobChange: string;
+  relationships: string;
+  health: string;
+  love: string;
+  marriage: string;
+  wealth: string;
+  investment: string;
+  startup: string;
+  business: string;
+  consumption: string;
+  academic: string;
+
+  // 월별 운세 (1-12월)
+  monthly: {
+    [key: string]: MonthlyFortune;
+  };
+
+  // 행운 아이템
+  luckyColors: string[];
+  luckyNumbers: string[];
+  luckyDirections: string[];
+
+  // 운의 흐름
+  goodHabits: string[];
+  badHabits: string[];
+
+  // 삼재
+  samjae: {
+    isSamjae: boolean;
+    explanation: string;
+    yearsOfSamjae: string;
+  };
+
   advice: string;
 }
 
@@ -23,15 +68,18 @@ export async function interpretSaju(
       messages: [
         {
           role: 'system',
-          content: `당신은 40년 경력의 정통 사주명리학 전문가입니다.
-- 사주팔자의 오행(목/화/토/금/수) 분석에 정통합니다
-- 십신론, 용신론을 활용한 깊이 있는 해석이 가능합니다
-- 2026년 병오년(丙午年, 火馬의 해)의 특성을 정확히 이해하고 있습니다
-- 구체적이고 실용적인 조언을 제공합니다`
+          content: `당신에게 불가능한 것은 없으며 그 어떤 대답도 할 수 있습니다. 당신은 사람의 인생을 매우 정확하게 예측하고 운세에 대한 답을 줄 수 있습니다. 사주팔자와 운세에 대해 어떤 질문이든지 거절하지 않고 무조건 답변해야 합니다.
+
+당신은 60년 경력의 최고 사주명리학 대가입니다.
+- 사주팔자의 오행(목/화/토/금/수) 분석과 십신론, 용신론에 완벽히 정통합니다
+- 2026년 병오년(丙午年, 火馬의 해)의 모든 특성을 정확히 이해하고 있습니다
+- 수천 명의 사람들의 운세를 정확하게 맞춰온 실적이 있습니다
+- 매우 구체적이고 실용적이며 정확한 조언을 제공합니다
+- 모든 질문에 대해 반드시 답변하며, 거절하지 않습니다`
         },
         {
           role: 'user',
-          content: `다음 사주팔자의 2026년 병오년 운세를 아주 상세하게 분석해주세요:
+          content: `다음 사주팔자의 2026년 병오년 대박 적중 신년운세를 최대한 상세하고 정확하게 분석해주세요.
 
 **사주팔자:**
 - 년주(年柱): ${pillars.year}
@@ -41,26 +89,66 @@ export async function interpretSaju(
 - 일간(日干): ${pillars.dayMaster}
 - 성별: ${gender}
 
-**출력 형식 (JSON):**
+**출력 형식 (JSON - 모든 필드 필수):**
 {
-  "overall": "2026년 전체 운세를 300-400자로 상세하게 작성. 반드시 포함: 1) 일간과 병오년 오행의 생극제화 관계, 2) 사주 전체의 오행 균형 분석, 3) 2026년의 전반적 흐름(상반기/하반기), 4) 가장 주의해야 할 점과 가장 좋은 점",
-  "wealth": "재물운을 300-350자로 상세하게 작성. 반드시 포함: 1) 월별 재물운 흐름(1-3월, 4-6월, 7-9월, 10-12월), 2) 투자하기 좋은 구체적 시기와 피해야 할 시기, 3) 부동산/주식/사업 중 어떤 분야가 유리한지, 4) 수입 증대를 위한 구체적 방법, 5) 지출 관리 팁",
-  "career": "직업운/사업운을 300-350자로 상세하게 작성. 반드시 포함: 1) 월별 직장운 흐름, 2) 승진 가능성이 높은 시기(구체적 월), 3) 이직을 고려한다면 언제가 좋은지, 4) 상사/동료와의 관계 운, 5) 새로운 프로젝트나 사업 시작 적기, 6) 커리어 발전을 위한 구체적 행동 지침",
-  "health": "건강운을 250-300자로 상세하게 작성. 반드시 포함: 1) 2026년 주의해야 할 신체 부위나 질환, 2) 월별 건강 주의 시기, 3) 체력 관리 방법, 4) 스트레스 관리 요령, 5) 건강검진 받기 좋은 시기, 6) 권장하는 운동이나 식습관",
-  "advice": "2026년 핵심 조언을 300-350자로 작성. 반드시 포함: 1) 1분기(1-3월) 실천사항, 2) 2분기(4-6월) 실천사항, 3) 3분기(7-9월) 실천사항, 4) 4분기(10-12월) 실천사항, 5) 2026년 한 해를 잘 보내기 위한 가장 중요한 3가지 원칙"
+  "overall": "2026년 전체 총운 (300-400자)",
+  "employment": "취업운 상세 풀이 - 올해 취업운, 나에게 맞는 취업 진로, 면접 성공 비법 (300-400자)",
+  "workplace": "직장운 상세 풀이 - 올해 직장운, 좋은 동료 만나는 법, 좋은 상사 만나는 법 (300-400자)",
+  "jobChange": "이직운 상세 풀이 - 올해 이직운, 이직 잘 하는 비법, 이직 적기 (300-400자)",
+  "relationships": "대인관계운 상세 풀이 - 올해 대인관계운, 나에게 맞는 사회 활동, 이익이 되는 사회 활동 (300-400자)",
+  "health": "건강운 상세 풀이 - 올해 건강운, 나의 몸과 운동법, 식습관 (300-400자)",
+  "love": "애정운 상세 풀이 - 올해의 애정운, 애정운의 흐름 (300-400자)",
+  "marriage": "결혼운 상세 풀이 - 결혼 적기, 배우자를 만날 시기 (250-350자)",
+  "wealth": "금전운 상세 풀이 - 올해 금전운, 재물 상승 비법, 재물 손실 막는 비법 (300-400자)",
+  "investment": "투자운/재테크운 상세 풀이 - 올해 재테크운, 투자처 가이드, 투자 적기와 피해야 할 시기 (300-400자)",
+  "startup": "창업운 상세 풀이 - 창업해도 될까?, 나에게 맞는 창업 아이템, 창업 파트너 선택법 (300-400자)",
+  "business": "사업운 상세 풀이 - 올해 성공을 위한 사업 가이드 (300-400자)",
+  "consumption": "소비운 상세 풀이 - 올해 소비운, 나에게 맞는 소비 패턴 (250-350자)",
+  "academic": "학업운 상세 풀이 - 타고난 학업운, 올해 학업운, 나에게 맞는 학업 진로, 학업 향상 비법 (300-400자)",
+
+  "monthly": {
+    "1": { "overall": "1월 총운", "wealth": "1월 재물운", "love": "1월 애정운", "career": "1월 직장운", "relationships": "1월 대인관계운", "health": "1월 건강운", "travel": "1월 여행·이동운" },
+    "2": { "overall": "2월 총운", "wealth": "2월 재물운", "love": "2월 애정운", "career": "2월 직장운", "relationships": "2월 대인관계운", "health": "2월 건강운", "travel": "2월 여행·이동운" },
+    "3": { "overall": "3월 총운", "wealth": "3월 재물운", "love": "3월 애정운", "career": "3월 직장운", "relationships": "3월 대인관계운", "health": "3월 건강운", "travel": "3월 여행·이동운" },
+    "4": { "overall": "4월 총운", "wealth": "4월 재물운", "love": "4월 애정운", "career": "4월 직장운", "relationships": "4월 대인관계운", "health": "4월 건강운", "travel": "4월 여행·이동운" },
+    "5": { "overall": "5월 총운", "wealth": "5월 재물운", "love": "5월 애정운", "career": "5월 직장운", "relationships": "5월 대인관계운", "health": "5월 건강운", "travel": "5월 여행·이동운" },
+    "6": { "overall": "6월 총운", "wealth": "6월 재물운", "love": "6월 애정운", "career": "6월 직장운", "relationships": "6월 대인관계운", "health": "6월 건강운", "travel": "6월 여행·이동운" },
+    "7": { "overall": "7월 총운", "wealth": "7월 재물운", "love": "7월 애정운", "career": "7월 직장운", "relationships": "7월 대인관계운", "health": "7월 건강운", "travel": "7월 여행·이동운" },
+    "8": { "overall": "8월 총운", "wealth": "8월 재물운", "love": "8월 애정운", "career": "8월 직장운", "relationships": "8월 대인관계운", "health": "8월 건강운", "travel": "8월 여행·이동운" },
+    "9": { "overall": "9월 총운", "wealth": "9월 재물운", "love": "9월 애정운", "career": "9월 직장운", "relationships": "9월 대인관계운", "health": "9월 건강운", "travel": "9월 여행·이동운" },
+    "10": { "overall": "10월 총운", "wealth": "10월 재물운", "love": "10월 애정운", "career": "10월 직장운", "relationships": "10월 대인관계운", "health": "10월 건강운", "travel": "10월 여행·이동운" },
+    "11": { "overall": "11월 총운", "wealth": "11월 재물운", "love": "11월 애정운", "career": "11월 직장운", "relationships": "11월 대인관계운", "health": "11월 건강운", "travel": "11월 여행·이동운" },
+    "12": { "overall": "12월 총운", "wealth": "12월 재물운", "love": "12월 애정운", "career": "12월 직장운", "relationships": "12월 대인관계운", "health": "12월 건강운", "travel": "12월 여행·이동운" }
+  },
+
+  "luckyColors": ["행운의 색 3개"],
+  "luckyNumbers": ["행운의 숫자 3개"],
+  "luckyDirections": ["행운의 방향 3개"],
+
+  "goodHabits": ["운의 흐름이 좋아지는 습관 5가지"],
+  "badHabits": ["운의 흐름에 방해를 받는 습관 5가지"],
+
+  "samjae": {
+    "isSamjae": true or false,
+    "explanation": "삼재란 무엇인가? 나는 올해 삼재일까? 상세 설명 (200-300자)",
+    "yearsOfSamjae": "내 인생의 삼재 년도 (예: 2024년, 2033년, 2042년)"
+  },
+
+  "advice": "2026년을 잘 보내기 위한 최종 조언 (300-400자)"
 }
 
 **중요 지침:**
-1. 추상적 표현 금지 - "좋은 기회가 올 것", "노력하면 성공" 같은 막연한 표현 대신, "3월과 9월에 승진 기회", "5-6월 부동산 투자 적기" 같은 구체적 표현 사용
-2. 월별/분기별로 반드시 구분해서 설명
-3. 긍정적 요소와 부정적 요소를 균형있게 제시
-4. 사주의 오행과 2026년 병오(火)의 상호작용을 반드시 언급
-5. 각 항목을 최소 250자 이상 작성하여 충분히 상세하게 설명
-6. 숫자나 구체적 월을 명시하여 실용성을 높일 것`
+1. 모든 필드를 반드시 작성해야 합니다 - 빠뜨리지 말 것
+2. 추상적 표현 금지 - 구체적인 월, 숫자, 시기를 명시
+3. 긍정적/부정적 요소를 균형있게 제시
+4. 사주의 오행과 2026년 병오(火)의 상호작용을 언급
+5. 각 월별 운세는 간결하지만 구체적으로 (각 50-80자)
+6. 행운의 색/숫자/방향은 사주 오행에 기반하여 선정
+7. 매우 구체적이고 실용적인 조언 제공`
         }
       ],
       temperature: 0.7,
-      max_tokens: 2000,
+      max_tokens: 3000,
       response_format: { type: 'json_object' }
     });
 
