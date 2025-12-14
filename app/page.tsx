@@ -76,6 +76,25 @@ export default function Home() {
               {t.home.button}
             </a>
           </div>
+
+          {/* 쿠팡 파트너스 배너 */}
+          <div className="mt-8">
+            <p className="text-xs text-gray-400 text-center mb-3">추천 상품</p>
+            <div className="flex justify-center">
+              <iframe
+                src="https://ads-partners.coupang.com/widgets.html?id=950096&template=carousel&trackingCode=AF9626171&subId=&width=468&height=60&tsource="
+                width="468"
+                height="60"
+                frameBorder="0"
+                scrolling="no"
+                referrerPolicy="unsafe-url"
+                className="max-w-full"
+              ></iframe>
+            </div>
+            <p className="text-xs text-gray-400 text-center mt-2">
+              이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.
+            </p>
+          </div>
         </div>
       </div>
     </div>
