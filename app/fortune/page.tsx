@@ -697,6 +697,17 @@ export default function FortunePage() {
               </p>
             </div>
 
+            {/* 카카오 애드핏 배너 */}
+            <div className="mb-6">
+              <div className="flex justify-center">
+                <ins className="kakao_ad_area" style={{display: 'none'}}
+                  data-ad-unit="DAN-jSMGjcGDOLCsegr6"
+                  data-ad-width="320"
+                  data-ad-height="50"></ins>
+              </div>
+              <script type="text/javascript" src="//t1.daumcdn.net/kas/static/ba.min.js" async></script>
+            </div>
+
             <button
               onClick={() => {
                 setStep(1);

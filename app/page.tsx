@@ -95,6 +95,17 @@ export default function Home() {
               이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.
             </p>
           </div>
+
+          {/* 카카오 애드핏 배너 */}
+          <div className="mt-6">
+            <div className="flex justify-center">
+              <ins className="kakao_ad_area" style={{display: 'none'}}
+                data-ad-unit="DAN-jSMGjcGDOLCsegr6"
+                data-ad-width="320"
+                data-ad-height="50"></ins>
+            </div>
+            <script type="text/javascript" src="//t1.daumcdn.net/kas/static/ba.min.js" async></script>
+          </div>
         </div>
       </div>
     </div>
