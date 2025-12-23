@@ -545,6 +545,17 @@ export default function FortunePage() {
                 <p className="text-gray-700 whitespace-pre-line">{result.fortune.health}</p>
               </div>
 
+              {/* 카카오 애드핏 320x100 */}
+              <div className="my-6">
+                <p className="text-xs text-gray-400 text-center mb-3">광고</p>
+                <div className="flex justify-center">
+                  <ins className="kakao_ad_area" style={{display: 'none'}}
+                    data-ad-unit="DAN-mHJn9kNMYQ0lX3f9"
+                    data-ad-width="320"
+                    data-ad-height="100"></ins>
+                </div>
+              </div>
+
               {/* 애정운 */}
               <div className="bg-white border-2 border-red-200 rounded-xl p-5">
                 <div className="flex items-center gap-2 mb-2">
@@ -579,6 +590,17 @@ export default function FortunePage() {
                   <h4 className="text-lg font-semibold text-gray-800">투자운/재테크운 풀이</h4>
                 </div>
                 <p className="text-gray-700 whitespace-pre-line">{result.fortune.investment}</p>
+              </div>
+
+              {/* 카카오 애드핏 300x250 */}
+              <div className="my-6">
+                <p className="text-xs text-gray-400 text-center mb-3">광고</p>
+                <div className="flex justify-center">
+                  <ins className="kakao_ad_area" style={{display: 'none'}}
+                    data-ad-unit="DAN-SxU7s73aohufOy49"
+                    data-ad-width="300"
+                    data-ad-height="250"></ins>
+                </div>
               </div>
 
               {/* 창업운 */}
