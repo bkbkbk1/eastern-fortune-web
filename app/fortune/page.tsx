@@ -220,10 +220,11 @@ export default function FortunePage() {
               </label>
               <input
                 type="text"
+                inputMode="numeric"
                 value={birthDate}
                 onChange={(e) => setBirthDate(e.target.value.replace(/\D/g, '').slice(0, 8))}
                 placeholder={t.fortune.birthDate.placeholder}
-                className="w-full px-6 py-4 text-xl text-center border-2 border-purple-300 rounded-2xl focus:outline-none focus:border-purple-600"
+                className="w-full px-6 py-4 text-xl text-center text-gray-900 placeholder:text-gray-400 border-2 border-purple-300 rounded-2xl focus:outline-none focus:border-purple-600 font-semibold"
                 maxLength={8}
               />
               <p className="text-sm text-gray-500 mt-2">{t.fortune.birthDate.helper}</p>
