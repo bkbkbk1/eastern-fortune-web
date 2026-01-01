@@ -77,6 +77,30 @@ export default function Home() {
             </a>
           </div>
 
+          {/* 오늘의 운세 섹션 - 재방문 유도 */}
+          <div className="mt-8 p-6 bg-gradient-to-r from-indigo-50 to-purple-50 border-2 border-indigo-200 rounded-2xl">
+            <div className="flex items-center justify-center gap-2 mb-3">
+              <span className="text-3xl">📅</span>
+              <h2 className="text-2xl font-bold text-gray-800">오늘의 운세</h2>
+              <span className="bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-full">NEW</span>
+            </div>
+            <p className="text-center text-gray-700 mb-4">
+              매일 바뀌는 나만의 일일 운세를 확인하세요!<br/>
+              <span className="text-sm text-gray-600">💰 재물운 | 💕 애정운 | 💚 건강운 | 💼 직장운</span>
+            </p>
+            <div className="flex justify-center">
+              <a
+                href="/daily"
+                className="inline-block bg-gradient-to-r from-indigo-500 to-purple-500 text-white font-semibold px-8 py-3 rounded-full hover:shadow-lg transition-all"
+              >
+                오늘의 운세 보기 →
+              </a>
+            </div>
+            <p className="text-center text-xs text-gray-500 mt-3">
+              ⏰ 매일 자정 업데이트 | 매일 달라지는 운세
+            </p>
+          </div>
+
           {/* 쿠팡 파트너스 배너 */}
           <div className="mt-8">
             <p className="text-xs text-gray-400 text-center mb-3">추천 상품</p>
