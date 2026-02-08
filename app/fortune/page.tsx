@@ -16,7 +16,6 @@ export default function FortunePage() {
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState<any>(null);
   const [paid, setPaid] = useState(false);
-  const [pendingResult, setPendingResult] = useState<any>(null);
   const [loadingMessage, setLoadingMessage] = useState('');
   const [selectedToken, setSelectedToken] = useState<PaymentToken | null>(null);
   const [paymentError, setPaymentError] = useState<string | null>(null);
@@ -70,16 +69,9 @@ export default function FortunePage() {
         return;
       }
 
-      // If in native app, go to payment step
-      if (isNative) {
-        setPendingResult(data);
-        setStep(4); // payment step
-      } else {
-        // Web: free version - show results directly
-        setResult(data);
-        setPaid(true);
-        setStep(5);
-      }
+      // Always show free preview first (step 4)
+      setResult(data);
+      setStep(4);
     } catch (error) {
       console.error('Error:', error);
       alert(t.fortune.errors.calculationError + (error instanceof Error ? error.message : ''));
@@ -93,13 +85,12 @@ export default function FortunePage() {
     setPaymentError(null);
 
     try {
-      const result = await requestPayment(token);
-      if (result.success) {
+      const res = await requestPayment(token);
+      if (res.success) {
         setPaid(true);
-        setResult(pendingResult);
         setStep(5);
       } else {
-        setPaymentError(result.error || t.fortune.errors.paymentFailed);
+        setPaymentError(res.error || t.fortune.errors.paymentFailed);
       }
     } catch (error) {
       setPaymentError(t.fortune.errors.paymentFailed);
@@ -108,12 +99,21 @@ export default function FortunePage() {
     }
   };
 
-  const tokenOptions: { token: PaymentToken; label: string; amount: string }[] = [
-    { token: 'SOL', label: 'SOL', amount: '0.001 SOL' },
-    { token: 'USDC', label: 'USDC', amount: '0.20 USDC' },
-    { token: 'SKR', label: 'Seeker', amount: '3 SKR' },
-    { token: 'POOP', label: 'POOP', amount: '10 POOP' },
+  const tokenOptions: { token: PaymentToken; label: string; amount: string; desc?: string }[] = [
+    { token: 'SOL', label: 'SOL', amount: '0.005 SOL' },
+    { token: 'USDC', label: 'USDC', amount: '1.00 USDC' },
+    { token: 'SKR', label: 'Seeker', amount: '15 SKR' },
+    { token: 'POOP', label: 'POOP', amount: '50 POOP', desc: t.fortune.payment.poopDesc },
   ];
+
+  const resetAll = () => {
+    setStep(1);
+    setBirthDate('');
+    setBirthHour('12');
+    setBirthMinute('00');
+    setResult(null);
+    setPaid(false);
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-600 to-indigo-700 flex items-center justify-center p-4">
@@ -305,81 +305,167 @@ export default function FortunePage() {
           </div>
         )}
 
-        {/* Step 4: Payment (Native app only) */}
-        {step === 4 && pendingResult && (
-          <div className="text-center">
-            <h2 className="text-3xl font-bold text-gray-800 mb-4">{t.fortune.payment.title}</h2>
-            <p className="text-gray-600 mb-8">{t.fortune.payment.subtitle}</p>
+        {/* Step 4: Free Preview + Payment */}
+        {step === 4 && result && !paid && (
+          <div>
+            <h2 className="text-3xl font-bold text-gray-800 mb-6 text-center">{t.fortune.preview.title}</h2>
 
-            <div className="bg-gradient-to-r from-purple-100 to-indigo-100 rounded-2xl p-8 mb-8">
-              <div className="text-6xl mb-4">🔮</div>
-              <h3 className="text-2xl font-bold text-gray-800 mb-2">
-                {t.fortune.payment.fortuneTitle}
-              </h3>
-              <p className="text-gray-600 mb-4">
-                {t.fortune.payment.fortuneDesc}
-              </p>
-              <p className="text-sm text-gray-500">{t.fortune.payment.priceNote}</p>
-            </div>
-
-            <div className="space-y-3 text-left bg-white border-2 border-purple-200 rounded-xl p-6 mb-8">
-              <div className="flex items-center gap-3">
-                <span className="text-green-500">✓</span>
-                <span className="text-gray-700">{t.fortune.payment.includes.pillars}</span>
-              </div>
-              <div className="flex items-center gap-3">
-                <span className="text-green-500">✓</span>
-                <span className="text-gray-700">{t.fortune.payment.includes.analysis}</span>
-              </div>
-              <div className="flex items-center gap-3">
-                <span className="text-green-500">✓</span>
-                <span className="text-gray-700">{t.fortune.payment.includes.categories}</span>
-              </div>
-              <div className="flex items-center gap-3">
-                <span className="text-green-500">✓</span>
-                <span className="text-gray-700">{t.fortune.payment.includes.advice}</span>
+            {/* Four Pillars - FREE */}
+            <div className="bg-gradient-to-r from-purple-100 to-indigo-100 rounded-2xl p-6 mb-6">
+              <h3 className="text-xl font-semibold text-gray-800 mb-4 text-center">{t.fortune.result.pillarsTitle}</h3>
+              <div className="grid grid-cols-4 gap-4">
+                <div className="text-center">
+                  <div className="text-sm text-gray-600 mb-1">{t.fortune.result.year}</div>
+                  <div className="text-2xl font-bold text-purple-700">{result.pillars.year}</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-sm text-gray-600 mb-1">{t.fortune.result.month}</div>
+                  <div className="text-2xl font-bold text-purple-700">{result.pillars.month}</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-sm text-gray-600 mb-1">{t.fortune.result.day}</div>
+                  <div className="text-2xl font-bold text-purple-700">{result.pillars.day}</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-sm text-gray-600 mb-1">{t.fortune.result.hour}</div>
+                  <div className="text-2xl font-bold text-purple-700">{result.pillars.hour}</div>
+                </div>
               </div>
             </div>
 
-            <p className="text-sm font-medium text-gray-700 mb-4">{t.fortune.payment.selectToken}</p>
+            {/* Overall Fortune Summary - FREE */}
+            <div className="bg-white border-2 border-purple-200 rounded-xl p-5 mb-4">
+              <div className="flex items-center gap-2 mb-2">
+                <span className="text-2xl">✨</span>
+                <h4 className="text-lg font-semibold text-gray-800">{t.fortune.result.sections.overall}</h4>
+              </div>
+              <p className="text-gray-700 whitespace-pre-line line-clamp-3">{result.fortune.overall}</p>
+              <p className="text-purple-600 text-sm mt-2 font-medium">{t.fortune.preview.readMore}</p>
+            </div>
 
-            <div className="grid grid-cols-2 gap-3 mb-6">
-              {tokenOptions.map(({ token, label, amount }) => (
+            {/* Lucky Items - FREE */}
+            <div className="bg-gradient-to-r from-yellow-100 to-orange-100 rounded-xl p-5 mb-6">
+              <h3 className="text-xl font-bold text-gray-800 mb-4 text-center">{t.fortune.result.sections.luckyItems}</h3>
+              <div className="grid grid-cols-3 gap-4">
+                <div className="text-center">
+                  <div className="text-3xl mb-2">🎨</div>
+                  <h4 className="font-semibold mb-1">{t.fortune.result.sections.luckyColor}</h4>
+                  {result.fortune.luckyColors?.map((color: string, i: number) => (
+                    <p key={i} className="text-sm text-gray-700">{color}</p>
+                  ))}
+                </div>
+                <div className="text-center">
+                  <div className="text-3xl mb-2">🔢</div>
+                  <h4 className="font-semibold mb-1">{t.fortune.result.sections.luckyNumber}</h4>
+                  {result.fortune.luckyNumbers?.map((num: string, i: number) => (
+                    <p key={i} className="text-sm text-gray-700">{num}</p>
+                  ))}
+                </div>
+                <div className="text-center">
+                  <div className="text-3xl mb-2">🧭</div>
+                  <h4 className="font-semibold mb-1">{t.fortune.result.sections.luckyDirection}</h4>
+                  {result.fortune.luckyDirections?.map((dir: string, i: number) => (
+                    <p key={i} className="text-sm text-gray-700">{dir}</p>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Blurred preview of detailed sections */}
+            <div className="relative mb-6">
+              <div className="blur-sm pointer-events-none space-y-3">
+                {['💼', '💰', '💕', '💚', '📈'].map((emoji, i) => (
+                  <div key={i} className="bg-white border-2 border-gray-200 rounded-xl p-4">
+                    <div className="flex items-center gap-2 mb-1">
+                      <span className="text-xl">{emoji}</span>
+                      <div className="h-4 bg-gray-300 rounded w-32"></div>
+                    </div>
+                    <div className="space-y-1">
+                      <div className="h-3 bg-gray-200 rounded w-full"></div>
+                      <div className="h-3 bg-gray-200 rounded w-4/5"></div>
+                      <div className="h-3 bg-gray-200 rounded w-3/5"></div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <div className="absolute inset-0 flex items-center justify-center">
+                <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-6 shadow-lg text-center">
+                  <div className="text-4xl mb-2">🔒</div>
+                  <p className="text-lg font-bold text-gray-800">{t.fortune.preview.locked}</p>
+                  <p className="text-sm text-gray-600">{t.fortune.preview.lockedDesc}</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Poop Dodge Promo Banner */}
+            <div className="bg-gradient-to-r from-amber-50 to-yellow-50 border-2 border-amber-300 rounded-2xl p-5 mb-6">
+              <div className="flex items-center gap-3 mb-2">
+                <span className="text-3xl">💩</span>
+                <div>
+                  <h4 className="font-bold text-gray-800">{t.fortune.payment.poopPromo.title}</h4>
+                  <p className="text-sm text-gray-600">{t.fortune.payment.poopPromo.desc}</p>
+                </div>
+              </div>
+              <p className="text-xs text-amber-700 mt-2">{t.fortune.payment.poopPromo.hint}</p>
+            </div>
+
+            {/* Payment Section */}
+            {isNative ? (
+              <div>
+                <p className="text-center text-sm font-medium text-gray-700 mb-4">{t.fortune.payment.selectToken}</p>
+
+                <div className="grid grid-cols-2 gap-3 mb-4">
+                  {tokenOptions.map(({ token, label, amount, desc }) => (
+                    <button
+                      key={token}
+                      onClick={() => handlePayment(token)}
+                      disabled={selectedToken !== null}
+                      className={`p-4 rounded-xl border-2 transition-all ${
+                        selectedToken === token
+                          ? 'border-purple-600 bg-purple-50'
+                          : 'border-gray-200 hover:border-purple-400'
+                      } disabled:opacity-50`}
+                    >
+                      <div className="font-bold text-gray-800">{label}</div>
+                      <div className="text-sm text-gray-600">{amount}</div>
+                      {desc && <div className="text-xs text-amber-600 mt-1">{desc}</div>}
+                      {selectedToken === token && (
+                        <div className="text-xs text-purple-600 mt-1">{t.fortune.payment.processing}</div>
+                      )}
+                    </button>
+                  ))}
+                </div>
+
+                {paymentError && (
+                  <div className="text-sm text-red-600 mb-4 p-3 bg-red-50 rounded-lg">
+                    {paymentError}
+                  </div>
+                )}
+
+                <p className="text-center text-xs text-gray-500 mb-4">{t.fortune.payment.priceNote}</p>
+              </div>
+            ) : (
+              <div className="text-center mb-4">
+                <p className="text-sm text-gray-500 mb-3">{t.fortune.preview.webFree}</p>
                 <button
-                  key={token}
-                  onClick={() => handlePayment(token)}
-                  disabled={selectedToken !== null}
-                  className={`p-4 rounded-xl border-2 transition-all ${
-                    selectedToken === token
-                      ? 'border-purple-600 bg-purple-50'
-                      : 'border-gray-200 hover:border-purple-400'
-                  } disabled:opacity-50`}
+                  onClick={() => { setPaid(true); setStep(5); }}
+                  className="w-full bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-bold text-lg py-4 rounded-full hover:shadow-2xl transition-all"
                 >
-                  <div className="font-bold text-gray-800">{label}</div>
-                  <div className="text-sm text-gray-600">{amount}</div>
-                  {selectedToken === token && (
-                    <div className="text-xs text-purple-600 mt-1">{t.fortune.payment.processing}</div>
-                  )}
+                  {t.fortune.preview.viewFull}
                 </button>
-              ))}
-            </div>
-
-            {paymentError && (
-              <div className="text-sm text-red-600 mb-4 p-3 bg-red-50 rounded-lg">
-                {paymentError}
               </div>
             )}
 
             <button
-              onClick={() => setStep(3)}
-              className="mt-2 text-gray-500 hover:text-gray-700 transition-all"
+              onClick={resetAll}
+              className="w-full mt-2 text-gray-500 hover:text-gray-700 transition-all text-sm"
             >
-              ← {t.fortune.buttons.prev}
+              ← {t.fortune.buttons.retry}
             </button>
           </div>
         )}
 
-        {/* Step 5: Results */}
+        {/* Step 5: Full Results */}
         {step === 5 && result && paid && (
           <div>
             <h2 className="text-3xl font-bold text-gray-800 mb-6 text-center">{t.fortune.result.title}</h2>
@@ -407,7 +493,7 @@ export default function FortunePage() {
               </div>
             </div>
 
-            {/* Fortune sections */}
+            {/* All fortune sections */}
             <div className="space-y-4 mb-8">
               <div className="bg-white border-2 border-purple-200 rounded-xl p-5">
                 <div className="flex items-center gap-2 mb-2">
@@ -583,15 +669,7 @@ export default function FortunePage() {
             </div>
 
             <button
-              onClick={() => {
-                setStep(1);
-                setBirthDate('');
-                setBirthHour('12');
-                setBirthMinute('00');
-                setResult(null);
-                setPaid(false);
-                setPendingResult(null);
-              }}
+              onClick={resetAll}
               className="w-full bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-semibold py-4 rounded-full hover:shadow-lg transition-all"
             >
               {t.fortune.buttons.retry}

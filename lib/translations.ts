@@ -77,12 +77,20 @@ export const translations = {
         "📝 상세한 운세 작성 중...",
         "✅ 거의 완료되었습니다..."
       ],
+      preview: {
+        title: "🔮 운세 미리보기",
+        readMore: "▼ 전체 운세를 보려면 결제하세요",
+        locked: "13가지 상세 운세가 잠겨있습니다",
+        lockedDesc: "결제 후 취업/직장/재물/애정/건강 등 상세 운세를 확인하세요",
+        webFree: "웹 버전은 무료로 전체 운세를 확인할 수 있습니다",
+        viewFull: "전체 운세 보기 →"
+      },
       payment: {
         title: "🔮 운세 결과 보기",
         subtitle: "Solana 지갑으로 결제하고 상세 운세를 확인하세요",
         fortuneTitle: "2026년 병오년 운세",
         fortuneDesc: "사주팔자와 ChatGPT 상세 해석",
-        priceNote: "약 $0.20 상당",
+        priceNote: "약 $1.00 상당",
         includes: {
           pillars: "사주팔자 (년/월/일/시)",
           analysis: "2026년 상세 운세 해석",
@@ -91,11 +99,12 @@ export const translations = {
         },
         selectToken: "결제할 토큰을 선택하세요:",
         processing: "처리 중...",
-        connectWallet: "지갑 연결하기",
-        pay: "결제하고 운세 보기 →",
-        waiting: "지갑 승인 대기 중...",
-        confirming: "트랜잭션 확인 중...",
-        connectedWallet: "연결된 지갑:"
+        poopDesc: "Poop Dodge에서 획득!",
+        poopPromo: {
+          title: "💩 Poop Dodge - $POOP 토큰 획득 게임!",
+          desc: "똥 피하기 게임을 플레이하고 $POOP 토큰을 모으세요. 모은 토큰으로 운세를 결제할 수 있습니다!",
+          hint: "📲 Solana dApp Store에서 'Poop Dodge'를 검색하세요"
+        }
       },
       result: {
         title: "🔮 2026년 병오년 운세",
@@ -248,12 +257,20 @@ export const translations = {
         "📝 Writing detailed fortune reading...",
         "✅ Almost done..."
       ],
+      preview: {
+        title: "🔮 Fortune Preview",
+        readMore: "▼ Pay to unlock the full detailed reading",
+        locked: "13 detailed fortune categories are locked",
+        lockedDesc: "Unlock career, wealth, love, health & more after payment",
+        webFree: "Web version: view the full reading for free",
+        viewFull: "View Full Fortune →"
+      },
       payment: {
         title: "🔮 Unlock Your Fortune",
         subtitle: "Pay with your Solana wallet to view your detailed fortune reading",
         fortuneTitle: "2026 Year of Fire Horse Fortune",
         fortuneDesc: "Four Pillars Analysis & AI Interpretation",
-        priceNote: "Approximately $0.20",
+        priceNote: "Approximately $1.00",
         includes: {
           pillars: "Four Pillars of Destiny (Year/Month/Day/Hour)",
           analysis: "Detailed 2026 fortune interpretation",
@@ -262,11 +279,12 @@ export const translations = {
         },
         selectToken: "Choose your payment token:",
         processing: "Processing...",
-        connectWallet: "Connect Wallet",
-        pay: "Pay and View Fortune →",
-        waiting: "Waiting for wallet approval...",
-        confirming: "Confirming transaction...",
-        connectedWallet: "Connected wallet:"
+        poopDesc: "Earn in Poop Dodge!",
+        poopPromo: {
+          title: "💩 Poop Dodge - Earn $POOP tokens by playing!",
+          desc: "Play the Poop Dodge game to collect $POOP tokens. Use them to pay for your fortune reading!",
+          hint: "📲 Search 'Poop Dodge' on the Solana dApp Store"
+        }
       },
       result: {
         title: "🔮 2026 Year of Fire Horse Fortune",
