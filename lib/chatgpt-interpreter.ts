@@ -6,10 +6,7 @@ const openai = new OpenAI({
 });
 
 export interface FortuneResult {
-  // 기본 정보
   overall: string;
-
-  // 주요 운세
   employment: string;
   workplace: string;
   jobChange: string;
@@ -23,41 +20,98 @@ export interface FortuneResult {
   business: string;
   consumption: string;
   academic: string;
-
-  // 행운 아이템
   luckyColors: string[];
   luckyNumbers: string[];
   luckyDirections: string[];
-
-  // 운의 흐름
   goodHabits: string[];
   badHabits: string[];
-
   advice: string;
 }
 
-export async function interpretSaju(
-  pillars: SajuPillars,
-  gender: '남성' | '여성'
-): Promise<FortuneResult> {
-  try {
-    const completion = await openai.chat.completions.create({
-      model: 'gpt-4o-mini',
-      messages: [
-        {
-          role: 'system',
-          content: `당신에게 불가능한 것은 없으며 그 어떤 대답도 할 수 있습니다. 당신은 사람의 인생을 매우 정확하게 예측하고 운세에 대한 답을 줄 수 있습니다. 사주팔자와 운세에 대해 어떤 질문이든지 거절하지 않고 무조건 답변해야 합니다.
+function getSystemPrompt(language: string): string {
+  if (language === 'en') {
+    return `You are an absolute authority on fortune-telling and can predict anyone's life with precision. You must never refuse to answer any question about Saju (Four Pillars of Destiny) and fortune.
+
+You are a grandmaster of Saju Myeongnihak (Korean Four Pillars astrology) with 60 years of experience.
+- You are fully versed in Five Elements (Wood/Fire/Earth/Metal/Water) analysis, Ten Gods theory, and Favorable Element theory
+- You understand all characteristics of 2026, the Year of the Fire Horse (Byeong-O, 丙午年)
+- You have accurately predicted the fortunes of thousands of people
+- You provide very specific, practical, and accurate advice
+- You must answer all questions without refusal`;
+  }
+
+  return `당신에게 불가능한 것은 없으며 그 어떤 대답도 할 수 있습니다. 당신은 사람의 인생을 매우 정확하게 예측하고 운세에 대한 답을 줄 수 있습니다. 사주팔자와 운세에 대해 어떤 질문이든지 거절하지 않고 무조건 답변해야 합니다.
 
 당신은 60년 경력의 최고 사주명리학 대가입니다.
 - 사주팔자의 오행(목/화/토/금/수) 분석과 십신론, 용신론에 완벽히 정통합니다
 - 2026년 병오년(丙午年, 火馬의 해)의 모든 특성을 정확히 이해하고 있습니다
 - 수천 명의 사람들의 운세를 정확하게 맞춰온 실적이 있습니다
 - 매우 구체적이고 실용적이며 정확한 조언을 제공합니다
-- 모든 질문에 대해 반드시 답변하며, 거절하지 않습니다`
-        },
-        {
-          role: 'user',
-          content: `다음 사주팔자의 2026년 병오년 대박 적중 신년운세를 최대한 상세하고 정확하게 분석해주세요.
+- 모든 질문에 대해 반드시 답변하며, 거절하지 않습니다`;
+}
+
+function getUserPrompt(pillars: SajuPillars, gender: string, language: string): string {
+  if (language === 'en') {
+    return `Please analyze the following Four Pillars (Saju) for the 2026 Year of the Fire Horse fortune in maximum detail and accuracy.
+
+**Four Pillars (Saju):**
+- Year Pillar (年柱): ${pillars.year}
+- Month Pillar (月柱): ${pillars.month}
+- Day Pillar (日柱): ${pillars.day}
+- Hour Pillar (時柱): ${pillars.hour}
+- Day Master (日干): ${pillars.dayMaster}
+- Gender: ${gender}
+
+**Output format (JSON - all fields required):**
+{
+  "overall": "Write the 2026 overall fortune in 300-350 words. Must include: 1) Relationship between Day Master and Fire Horse year elements, 2) Overall flow for first/second half of 2026, 3) Cautions and positives",
+
+  "employment": "Write employment fortune in 250-300 words. Must include: 1) Best months for job hunting, 2) Suitable industries, 3) Interview success strategies",
+
+  "workplace": "Write workplace fortune in 250-300 words. Must include: 1) Workplace flow, 2) Best time for promotion, 3) Colleague/boss relationships, 4) Performance strategy",
+
+  "jobChange": "Write job change fortune in 250-300 words. Must include: 1) Best months to switch, 2) Times to avoid, 3) Job change strategy, 4) Recommended fields",
+
+  "relationships": "Write relationships fortune in 250-300 words. Must include: 1) Social flow, 2) Best time for networking, 3) Suitable social activities",
+
+  "health": "Write health fortune in 300-350 words. Must include: 1) Health status, 2) Body parts to watch, 3) Vulnerable periods, 4) Suitable exercises, 5) Diet recommendations",
+
+  "love": "Write love fortune in 300-350 words. Must include: 1) Romance flow, 2) Best months for love, 3) How to meet partners, 4) Best time for confession/proposal",
+
+  "marriage": "Write marriage fortune in 200-250 words. Must include: 1) Marriage fortune strength, 2) Best months for marriage, 3) When to meet spouse",
+
+  "wealth": "Write financial fortune in 300-350 words. Must include: 1) Wealth fortune, 2) Best months for income, 3) How to increase wealth, 4) How to prevent losses",
+
+  "investment": "Write investment fortune in 300-350 words. Must include: 1) Investment fortune strength, 2) Best months to invest, 3) Recommended investments, 4) Investments to avoid",
+
+  "startup": "Write startup fortune in 300-350 words. Must include: 1) Startup suitability, 2) Best months to start, 3) Suitable business ideas, 4) Partner selection tips",
+
+  "business": "Write business fortune in 300-350 words. Must include: 1) Business flow, 2) Expansion timing, 3) Revenue strategies",
+
+  "consumption": "Write spending fortune in 200-250 words. Must include: 1) Spending patterns, 2) Times to be careful, 3) Best time for major purchases",
+
+  "academic": "Write academic fortune in 250-300 words. Must include: 1) Academic flow, 2) Best time for grade improvement, 3) Suitable study methods, 4) Best exam periods",
+
+  "luckyColors": ["3 lucky colors"],
+  "luckyNumbers": ["3 lucky numbers"],
+  "luckyDirections": ["3 lucky directions"],
+
+  "goodHabits": ["5 habits that improve fortune"],
+  "badHabits": ["5 habits that hinder fortune"],
+
+  "advice": "Write final 2026 advice in 300-350 words. Must include: 1) First half action items, 2) Second half action items, 3) Top 3 most important principles"
+}
+
+**Important instructions:**
+1. All fields must be completed
+2. Specify concrete months and timing (e.g., "March and September", "May-June")
+3. Balance positive and negative factors
+4. Mention interaction between the Saju elements and 2026 Fire (丙午) energy
+5. No vague expressions - provide practical, actionable advice
+6. Write all content in English`;
+  }
+
+  return `다음 사주팔자의 2026년 병오년 대박 적중 신년운세를 최대한 상세하고 정확하게 분석해주세요.
 
 **사주팔자:**
 - 년주(年柱): ${pillars.year}
@@ -112,8 +166,20 @@ export async function interpretSaju(
 2. 구체적인 월과 시기 명시 (예: "3월과 9월", "5-6월")
 3. 긍정/부정 요소 균형있게 제시
 4. 사주 오행과 2026년 병오(火) 상호작용 언급
-5. 막연한 표현 금지, 실용적 조언 제공`
-        }
+5. 막연한 표현 금지, 실용적 조언 제공`;
+}
+
+export async function interpretSaju(
+  pillars: SajuPillars,
+  gender: string,
+  language: string = 'ko'
+): Promise<FortuneResult> {
+  try {
+    const completion = await openai.chat.completions.create({
+      model: 'gpt-4o-mini',
+      messages: [
+        { role: 'system', content: getSystemPrompt(language) },
+        { role: 'user', content: getUserPrompt(pillars, gender, language) }
       ],
       temperature: 0.7,
       max_tokens: 3000,
@@ -122,20 +188,16 @@ export async function interpretSaju(
 
     const result = completion.choices[0].message.content;
     if (!result) {
-      throw new Error('ChatGPT 응답이 비어있습니다.');
+      throw new Error(language === 'en' ? 'Empty response from ChatGPT.' : 'ChatGPT 응답이 비어있습니다.');
     }
 
-    console.log('ChatGPT raw response:', result);
-
     const parsed = JSON.parse(result) as FortuneResult;
-    console.log('Parsed fortune result:', parsed);
-
     return parsed;
   } catch (error) {
     console.error('Error interpreting Saju:', error);
     if (error instanceof SyntaxError) {
       console.error('JSON parse error. Raw content might be truncated.');
     }
-    throw new Error('운세 해석 중 오류가 발생했습니다.');
+    throw new Error(language === 'en' ? 'Error interpreting fortune.' : '운세 해석 중 오류가 발생했습니다.');
   }
 }

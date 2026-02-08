@@ -1,27 +1,10 @@
 'use client';
 
-import { useEffect } from 'react';
 import { useLanguage } from '@/lib/LanguageContext';
 import LanguageToggle from './components/LanguageToggle';
 
 export default function Home() {
   const { t } = useLanguage();
-
-  // Initialize Farcaster SDK
-  useEffect(() => {
-    const initSDK = async () => {
-      if (typeof window === 'undefined') return;
-
-      try {
-        const { sdk } = await import('@farcaster/miniapp-sdk');
-        await sdk.actions.ready();
-      } catch (error) {
-        console.error('SDK initialization error:', error);
-      }
-    };
-
-    initSDK();
-  }, []);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-600 to-indigo-700 flex items-center justify-center p-4">
@@ -39,6 +22,20 @@ export default function Home() {
             <p className="text-gray-700 leading-relaxed whitespace-pre-line">
               {t.home.description}
             </p>
+          </div>
+
+          {/* What is Saju section */}
+          <div className="bg-gradient-to-r from-amber-50 to-orange-50 border-2 border-amber-200 rounded-2xl p-6 mb-8 text-left">
+            <h2 className="text-2xl font-bold text-gray-800 mb-3 text-center">{t.home.sajuIntro.title}</h2>
+            <p className="text-gray-700 leading-relaxed mb-4">{t.home.sajuIntro.description}</p>
+            <div className="space-y-2">
+              {t.home.sajuIntro.pillars.map((pillar: string, i: number) => (
+                <div key={i} className="flex items-start gap-2">
+                  <span className="text-amber-600 font-bold mt-0.5">&#x2022;</span>
+                  <span className="text-gray-700 text-sm">{pillar}</span>
+                </div>
+              ))}
+            </div>
           </div>
 
           <div className="space-y-4 text-left">
@@ -77,58 +74,23 @@ export default function Home() {
             </a>
           </div>
 
-          {/* 오늘의 운세 섹션 - 재방문 유도 */}
+          {/* Daily fortune section */}
           <div className="mt-8 p-6 bg-gradient-to-r from-indigo-50 to-purple-50 border-2 border-indigo-200 rounded-2xl">
             <div className="flex items-center justify-center gap-2 mb-3">
               <span className="text-3xl">📅</span>
-              <h2 className="text-2xl font-bold text-gray-800">오늘의 운세</h2>
-              <span className="bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-full">NEW</span>
+              <h2 className="text-2xl font-bold text-gray-800">{t.home.daily.title}</h2>
             </div>
             <p className="text-center text-gray-700 mb-4">
-              매일 바뀌는 나만의 일일 운세를 확인하세요!<br/>
-              <span className="text-sm text-gray-600">💰 재물운 | 💕 애정운 | 💚 건강운 | 💼 직장운</span>
+              {t.home.daily.desc}
             </p>
             <div className="flex justify-center">
               <a
                 href="/daily"
                 className="inline-block bg-gradient-to-r from-indigo-500 to-purple-500 text-white font-semibold px-8 py-3 rounded-full hover:shadow-lg transition-all"
               >
-                오늘의 운세 보기 →
+                {t.home.daily.button}
               </a>
             </div>
-            <p className="text-center text-xs text-gray-500 mt-3">
-              ⏰ 매일 자정 업데이트 | 매일 달라지는 운세
-            </p>
-          </div>
-
-          {/* 쿠팡 파트너스 배너 */}
-          <div className="mt-8">
-            <p className="text-xs text-gray-400 text-center mb-3">추천 상품</p>
-            <div className="flex justify-center">
-              <iframe
-                src="https://ads-partners.coupang.com/widgets.html?id=950096&template=carousel&trackingCode=AF9626171&subId=&width=468&height=60&tsource="
-                width="468"
-                height="60"
-                frameBorder="0"
-                scrolling="no"
-                referrerPolicy="unsafe-url"
-                className="max-w-full"
-              ></iframe>
-            </div>
-            <p className="text-xs text-gray-400 text-center mt-2">
-              이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.
-            </p>
-          </div>
-
-          {/* 카카오 애드핏 배너 */}
-          <div className="mt-6">
-            <div className="flex justify-center">
-              <ins className="kakao_ad_area" style={{display: 'none'}}
-                data-ad-unit="DAN-jSMGjcGDOLCsegr6"
-                data-ad-width="320"
-                data-ad-height="50"></ins>
-            </div>
-            <script type="text/javascript" src="//t1.daumcdn.net/kas/static/ba.min.js" async></script>
           </div>
         </div>
       </div>

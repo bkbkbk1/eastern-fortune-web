@@ -6,22 +6,23 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "video:preview": "remotion studio remotion/Root.tsx",
+    "video:render": "remotion render remotion/Root.tsx PromoVideo out/promo-video.mp4",
+    "video:render:minimal": "remotion render remotion/Root.tsx PromoVideoMinimal out/promo-video-minimal.mp4",
+    "video:render:3d": "remotion render remotion/Root.tsx PromoVideo3D out/promo-video-3d.mp4",
+    "video:render:3dpro": "remotion render remotion/Root.tsx PromoVideo3DPro out/promo-video-3dpro.mp4"
   },
   "dependencies": {
-    "@coinbase/onchainkit": "^1.1.2",
-    "@farcaster/miniapp-sdk": "^0.2.1",
-    "@farcaster/miniapp-wagmi-connector": "^1.1.0",
-    "@tanstack/react-query": "^5.90.10",
+    "@remotion/cli": "^4.0.409",
     "@vercel/analytics": "^1.6.1",
     "lunar-typescript": "^1.8.6",
     "next": "^16.0.7",
     "openai": "^6.9.1",
     "react": "19.2.0",
     "react-dom": "19.2.0",
-    "satori": "^0.18.3",
-    "viem": "2.x",
-    "wagmi": "^2.16.0"
+    "remotion": "^4.0.409",
+    "satori": "^0.18.3"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",

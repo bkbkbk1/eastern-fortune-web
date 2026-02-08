@@ -1,20 +1,14 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
-import { useAccount, useConnect, useSendTransaction, useWaitForTransactionReceipt } from 'wagmi';
-import { parseEther } from 'viem';
 import { useLanguage } from '@/lib/LanguageContext';
 import LanguageToggle from '../components/LanguageToggle';
+import { isInNativeApp, requestPayment, type PaymentToken } from '@/lib/solana-bridge';
 
 export default function FortunePage() {
-  const router = useRouter();
-  const { isConnected, address } = useAccount();
-  const { connect, connectors } = useConnect();
-  const { data: hash, sendTransaction, isPending, isError, error } = useSendTransaction();
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
 
-  const [step, setStep] = useState<number | 'payment'>(1);
+  const [step, setStep] = useState<number>(1);
   const [birthDate, setBirthDate] = useState('');
   const [birthHour, setBirthHour] = useState('12');
   const [birthMinute, setBirthMinute] = useState('00');
@@ -22,78 +16,31 @@ export default function FortunePage() {
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState<any>(null);
   const [paid, setPaid] = useState(false);
-  const [tempResult, setTempResult] = useState<any>(null);
-  const [isSDKLoaded, setIsSDKLoaded] = useState(false);
-  const [loadingMessage, setLoadingMessage] = useState('사주팔자 계산 중...');
-
-  // 트랜잭션 완료 감지
-  const { isLoading: isConfirming, isSuccess: isConfirmed } = useWaitForTransactionReceipt({
-    hash,
-  });
+  const [pendingResult, setPendingResult] = useState<any>(null);
+  const [loadingMessage, setLoadingMessage] = useState('');
+  const [selectedToken, setSelectedToken] = useState<PaymentToken | null>(null);
+  const [paymentError, setPaymentError] = useState<string | null>(null);
+  const [isNative, setIsNative] = useState(false);
 
   useEffect(() => {
-    const initSDK = async () => {
-      if (typeof window === 'undefined') return;
-
-      try {
-        const { sdk } = await import('@farcaster/miniapp-sdk');
-        await sdk.actions.ready();
-        setIsSDKLoaded(true);
-      } catch (error) {
-        console.error('SDK initialization error:', error);
-        setIsSDKLoaded(true); // Continue anyway for browser testing
-      }
-    };
-
-    initSDK();
+    setIsNative(isInNativeApp());
   }, []);
-
-  // 트랜잭션 성공 시 처리
-  useEffect(() => {
-    if (isConfirmed && hash) {
-      console.log('✅ Transaction confirmed! Hash:', hash);
-      setPaid(true);
-      setResult(tempResult);
-      setStep(4);
-      setLoading(false);
-    }
-  }, [isConfirmed, hash, tempResult]);
-
-  // Transaction error handling
-  useEffect(() => {
-    if (isError && error) {
-      console.error('❌ Transaction error:', error);
-      alert(t.fortune.errors.transactionFailed + error.message);
-      setLoading(false);
-    }
-  }, [isError, error, t]);
 
   // Loading messages animation
   useEffect(() => {
     if (!loading) return;
 
-    const messages = [
-      '🔮 사주팔자 계산 중...',
-      '📊 음양오행 분석 중...',
-      '✨ 2026년 병오년과의 상호작용 분석 중...',
-      '💫 십신론 적용 중...',
-      '🌟 용신 파악 중...',
-      '💰 재물운과 투자운 분석 중...',
-      '💼 직장운과 이직운 분석 중...',
-      '💕 애정운과 결혼운 분석 중...',
-      '🍀 행운의 아이템 찾는 중...',
-      '📝 상세한 운세 작성 중...',
-      '✅ 거의 완료되었습니다...'
-    ];
-
+    const messages = t.fortune.loadingMessages;
     let currentIndex = 0;
+    setLoadingMessage(messages[0]);
+
     const interval = setInterval(() => {
       currentIndex = (currentIndex + 1) % messages.length;
       setLoadingMessage(messages[currentIndex]);
     }, 2000);
 
     return () => clearInterval(interval);
-  }, [loading]);
+  }, [loading, t]);
 
   const handleCalculate = async () => {
     if (!birthDate || birthDate.length !== 8) {
@@ -111,24 +58,28 @@ export default function FortunePage() {
           birthDate,
           birthHour: parseInt(birthHour),
           birthMinute: parseInt(birthMinute),
-          gender
+          gender,
+          language
         })
       });
 
       const data = await response.json();
-
-      console.log('API response:', data);
-      console.log('Response status:', response.status);
 
       if (!response.ok || data.error) {
         alert(`${t.fortune.errors.apiError}${data.error || data.details || 'Unknown error'}`);
         return;
       }
 
-      // Free version - skip payment, go directly to results
-      setResult(data);
-      setPaid(true);
-      setStep(4);
+      // If in native app, go to payment step
+      if (isNative) {
+        setPendingResult(data);
+        setStep(4); // payment step
+      } else {
+        // Web: free version - show results directly
+        setResult(data);
+        setPaid(true);
+        setStep(5);
+      }
     } catch (error) {
       console.error('Error:', error);
       alert(t.fortune.errors.calculationError + (error instanceof Error ? error.message : ''));
@@ -137,21 +88,32 @@ export default function FortunePage() {
     }
   };
 
-  // 미니앱 환경 감지
-  const isMiniApp = typeof window !== 'undefined' && (
-    window.location !== window.parent.location || // iframe 안에서 실행
-    /warpcast|farcaster/i.test(navigator.userAgent) // Warpcast User Agent
-  );
+  const handlePayment = async (token: PaymentToken) => {
+    setSelectedToken(token);
+    setPaymentError(null);
 
-  console.log('=== RENDER STATE ===');
-  console.log('step:', step, 'typeof:', typeof step);
-  console.log('result:', result ? 'exists' : 'null');
-  console.log('paid:', paid);
-  console.log('tempResult:', tempResult ? 'exists' : 'null');
-  console.log('isConnected:', isConnected);
-  console.log('isMiniApp:', isMiniApp);
-  console.log('connectors.length:', connectors.length);
-  console.log('==================');
+    try {
+      const result = await requestPayment(token);
+      if (result.success) {
+        setPaid(true);
+        setResult(pendingResult);
+        setStep(5);
+      } else {
+        setPaymentError(result.error || t.fortune.errors.paymentFailed);
+      }
+    } catch (error) {
+      setPaymentError(t.fortune.errors.paymentFailed);
+    } finally {
+      setSelectedToken(null);
+    }
+  };
+
+  const tokenOptions: { token: PaymentToken; label: string; amount: string }[] = [
+    { token: 'SOL', label: 'SOL', amount: '0.001 SOL' },
+    { token: 'USDC', label: 'USDC', amount: '0.20 USDC' },
+    { token: 'SKR', label: 'Seeker', amount: '3 SKR' },
+    { token: 'POOP', label: 'POOP', amount: '10 POOP' },
+  ];
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-600 to-indigo-700 flex items-center justify-center p-4">
@@ -166,7 +128,7 @@ export default function FortunePage() {
             </div>
 
             <h2 className="text-3xl font-bold text-gray-800 mb-4">
-              운세 분석 중
+              {t.fortune.loading.title}
             </h2>
 
             <div className="bg-gradient-to-r from-purple-100 to-indigo-100 rounded-2xl p-6 mb-6">
@@ -180,26 +142,16 @@ export default function FortunePage() {
             </div>
 
             <div className="space-y-3 text-left bg-purple-50 rounded-xl p-6">
-              <p className="text-sm text-gray-600 flex items-center gap-2">
-                <span className="text-green-500 text-lg">✓</span>
-                <span>60년 경력 사주명리학 대가가 분석합니다</span>
-              </p>
-              <p className="text-sm text-gray-600 flex items-center gap-2">
-                <span className="text-green-500 text-lg">✓</span>
-                <span>13가지 상세 운세 카테고리</span>
-              </p>
-              <p className="text-sm text-gray-600 flex items-center gap-2">
-                <span className="text-green-500 text-lg">✓</span>
-                <span>취업/직장/이직/투자/창업/사업 전문 분석</span>
-              </p>
-              <p className="text-sm text-gray-600 flex items-center gap-2">
-                <span className="text-green-500 text-lg">✓</span>
-                <span>행운의 아이템 & 운세 개선 방법 포함</span>
-              </p>
+              {t.fortune.loading.features.map((feature: string, i: number) => (
+                <p key={i} className="text-sm text-gray-600 flex items-center gap-2">
+                  <span className="text-green-500 text-lg">✓</span>
+                  <span>{feature}</span>
+                </p>
+              ))}
             </div>
 
             <p className="text-gray-500 text-sm mt-6">
-              ⏱️ 보통 20-30초 정도 소요됩니다
+              {t.fortune.loading.time}
             </p>
           </div>
         </div>
@@ -347,32 +299,27 @@ export default function FortunePage() {
                 disabled={loading}
                 className="bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-semibold px-12 py-3 rounded-full hover:shadow-lg transition-all disabled:opacity-50"
               >
-                {loading ? t.fortune.buttons.calculating : t.fortune.buttons.next}
+                {loading ? t.fortune.buttons.calculating : t.fortune.buttons.calculate}
               </button>
             </div>
           </div>
         )}
 
-        {/* Step 3.5: Payment */}
-        {step === 'payment' && tempResult && (
+        {/* Step 4: Payment (Native app only) */}
+        {step === 4 && pendingResult && (
           <div className="text-center">
             <h2 className="text-3xl font-bold text-gray-800 mb-4">{t.fortune.payment.title}</h2>
-            <p className="text-gray-600 mb-8">
-              {t.fortune.payment.subtitle}
-            </p>
+            <p className="text-gray-600 mb-8">{t.fortune.payment.subtitle}</p>
 
             <div className="bg-gradient-to-r from-purple-100 to-indigo-100 rounded-2xl p-8 mb-8">
               <div className="text-6xl mb-4">🔮</div>
               <h3 className="text-2xl font-bold text-gray-800 mb-2">
                 {t.fortune.payment.fortuneTitle}
               </h3>
-              <p className="text-gray-600 mb-6">
+              <p className="text-gray-600 mb-4">
                 {t.fortune.payment.fortuneDesc}
               </p>
-              <div className="text-4xl font-bold text-purple-700">
-                {t.fortune.payment.price}
-              </div>
-              <p className="text-sm text-gray-500 mt-2">{t.fortune.payment.priceUsd}</p>
+              <p className="text-sm text-gray-500">{t.fortune.payment.priceNote}</p>
             </div>
 
             <div className="space-y-3 text-left bg-white border-2 border-purple-200 rounded-xl p-6 mb-8">
@@ -394,76 +341,46 @@ export default function FortunePage() {
               </div>
             </div>
 
-            {!isConnected ? (
-              <div className="space-y-4">
-                <div className="text-xs bg-yellow-100 p-3 rounded mb-4">
-                  <div>Environment: {isMiniApp ? '✅ MiniApp' : '❌ Browser'}</div>
-                  <div>Connectors: {connectors.length}</div>
-                  <div>Status: {isConnected ? 'Connected' : 'Not connected'}</div>
-                </div>
+            <p className="text-sm font-medium text-gray-700 mb-4">{t.fortune.payment.selectToken}</p>
+
+            <div className="grid grid-cols-2 gap-3 mb-6">
+              {tokenOptions.map(({ token, label, amount }) => (
                 <button
-                  onClick={() => {
-                    console.log('Connecting... connectors:', connectors);
-                    if (connectors[0]) {
-                      connect({ connector: connectors[0] });
-                    } else {
-                      alert(t.fortune.payment.warningMiniapp);
-                    }
-                  }}
-                  className="w-full bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-bold text-lg py-5 rounded-full hover:shadow-2xl transition-all"
+                  key={token}
+                  onClick={() => handlePayment(token)}
+                  disabled={selectedToken !== null}
+                  className={`p-4 rounded-xl border-2 transition-all ${
+                    selectedToken === token
+                      ? 'border-purple-600 bg-purple-50'
+                      : 'border-gray-200 hover:border-purple-400'
+                  } disabled:opacity-50`}
                 >
-                  {t.fortune.payment.connectWallet}
+                  <div className="font-bold text-gray-800">{label}</div>
+                  <div className="text-sm text-gray-600">{amount}</div>
+                  {selectedToken === token && (
+                    <div className="text-xs text-purple-600 mt-1">{t.fortune.payment.processing}</div>
+                  )}
                 </button>
-                {!isMiniApp && (
-                  <div className="text-sm text-red-600 text-center whitespace-pre-line">
-                    {t.fortune.payment.warningBrowser}
-                  </div>
-                )}
-              </div>
-            ) : (
-              <div className="space-y-4">
-                <div className="text-sm text-gray-600 text-center">
-                  {t.fortune.payment.connectedWallet} {address?.slice(0, 6)}...{address?.slice(-4)}
-                </div>
-                <button
-                  onClick={() => {
-                    console.log('=== Payment Button Clicked ===');
-                    console.log('tempResult:', tempResult);
-                    console.log('isConnected:', isConnected);
-                    console.log('address:', address);
+              ))}
+            </div>
 
-                    if (!tempResult) {
-                      alert(t.fortune.errors.noData);
-                      setStep(1);
-                      return;
-                    }
-
-                    setLoading(true);
-
-                    sendTransaction({
-                      to: '0x777BEF71B74F71a97925e6D2AF3786EC08A23923',
-                      value: parseEther('0.0001'),
-                    });
-                  }}
-                  disabled={isPending || isConfirming || !tempResult}
-                  className="w-full bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-bold text-lg py-5 rounded-full hover:shadow-2xl transition-all disabled:opacity-50"
-                >
-                  {isPending ? t.fortune.payment.waiting : isConfirming ? t.fortune.payment.confirming : t.fortune.payment.pay}
-                </button>
+            {paymentError && (
+              <div className="text-sm text-red-600 mb-4 p-3 bg-red-50 rounded-lg">
+                {paymentError}
               </div>
             )}
 
             <button
               onClick={() => setStep(3)}
-              className="mt-4 text-gray-500 hover:text-gray-700 transition-all"
+              className="mt-2 text-gray-500 hover:text-gray-700 transition-all"
             >
               ← {t.fortune.buttons.prev}
             </button>
           </div>
         )}
 
-        {/* Step 4: Results */}
-        {step === 4 && result && paid && (
+        {/* Step 5: Results */}
+        {step === 5 && result && paid && (
           <div>
             <h2 className="text-3xl font-bold text-gray-800 mb-6 text-center">{t.fortune.result.title}</h2>
 
@@ -490,177 +407,141 @@ export default function FortunePage() {
               </div>
             </div>
 
-            {/* Fortune - 2026년 대박 적중 신년운세 */}
+            {/* Fortune sections */}
             <div className="space-y-4 mb-8">
-              {/* 총운 */}
               <div className="bg-white border-2 border-purple-200 rounded-xl p-5">
                 <div className="flex items-center gap-2 mb-2">
                   <span className="text-2xl">✨</span>
-                  <h4 className="text-lg font-semibold text-gray-800">2026년 총운</h4>
+                  <h4 className="text-lg font-semibold text-gray-800">{t.fortune.result.sections.overall}</h4>
                 </div>
                 <p className="text-gray-700 whitespace-pre-line">{result.fortune.overall}</p>
               </div>
 
-              {/* 취업운 */}
               <div className="bg-white border-2 border-blue-200 rounded-xl p-5">
                 <div className="flex items-center gap-2 mb-2">
                   <span className="text-2xl">💼</span>
-                  <h4 className="text-lg font-semibold text-gray-800">취업운 풀이</h4>
+                  <h4 className="text-lg font-semibold text-gray-800">{t.fortune.result.sections.employment}</h4>
                 </div>
                 <p className="text-gray-700 whitespace-pre-line">{result.fortune.employment}</p>
               </div>
 
-              {/* 직장운 */}
               <div className="bg-white border-2 border-blue-200 rounded-xl p-5">
                 <div className="flex items-center gap-2 mb-2">
                   <span className="text-2xl">🏢</span>
-                  <h4 className="text-lg font-semibold text-gray-800">직장운 풀이</h4>
+                  <h4 className="text-lg font-semibold text-gray-800">{t.fortune.result.sections.workplace}</h4>
                 </div>
                 <p className="text-gray-700 whitespace-pre-line">{result.fortune.workplace}</p>
               </div>
 
-              {/* 이직운 */}
               <div className="bg-white border-2 border-blue-200 rounded-xl p-5">
                 <div className="flex items-center gap-2 mb-2">
                   <span className="text-2xl">🔄</span>
-                  <h4 className="text-lg font-semibold text-gray-800">이직운 풀이</h4>
+                  <h4 className="text-lg font-semibold text-gray-800">{t.fortune.result.sections.jobChange}</h4>
                 </div>
                 <p className="text-gray-700 whitespace-pre-line">{result.fortune.jobChange}</p>
               </div>
 
-              {/* 대인관계운 */}
               <div className="bg-white border-2 border-pink-200 rounded-xl p-5">
                 <div className="flex items-center gap-2 mb-2">
                   <span className="text-2xl">👥</span>
-                  <h4 className="text-lg font-semibold text-gray-800">대인관계운 풀이</h4>
+                  <h4 className="text-lg font-semibold text-gray-800">{t.fortune.result.sections.relationships}</h4>
                 </div>
                 <p className="text-gray-700 whitespace-pre-line">{result.fortune.relationships}</p>
               </div>
 
-              {/* 건강운 */}
               <div className="bg-white border-2 border-green-200 rounded-xl p-5">
                 <div className="flex items-center gap-2 mb-2">
                   <span className="text-2xl">💚</span>
-                  <h4 className="text-lg font-semibold text-gray-800">건강운 풀이</h4>
+                  <h4 className="text-lg font-semibold text-gray-800">{t.fortune.result.sections.health}</h4>
                 </div>
                 <p className="text-gray-700 whitespace-pre-line">{result.fortune.health}</p>
               </div>
 
-              {/* 카카오 애드핏 320x100 */}
-              <div className="my-6">
-                <p className="text-xs text-gray-400 text-center mb-3">광고</p>
-                <div className="flex justify-center">
-                  <ins className="kakao_ad_area" style={{display: 'none'}}
-                    data-ad-unit="DAN-mHJn9kNMYQ0lX3f9"
-                    data-ad-width="320"
-                    data-ad-height="100"></ins>
-                </div>
-              </div>
-
-              {/* 애정운 */}
               <div className="bg-white border-2 border-red-200 rounded-xl p-5">
                 <div className="flex items-center gap-2 mb-2">
                   <span className="text-2xl">💕</span>
-                  <h4 className="text-lg font-semibold text-gray-800">애정운 풀이</h4>
+                  <h4 className="text-lg font-semibold text-gray-800">{t.fortune.result.sections.love}</h4>
                 </div>
                 <p className="text-gray-700 whitespace-pre-line">{result.fortune.love}</p>
               </div>
 
-              {/* 결혼운 */}
               <div className="bg-white border-2 border-red-200 rounded-xl p-5">
                 <div className="flex items-center gap-2 mb-2">
                   <span className="text-2xl">💑</span>
-                  <h4 className="text-lg font-semibold text-gray-800">결혼운 풀이</h4>
+                  <h4 className="text-lg font-semibold text-gray-800">{t.fortune.result.sections.marriage}</h4>
                 </div>
                 <p className="text-gray-700 whitespace-pre-line">{result.fortune.marriage}</p>
               </div>
 
-              {/* 금전운 */}
               <div className="bg-white border-2 border-yellow-200 rounded-xl p-5">
                 <div className="flex items-center gap-2 mb-2">
                   <span className="text-2xl">💰</span>
-                  <h4 className="text-lg font-semibold text-gray-800">금전운 풀이</h4>
+                  <h4 className="text-lg font-semibold text-gray-800">{t.fortune.result.sections.wealth}</h4>
                 </div>
                 <p className="text-gray-700 whitespace-pre-line">{result.fortune.wealth}</p>
               </div>
 
-              {/* 투자운 */}
               <div className="bg-white border-2 border-yellow-200 rounded-xl p-5">
                 <div className="flex items-center gap-2 mb-2">
                   <span className="text-2xl">📈</span>
-                  <h4 className="text-lg font-semibold text-gray-800">투자운/재테크운 풀이</h4>
+                  <h4 className="text-lg font-semibold text-gray-800">{t.fortune.result.sections.investment}</h4>
                 </div>
                 <p className="text-gray-700 whitespace-pre-line">{result.fortune.investment}</p>
               </div>
 
-              {/* 카카오 애드핏 300x250 */}
-              <div className="my-6">
-                <p className="text-xs text-gray-400 text-center mb-3">광고</p>
-                <div className="flex justify-center">
-                  <ins className="kakao_ad_area" style={{display: 'none'}}
-                    data-ad-unit="DAN-SxU7s73aohufOy49"
-                    data-ad-width="300"
-                    data-ad-height="250"></ins>
-                </div>
-              </div>
-
-              {/* 창업운 */}
               <div className="bg-white border-2 border-orange-200 rounded-xl p-5">
                 <div className="flex items-center gap-2 mb-2">
                   <span className="text-2xl">🚀</span>
-                  <h4 className="text-lg font-semibold text-gray-800">창업운 풀이</h4>
+                  <h4 className="text-lg font-semibold text-gray-800">{t.fortune.result.sections.startup}</h4>
                 </div>
                 <p className="text-gray-700 whitespace-pre-line">{result.fortune.startup}</p>
               </div>
 
-              {/* 사업운 */}
               <div className="bg-white border-2 border-orange-200 rounded-xl p-5">
                 <div className="flex items-center gap-2 mb-2">
                   <span className="text-2xl">📊</span>
-                  <h4 className="text-lg font-semibold text-gray-800">사업운 풀이</h4>
+                  <h4 className="text-lg font-semibold text-gray-800">{t.fortune.result.sections.business}</h4>
                 </div>
                 <p className="text-gray-700 whitespace-pre-line">{result.fortune.business}</p>
               </div>
 
-              {/* 소비운 */}
               <div className="bg-white border-2 border-purple-200 rounded-xl p-5">
                 <div className="flex items-center gap-2 mb-2">
                   <span className="text-2xl">🛍️</span>
-                  <h4 className="text-lg font-semibold text-gray-800">소비운 풀이</h4>
+                  <h4 className="text-lg font-semibold text-gray-800">{t.fortune.result.sections.consumption}</h4>
                 </div>
                 <p className="text-gray-700 whitespace-pre-line">{result.fortune.consumption}</p>
               </div>
 
-              {/* 학업운 */}
               <div className="bg-white border-2 border-blue-200 rounded-xl p-5">
                 <div className="flex items-center gap-2 mb-2">
                   <span className="text-2xl">📚</span>
-                  <h4 className="text-lg font-semibold text-gray-800">학업운 풀이</h4>
+                  <h4 className="text-lg font-semibold text-gray-800">{t.fortune.result.sections.academic}</h4>
                 </div>
                 <p className="text-gray-700 whitespace-pre-line">{result.fortune.academic}</p>
               </div>
 
-              {/* 행운 아이템 */}
+              {/* Lucky Items */}
               <div className="bg-gradient-to-r from-yellow-100 to-orange-100 rounded-xl p-5">
-                <h3 className="text-xl font-bold text-gray-800 mb-4 text-center">🍀 2026년 나에게 이로운 아이템</h3>
+                <h3 className="text-xl font-bold text-gray-800 mb-4 text-center">{t.fortune.result.sections.luckyItems}</h3>
                 <div className="grid grid-cols-3 gap-4">
                   <div className="text-center">
                     <div className="text-3xl mb-2">🎨</div>
-                    <h4 className="font-semibold mb-1">행운의 색</h4>
+                    <h4 className="font-semibold mb-1">{t.fortune.result.sections.luckyColor}</h4>
                     {result.fortune.luckyColors?.map((color: string, i: number) => (
                       <p key={i} className="text-sm text-gray-700">{color}</p>
                     ))}
                   </div>
                   <div className="text-center">
                     <div className="text-3xl mb-2">🔢</div>
-                    <h4 className="font-semibold mb-1">행운의 숫자</h4>
+                    <h4 className="font-semibold mb-1">{t.fortune.result.sections.luckyNumber}</h4>
                     {result.fortune.luckyNumbers?.map((num: string, i: number) => (
                       <p key={i} className="text-sm text-gray-700">{num}</p>
                     ))}
                   </div>
                   <div className="text-center">
                     <div className="text-3xl mb-2">🧭</div>
-                    <h4 className="font-semibold mb-1">행운의 방향</h4>
+                    <h4 className="font-semibold mb-1">{t.fortune.result.sections.luckyDirection}</h4>
                     {result.fortune.luckyDirections?.map((dir: string, i: number) => (
                       <p key={i} className="text-sm text-gray-700">{dir}</p>
                     ))}
@@ -668,12 +549,12 @@ export default function FortunePage() {
                 </div>
               </div>
 
-              {/* 운의 흐름 */}
+              {/* Fortune Flow */}
               <div className="bg-white border-2 border-purple-200 rounded-xl p-5">
-                <h3 className="text-xl font-bold text-gray-800 mb-4 text-center">⚡ 2026년의 극과 극</h3>
+                <h3 className="text-xl font-bold text-gray-800 mb-4 text-center">{t.fortune.result.sections.fortuneFlow}</h3>
                 <div className="grid md:grid-cols-2 gap-4">
                   <div className="bg-green-50 rounded-lg p-4">
-                    <h4 className="font-bold text-green-700 mb-2">✅ 운의 흐름이 좋아집니다</h4>
+                    <h4 className="font-bold text-green-700 mb-2">{t.fortune.result.sections.goodHabits}</h4>
                     <ul className="text-sm space-y-1 text-gray-700">
                       {result.fortune.goodHabits?.map((habit: string, i: number) => (
                         <li key={i}>• {habit}</li>
@@ -681,7 +562,7 @@ export default function FortunePage() {
                     </ul>
                   </div>
                   <div className="bg-red-50 rounded-lg p-4">
-                    <h4 className="font-bold text-red-700 mb-2">⚠️ 운의 흐름에 방해를 받습니다</h4>
+                    <h4 className="font-bold text-red-700 mb-2">{t.fortune.result.sections.badHabits}</h4>
                     <ul className="text-sm space-y-1 text-gray-700">
                       {result.fortune.badHabits?.map((habit: string, i: number) => (
                         <li key={i}>• {habit}</li>
@@ -691,44 +572,14 @@ export default function FortunePage() {
                 </div>
               </div>
 
-              {/* 최종 조언 */}
+              {/* Final Advice */}
               <div className="bg-gradient-to-r from-yellow-100 to-orange-100 border-2 border-yellow-300 rounded-xl p-5">
                 <div className="flex items-center gap-2 mb-2">
                   <span className="text-2xl">💡</span>
-                  <h4 className="text-lg font-semibold text-gray-800">2026년 최종 조언</h4>
+                  <h4 className="text-lg font-semibold text-gray-800">{t.fortune.result.sections.advice}</h4>
                 </div>
                 <p className="text-gray-700 font-medium whitespace-pre-line">{result.fortune.advice}</p>
               </div>
-            </div>
-
-            {/* 쿠팡 파트너스 배너 - 자연스럽게 추가 */}
-            <div className="mt-8 mb-6">
-              <p className="text-xs text-gray-400 text-center mb-3">추천 상품</p>
-              <div className="flex justify-center">
-                <iframe
-                  src="https://ads-partners.coupang.com/widgets.html?id=950096&template=carousel&trackingCode=AF9626171&subId=&width=468&height=60&tsource="
-                  width="468"
-                  height="60"
-                  frameBorder="0"
-                  scrolling="no"
-                  referrerPolicy="unsafe-url"
-                  className="max-w-full"
-                ></iframe>
-              </div>
-              <p className="text-xs text-gray-400 text-center mt-2">
-                이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.
-              </p>
-            </div>
-
-            {/* 카카오 애드핏 배너 */}
-            <div className="mb-6">
-              <div className="flex justify-center">
-                <ins className="kakao_ad_area" style={{display: 'none'}}
-                  data-ad-unit="DAN-jSMGjcGDOLCsegr6"
-                  data-ad-width="320"
-                  data-ad-height="50"></ins>
-              </div>
-              <script type="text/javascript" src="//t1.daumcdn.net/kas/static/ba.min.js" async></script>
             </div>
 
             <button
@@ -739,7 +590,7 @@ export default function FortunePage() {
                 setBirthMinute('00');
                 setResult(null);
                 setPaid(false);
-                setTempResult(null);
+                setPendingResult(null);
               }}
               className="w-full bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-semibold py-4 rounded-full hover:shadow-lg transition-all"
             >
