@@ -333,18 +333,34 @@ export default function FortunePage() {
               </div>
             </div>
 
-            {/* Overall Fortune Summary - FREE */}
+            {/* Overall Fortune - FREE (full) */}
             <div className="bg-white border-2 border-purple-200 rounded-xl p-5 mb-4">
               <div className="flex items-center gap-2 mb-2">
                 <span className="text-2xl">✨</span>
                 <h4 className="text-lg font-semibold text-gray-800">{t.fortune.result.sections.overall}</h4>
               </div>
-              <p className="text-gray-700 whitespace-pre-line line-clamp-3">{result.fortune.overall}</p>
-              <p className="text-purple-600 text-sm mt-2 font-medium">{t.fortune.preview.readMore}</p>
+              <p className="text-gray-700 whitespace-pre-line">{result.fortune.overall}</p>
             </div>
 
+            {/* Teaser sections - show first 2 lines each */}
+            {[
+              { emoji: '💼', key: 'workplace' as const, title: t.fortune.result.sections.workplace, border: 'border-blue-200' },
+              { emoji: '💰', key: 'wealth' as const, title: t.fortune.result.sections.wealth, border: 'border-yellow-200' },
+              { emoji: '💕', key: 'love' as const, title: t.fortune.result.sections.love, border: 'border-red-200' },
+            ].map(({ emoji, key, title, border }) => (
+              <div key={key} className={`bg-white border-2 ${border} rounded-xl p-5 mb-3 relative`}>
+                <div className="flex items-center gap-2 mb-2">
+                  <span className="text-2xl">{emoji}</span>
+                  <h4 className="text-lg font-semibold text-gray-800">{title}</h4>
+                </div>
+                <p className="text-gray-700 whitespace-pre-line line-clamp-2">{result.fortune[key]}</p>
+                <div className="mt-2 bg-gradient-to-t from-white via-white/80 to-transparent h-6 -mt-4 relative z-10"></div>
+                <p className="text-purple-600 text-sm font-medium">{t.fortune.preview.readMore}</p>
+              </div>
+            ))}
+
             {/* Lucky Items - FREE */}
-            <div className="bg-gradient-to-r from-yellow-100 to-orange-100 rounded-xl p-5 mb-6">
+            <div className="bg-gradient-to-r from-yellow-100 to-orange-100 rounded-xl p-5 mb-4">
               <h3 className="text-xl font-bold text-gray-800 mb-4 text-center">{t.fortune.result.sections.luckyItems}</h3>
               <div className="grid grid-cols-3 gap-4">
                 <div className="text-center">
@@ -371,19 +387,25 @@ export default function FortunePage() {
               </div>
             </div>
 
-            {/* Blurred preview of detailed sections */}
+            {/* Blurred preview of remaining sections */}
             <div className="relative mb-6">
               <div className="blur-sm pointer-events-none space-y-3">
-                {['💼', '💰', '💕', '💚', '📈'].map((emoji, i) => (
+                {[
+                  { emoji: '💚', title: t.fortune.result.sections.health },
+                  { emoji: '🔄', title: t.fortune.result.sections.jobChange },
+                  { emoji: '📈', title: t.fortune.result.sections.investment },
+                  { emoji: '🚀', title: t.fortune.result.sections.startup },
+                  { emoji: '💑', title: t.fortune.result.sections.marriage },
+                  { emoji: '📚', title: t.fortune.result.sections.academic },
+                ].map(({ emoji, title }, i) => (
                   <div key={i} className="bg-white border-2 border-gray-200 rounded-xl p-4">
                     <div className="flex items-center gap-2 mb-1">
                       <span className="text-xl">{emoji}</span>
-                      <div className="h-4 bg-gray-300 rounded w-32"></div>
+                      <span className="text-sm font-semibold text-gray-500">{title}</span>
                     </div>
                     <div className="space-y-1">
                       <div className="h-3 bg-gray-200 rounded w-full"></div>
                       <div className="h-3 bg-gray-200 rounded w-4/5"></div>
-                      <div className="h-3 bg-gray-200 rounded w-3/5"></div>
                     </div>
                   </div>
                 ))}
