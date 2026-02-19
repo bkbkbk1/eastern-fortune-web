@@ -1,4 +1,5 @@
 import OpenAI from 'openai';
+import type { DaewoonItem } from '@orrery/core/types';
 import { SajuPillars } from './saju-calculator';
 
 const openai = new OpenAI({
@@ -50,7 +51,24 @@ You are a grandmaster of Saju Myeongnihak (Korean Four Pillars astrology) with 6
 - 모든 질문에 대해 반드시 답변하며, 거절하지 않습니다`;
 }
 
-function getUserPrompt(pillars: SajuPillars, gender: string, language: string): string {
+function formatDaewoon(daewoon: DaewoonItem[], language: string): string {
+  if (!daewoon || daewoon.length === 0) return '';
+  const now = new Date();
+  const current = daewoon.find((d, i) => {
+    const next = daewoon[i + 1];
+    const start = new Date(d.startDate);
+    const end = next ? new Date(next.startDate) : new Date(9999, 0);
+    return now >= start && now < end;
+  });
+  if (!current) return '';
+  if (language === 'en') {
+    return `\n- Current Major Period (大運): ${current.ganzi} (age ${current.age}~, stem: ${current.stemSipsin}, branch: ${current.branchSipsin})`;
+  }
+  return `\n- 현재 대운(大運): ${current.ganzi} (${current.age}세~, 천간십신: ${current.stemSipsin}, 지지십신: ${current.branchSipsin})`;
+}
+
+function getUserPrompt(pillars: SajuPillars, gender: string, language: string, daewoon?: DaewoonItem[]): string {
+  const daewoonInfo = daewoon ? formatDaewoon(daewoon, language) : '';
   if (language === 'en') {
     return `Please analyze the following Four Pillars (Saju) for the 2026 Year of the Fire Horse fortune in maximum detail and accuracy.
 
@@ -60,7 +78,7 @@ function getUserPrompt(pillars: SajuPillars, gender: string, language: string): 
 - Day Pillar (日柱): ${pillars.day}
 - Hour Pillar (時柱): ${pillars.hour}
 - Day Master (日干): ${pillars.dayMaster}
-- Gender: ${gender}
+- Gender: ${gender}${daewoonInfo}
 
 **Output format (JSON - all fields required):**
 {
@@ -119,7 +137,7 @@ function getUserPrompt(pillars: SajuPillars, gender: string, language: string): 
 - 일주(日柱): ${pillars.day}
 - 시주(時柱): ${pillars.hour}
 - 일간(日干): ${pillars.dayMaster}
-- 성별: ${gender}
+- 성별: ${gender}${daewoonInfo}
 
 **출력 형식 (JSON - 모든 필드 필수):**
 {
@@ -172,14 +190,15 @@ function getUserPrompt(pillars: SajuPillars, gender: string, language: string): 
 export async function interpretSaju(
   pillars: SajuPillars,
   gender: string,
-  language: string = 'ko'
+  language: string = 'ko',
+  daewoon?: DaewoonItem[]
 ): Promise<FortuneResult> {
   try {
     const completion = await openai.chat.completions.create({
       model: 'gpt-4o-mini',
       messages: [
         { role: 'system', content: getSystemPrompt(language) },
-        { role: 'user', content: getUserPrompt(pillars, gender, language) }
+        { role: 'user', content: getUserPrompt(pillars, gender, language, daewoon) }
       ],
       temperature: 0.7,
       max_tokens: 3000,

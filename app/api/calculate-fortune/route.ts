@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { calculateSaju } from '@/lib/saju-calculator';
+import { calculateSajuEnriched } from '@/lib/saju-calculator';
 import { interpretSaju } from '@/lib/chatgpt-interpreter';
 
 export async function POST(req: NextRequest) {
@@ -18,17 +18,20 @@ export async function POST(req: NextRequest) {
     const day = parseInt(birthDate.substring(6, 8));
     const hour = parseInt(birthHour);
     const minute = parseInt(birthMinute || '0');
+    const orrGender: 'M' | 'F' = gender === 'female' ? 'F' : 'M';
 
-    const pillars = calculateSaju(year, month, day, hour, minute);
+    const enriched = calculateSajuEnriched(year, month, day, hour, minute, orrGender);
 
     const genderLabel = language === 'en'
       ? (gender === 'male' ? 'Male' : 'Female')
       : (gender === 'male' ? '남성' : '여성');
 
-    const fortune = await interpretSaju(pillars, genderLabel, language);
+    const fortune = await interpretSaju(enriched.pillars, genderLabel, language, enriched.daewoon);
 
     return NextResponse.json({
-      pillars,
+      pillars: enriched.pillars,
+      pillarDetails: enriched.pillarDetails,
+      daewoon: enriched.daewoon,
       fortune
     });
   } catch (error) {
