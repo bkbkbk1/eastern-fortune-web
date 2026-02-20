@@ -1,7 +1,6 @@
 'use client';
 
 import { useState } from 'react';
-import { useLanguage } from '@/lib/LanguageContext';
 import LanguageToggle from '../components/LanguageToggle';
 import type { ZiweiChart, ZiweiPalace } from '@orrery/core/types';
 
@@ -110,21 +109,7 @@ function ZiweiBoard({ chart }: { chart: ZiweiChart }) {
 }
 
 export default function ZiweiPage() {
-  const { language } = useLanguage();
-  const t = language === 'en' ? {
-    title: 'Zi Wei Dou Shu',
-    subtitle: 'Purple Star Astrology (紫微斗數)',
-    birthDate: { label: 'Birth Date (양력 YYYYMMDD)', placeholder: 'e.g. 19900115', helper: 'Enter solar calendar date' },
-    birthTime: { label: 'Birth Time', hour: 'h', minute: 'm', helper: 'Time of birth' },
-    gender: { title: 'Gender', male: 'Male', female: 'Female' },
-    buttons: { calculate: 'View Chart', calculating: 'Calculating...', retry: 'Start Over', prev: 'Back', next: 'Next' },
-    board: 'Star Chart (命盤)',
-    daxian: 'Major Periods (大限)',
-    interpretation: 'AI Interpretation',
-    currentDaxian: 'Current',
-    loading: 'Calculating your Purple Star chart...',
-    errors: { apiError: 'Error: ', birthDateInvalid: 'Please enter 8-digit birth date' }
-  } : {
+  const t = {
     title: '자미두수 (紫微斗數)',
     subtitle: '중국 전통 자미두수 명반 분석',
     birthDate: { label: '생년월일 (양력 YYYYMMDD)', placeholder: '예: 19900115', helper: '양력 날짜를 입력해주세요' },
@@ -157,7 +142,7 @@ export default function ZiweiPage() {
       const response = await fetch('/api/calculate-ziwei', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ birthDate, birthHour: parseInt(birthHour), birthMinute: parseInt(birthMinute), gender, language })
+        body: JSON.stringify({ birthDate, birthHour: parseInt(birthHour), birthMinute: parseInt(birthMinute), gender, language: 'ko' })
       });
       const data = await response.json();
       if (!response.ok || data.error) {
