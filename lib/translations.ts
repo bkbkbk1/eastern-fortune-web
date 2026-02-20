@@ -99,12 +99,6 @@ export const translations = {
         },
         selectToken: "결제할 토큰을 선택하세요:",
         processing: "처리 중...",
-        poopDesc: "Poop Dodge에서 획득!",
-        poopPromo: {
-          title: "💩 Poop Dodge - $POOP 토큰 획득 게임!",
-          desc: "똥 피하기 게임을 플레이하고 $POOP 토큰을 모으세요. 모은 토큰으로 운세를 결제할 수 있습니다!",
-          hint: "📲 Solana dApp Store에서 'Poop Dodge'를 검색하세요"
-        }
       },
       result: {
         title: "🔮 2026년 병오년 운세",
@@ -279,12 +273,6 @@ export const translations = {
         },
         selectToken: "Choose your payment token:",
         processing: "Processing...",
-        poopDesc: "Earn in Poop Dodge!",
-        poopPromo: {
-          title: "💩 Poop Dodge - Earn $POOP tokens by playing!",
-          desc: "Play the Poop Dodge game to collect $POOP tokens. Use them to pay for your fortune reading!",
-          hint: "📲 Search 'Poop Dodge' on the Solana dApp Store"
-        }
       },
       result: {
         title: "🔮 2026 Year of Fire Horse Fortune",

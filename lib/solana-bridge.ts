@@ -1,6 +1,6 @@
 // Solana WebView <-> Native bridge communication
 
-export type PaymentToken = 'SOL' | 'USDC' | 'SKR' | 'POOP';
+export type PaymentToken = 'SOL' | 'USDC' | 'SKR';
 
 export interface PaymentRequest {
   type: 'PAYMENT_REQUEST';

@@ -17,7 +17,7 @@ export default function TermsPage() {
 
         <section>
           <h2 className="text-xl font-semibold mb-2">3. Payments</h2>
-          <p>In-app fortune readings may require payment via Solana blockchain tokens (SOL, USDC, SKR, or POOP). All payments are final and non-refundable due to the nature of blockchain transactions.</p>
+          <p>In-app fortune readings may require payment via Solana blockchain tokens (SOL, USDC, or SKR). All payments are final and non-refundable due to the nature of blockchain transactions.</p>
         </section>
 
         <section>

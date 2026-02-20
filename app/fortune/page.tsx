@@ -103,7 +103,6 @@ export default function FortunePage() {
     { token: 'SOL', label: 'SOL', amount: '0.005 SOL' },
     { token: 'USDC', label: 'USDC', amount: '1.00 USDC' },
     { token: 'SKR', label: 'Seeker', amount: '15 SKR' },
-    { token: 'POOP', label: 'POOP', amount: '50 POOP', desc: t.fortune.payment.poopDesc },
   ];
 
   const resetAll = () => {
@@ -417,18 +416,6 @@ export default function FortunePage() {
                   <p className="text-sm text-gray-600">{t.fortune.preview.lockedDesc}</p>
                 </div>
               </div>
-            </div>
-
-            {/* Poop Dodge Promo Banner */}
-            <div className="bg-gradient-to-r from-amber-50 to-yellow-50 border-2 border-amber-300 rounded-2xl p-5 mb-6">
-              <div className="flex items-center gap-3 mb-2">
-                <span className="text-3xl">💩</span>
-                <div>
-                  <h4 className="font-bold text-gray-800">{t.fortune.payment.poopPromo.title}</h4>
-                  <p className="text-sm text-gray-600">{t.fortune.payment.poopPromo.desc}</p>
-                </div>
-              </div>
-              <p className="text-xs text-amber-700 mt-2">{t.fortune.payment.poopPromo.hint}</p>
             </div>
 
             {/* Payment Section */}
