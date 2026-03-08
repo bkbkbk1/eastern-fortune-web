@@ -74,25 +74,6 @@ export default function Home() {
             </a>
           </div>
 
-          {/* Daily fortune section */}
-          <div className="mt-8 p-6 bg-gradient-to-r from-indigo-50 to-purple-50 border-2 border-indigo-200 rounded-2xl">
-            <div className="flex items-center justify-center gap-2 mb-3">
-              <span className="text-3xl">📅</span>
-              <h2 className="text-2xl font-bold text-gray-800">{t.home.daily.title}</h2>
-            </div>
-            <p className="text-center text-gray-700 mb-4">
-              {t.home.daily.desc}
-            </p>
-            <div className="flex justify-center">
-              <a
-                href="/daily"
-                className="inline-block bg-gradient-to-r from-indigo-500 to-purple-500 text-white font-semibold px-8 py-3 rounded-full hover:shadow-lg transition-all"
-              >
-                {t.home.daily.button}
-              </a>
-            </div>
-          </div>
-
           {/* Ziwei section */}
           <div className="mt-8 p-6 bg-gradient-to-r from-violet-50 to-indigo-50 border-2 border-violet-200 rounded-2xl">
             <div className="flex items-center justify-center gap-2 mb-3">
@@ -114,6 +95,13 @@ export default function Home() {
                 {language === 'en' ? 'View Star Chart' : '명반 보기'}
               </a>
             </div>
+          </div>
+
+          {/* Footer Links */}
+          <div className="mt-8 pt-6 border-t border-gray-200 flex justify-center gap-4 text-xs text-gray-400">
+            <a href="/privacy" className="hover:text-purple-600 transition-colors">Privacy Policy</a>
+            <span>|</span>
+            <a href="/terms" className="hover:text-purple-600 transition-colors">Terms of Service</a>
           </div>
         </div>
       </div>

@@ -19,11 +19,6 @@ export const translations = {
       health: { title: "건강운", desc: "주의해야 할 건강 포인트" },
       cta: "지금 바로 운세를 확인하세요",
       button: "운세 보러 가기 →",
-      daily: {
-        title: "오늘의 운세",
-        desc: "매일 바뀌는 나만의 일일 운세를 확인하세요!",
-        button: "오늘의 운세 보기 →"
-      }
     },
     fortune: {
       title: "🔮 2026년 운세",
@@ -141,36 +136,22 @@ export const translations = {
         paymentFailed: "결제에 실패했습니다. 다시 시도해주세요."
       }
     },
-    daily: {
-      title: "오늘의 운세",
-      description: "매일 바뀌는 나만의 운세를 확인하세요\n생년월일만 입력하면 OK!",
-      birthDateLabel: "생년월일",
-      birthDatePlaceholder: "19900101",
-      birthDateHelper: "예: 1990년 1월 1일 → 19900101",
-      viewButton: "오늘의 운세 보기",
-      backToMain: "← 2026년 신년운세 보기",
-      loading: "오늘의 운세 분석 중...",
-      pleaseWait: "잠시만 기다려주세요",
-      resultTitle: "오늘의 운세",
-      tryAgain: "다시 보기",
-      yearlyFortune: "2026년 신년운세 →",
-      sections: {
-        message: "오늘의 한마디",
-        wealth: "재물운",
-        love: "애정운",
-        health: "건강운",
-        work: "직장운",
-        luckyItems: "🍀 오늘의 행운 아이템",
-        luckyColor: "행운의 색",
-        luckyNumber: "행운의 숫자",
-        luckyTime: "행운의 시간",
-        advice: "오늘의 조언"
+    ziwei: {
+      preview: {
+        title: "⭐ 자미두수 명반 미리보기",
+        readMore: "▼ 전체 해석을 보려면 결제하세요",
+        locked: "궁별 상세 해석이 잠겨있습니다",
+        lockedDesc: "결제 후 12궁 상세 해석을 확인하세요",
+        webFree: "웹 버전은 무료로 전체 해석을 확인할 수 있습니다",
+        viewFull: "전체 해석 보기 →",
+        summaryTitle: "총론",
       },
-      errors: {
-        birthDateInvalid: "생년월일 8자리를 입력해주세요",
-        apiError: "오류: ",
-        calculationError: "운세 계산 중 오류가 발생했습니다"
-      }
+      payment: {
+        selectToken: "결제할 토큰을 선택하세요:",
+        processing: "처리 중...",
+        priceNote: "약 $1.00 상당",
+        paymentFailed: "결제에 실패했습니다. 다시 시도해주세요.",
+      },
     }
   },
   en: {
@@ -193,11 +174,6 @@ export const translations = {
       health: { title: "Health Fortune", desc: "Health points to watch" },
       cta: "Discover your fortune now",
       button: "Get My Fortune →",
-      daily: {
-        title: "Daily Fortune",
-        desc: "Check your personal daily fortune, updated every day!",
-        button: "View Daily Fortune →"
-      }
     },
     fortune: {
       title: "🔮 2026 Fortune Reading",
@@ -315,36 +291,22 @@ export const translations = {
         paymentFailed: "Payment failed. Please try again."
       }
     },
-    daily: {
-      title: "Daily Fortune",
-      description: "Check your personal daily fortune!\nJust enter your birth date.",
-      birthDateLabel: "Birth Date",
-      birthDatePlaceholder: "19900101",
-      birthDateHelper: "e.g., January 1, 1990 → 19900101",
-      viewButton: "View Daily Fortune",
-      backToMain: "← Back to 2026 Fortune",
-      loading: "Analyzing today's fortune...",
-      pleaseWait: "Please wait a moment",
-      resultTitle: "Today's Fortune",
-      tryAgain: "Try Again",
-      yearlyFortune: "2026 Yearly Fortune →",
-      sections: {
-        message: "Today's Message",
-        wealth: "Wealth",
-        love: "Love",
-        health: "Health",
-        work: "Career",
-        luckyItems: "🍀 Today's Lucky Items",
-        luckyColor: "Lucky Color",
-        luckyNumber: "Lucky Number",
-        luckyTime: "Lucky Time",
-        advice: "Today's Advice"
+    ziwei: {
+      preview: {
+        title: "⭐ Zi Wei Dou Shu Preview",
+        readMore: "▼ Pay to unlock the full interpretation",
+        locked: "Detailed palace interpretations are locked",
+        lockedDesc: "Unlock all 12 palace interpretations after payment",
+        webFree: "Web version: view the full reading for free",
+        viewFull: "View Full Reading →",
+        summaryTitle: "Overview",
       },
-      errors: {
-        birthDateInvalid: "Please enter your birth date in 8 digits",
-        apiError: "Error: ",
-        calculationError: "Error calculating fortune"
-      }
+      payment: {
+        selectToken: "Choose your payment token:",
+        processing: "Processing...",
+        priceNote: "Approximately $1.00",
+        paymentFailed: "Payment failed. Please try again.",
+      },
     }
   }
 };

@@ -103,6 +103,7 @@ export default function FortunePage() {
     { token: 'SOL', label: 'SOL', amount: '0.005 SOL' },
     { token: 'USDC', label: 'USDC', amount: '1.00 USDC' },
     { token: 'SKR', label: 'Seeker', amount: '15 SKR' },
+    { token: 'POOP', label: '💩 POOP', amount: '1000 POOP', desc: 'Poop Dodge Token' },
   ];
 
   const resetAll = () => {
@@ -452,6 +453,19 @@ export default function FortunePage() {
                 )}
 
                 <p className="text-center text-xs text-gray-500 mb-4">{t.fortune.payment.priceNote}</p>
+
+                {/* Poop Dodge Promo Banner */}
+                <a href="https://poop-dodge-game.vercel.app" target="_blank" rel="noopener noreferrer"
+                  className="block bg-gradient-to-r from-amber-100 to-yellow-100 border-2 border-amber-300 rounded-xl p-4 mb-4 hover:shadow-md transition-all">
+                  <div className="flex items-center gap-3">
+                    <span className="text-3xl">💩</span>
+                    <div className="flex-1">
+                      <p className="font-bold text-gray-800 text-sm">{language === 'ko' ? 'Poop Dodge 게임으로 POOP 토큰을 모으세요!' : 'Earn POOP tokens playing Poop Dodge!'}</p>
+                      <p className="text-xs text-gray-600">{language === 'ko' ? '무료 아케이드 게임 → 토큰 획득 → 운세 결제' : 'Free arcade game → Earn tokens → Pay for fortune'}</p>
+                    </div>
+                    <span className="text-lg">→</span>
+                  </div>
+                </a>
               </div>
             ) : (
               <div className="text-center mb-4">
