@@ -1,15 +1,21 @@
 'use client';
 
-import { useLanguage } from '@/lib/LanguageContext';
-import LanguageToggle from '../components/LanguageToggle';
+import { useState } from 'react';
 
 export default function TermsPage() {
-  const { language } = useLanguage();
-  const isKo = language === 'ko';
+  const [isKo, setIsKo] = useState(false);
 
   return (
     <div className="min-h-screen bg-white p-8 max-w-3xl mx-auto">
-      <LanguageToggle />
+      <div className="flex justify-end mb-4">
+        <button
+          onClick={() => setIsKo(!isKo)}
+          className="px-3 py-1.5 bg-gray-100 hover:bg-gray-200 rounded-full text-sm font-medium transition-colors"
+        >
+          {isKo ? '🇺🇸 EN' : '🇰🇷 KO'}
+        </button>
+      </div>
+
       <h1 className="text-3xl font-bold mb-6">{isKo ? '이용약관' : 'Terms of Service'}</h1>
       <p className="text-sm text-gray-500 mb-8">{isKo ? '최종 수정일: 2026년 3월' : 'Last updated: March 2026'}</p>
 
