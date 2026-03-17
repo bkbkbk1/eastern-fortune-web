@@ -1,5 +1,5 @@
 import OpenAI from 'openai';
-import type { DaewoonItem } from '@orrery/core/types';
+import type { DaewoonItem } from './saju-calculator';
 import { SajuPillars } from './saju-calculator';
 
 const openai = new OpenAI({

@@ -4,7 +4,7 @@ import { useLanguage } from '@/lib/LanguageContext';
 import LanguageToggle from './components/LanguageToggle';
 
 export default function Home() {
-  const { t, language } = useLanguage();
+  const { t } = useLanguage();
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-600 to-indigo-700 flex items-center justify-center p-4">
@@ -74,30 +74,7 @@ export default function Home() {
             </a>
           </div>
 
-          {/* Ziwei section */}
-          <div className="mt-8 p-6 bg-gradient-to-r from-violet-50 to-indigo-50 border-2 border-violet-200 rounded-2xl">
-            <div className="flex items-center justify-center gap-2 mb-3">
-              <span className="text-3xl">⭐</span>
-              <h2 className="text-2xl font-bold text-gray-800">
-                {language === 'en' ? 'Zi Wei Dou Shu' : '자미두수 (紫微斗數)'}
-              </h2>
-            </div>
-            <p className="text-center text-gray-700 mb-4">
-              {language === 'en'
-                ? 'Chinese Purple Star Astrology — a comprehensive 12-palace star chart analysis'
-                : '중국 전통 자미두수 명반으로 12궁의 성요 배치를 통해 운명을 분석합니다'}
-            </p>
-            <div className="flex justify-center">
-              <a
-                href="/ziwei"
-                className="inline-block bg-gradient-to-r from-violet-500 to-indigo-500 text-white font-semibold px-8 py-3 rounded-full hover:shadow-lg transition-all"
-              >
-                {language === 'en' ? 'View Star Chart' : '명반 보기'}
-              </a>
-            </div>
-          </div>
-
-          {/* Footer Links */}
+{/* Footer Links */}
           <div className="mt-8 pt-6 border-t border-gray-200 flex justify-center gap-4 text-xs text-gray-400">
             <a href="/privacy" className="hover:text-purple-600 transition-colors">Privacy Policy</a>
             <span>|</span>
