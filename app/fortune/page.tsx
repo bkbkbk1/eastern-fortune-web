@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useLanguage } from '@/lib/LanguageContext';
 import LanguageToggle from '../components/LanguageToggle';
+import ShareButton from '../components/ShareButton';
 import { isInNativeApp, requestPayment, type PaymentToken } from '@/lib/solana-bridge';
 
 export default function FortunePage() {
@@ -164,7 +165,12 @@ export default function FortunePage() {
         {step === 1 && (
           <div className="text-center">
             <h1 className="text-4xl font-bold text-gray-800 mb-4">{t.fortune.title}</h1>
-            <p className="text-xl text-gray-600 mb-8">{t.fortune.subtitle}</p>
+            <p className="text-xl text-gray-600 mb-3">{t.fortune.subtitle}</p>
+            <p className="mb-6">
+              <a href="/ziwei" className="text-sm text-violet-600 hover:text-violet-800 underline underline-offset-2 transition-colors">
+                {t.fortune.ziweiLink}
+              </a>
+            </p>
 
             <div className="max-w-md mx-auto mb-8">
               <label className="block text-left text-gray-700 font-medium mb-2">
@@ -355,7 +361,9 @@ export default function FortunePage() {
                 </div>
                 <p className="text-gray-700 whitespace-pre-line line-clamp-2">{result.fortune[key]}</p>
                 <div className="mt-2 bg-gradient-to-t from-white via-white/80 to-transparent h-6 -mt-4 relative z-10"></div>
-                <p className="text-purple-600 text-sm font-medium">{t.fortune.preview.readMore}</p>
+                <p className="text-purple-600 text-sm font-medium">
+                  {isNative ? t.fortune.preview.readMore : t.fortune.preview.webReadMore}
+                </p>
               </div>
             ))}
 
@@ -413,8 +421,8 @@ export default function FortunePage() {
               <div className="absolute inset-0 flex items-center justify-center">
                 <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-6 shadow-lg text-center">
                   <div className="text-4xl mb-2">🔒</div>
-                  <p className="text-lg font-bold text-gray-800">{t.fortune.preview.locked}</p>
-                  <p className="text-sm text-gray-600">{t.fortune.preview.lockedDesc}</p>
+                  <p className="text-lg font-bold text-gray-800">{isNative ? t.fortune.preview.locked : t.fortune.preview.webLocked}</p>
+                  <p className="text-sm text-gray-600">{isNative ? t.fortune.preview.lockedDesc : t.fortune.preview.webLockedDesc}</p>
                 </div>
               </div>
             </div>
@@ -476,6 +484,7 @@ export default function FortunePage() {
                 >
                   {t.fortune.preview.viewFull}
                 </button>
+                <ShareButton className="w-full mt-3" label={t.fortune.share.copy} />
               </div>
             )}
 
@@ -691,6 +700,7 @@ export default function FortunePage() {
               </div>
             </div>
 
+            <ShareButton className="w-full mb-3" label={t.fortune.share.shareResult} />
             <button
               onClick={resetAll}
               className="w-full bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-semibold py-4 rounded-full hover:shadow-lg transition-all"

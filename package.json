@@ -9,6 +9,7 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@orrery/core": "^0.6.0",
     "@vercel/analytics": "^1.6.1",
     "lunar-typescript": "^1.8.6",
     "next": "^16.0.7",

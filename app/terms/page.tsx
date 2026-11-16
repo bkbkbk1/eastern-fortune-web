@@ -106,6 +106,24 @@ export default function TermsPage() {
             ? '이용약관 관련 문의: person.bk.scholarship@gmail.com'
             : 'For questions about these terms, contact us at person.bk.scholarship@gmail.com'}</p>
         </section>
+
+        <section>
+          <h2 className="text-xl font-semibold mb-2">{isKo ? '11. 오픈소스 고지' : '11. Open Source Notices'}</h2>
+          <p>{isKo
+            ? '본 서비스의 사주(四柱) 및 자미두수(紫微斗數) 명반 계산에는 아래 오픈소스 소프트웨어를 사용합니다.'
+            : 'This service uses the open-source software below for Four Pillars (Saju) and Zi Wei Dou Shu chart calculations.'}</p>
+          <ul className="list-disc ml-6 mt-2 space-y-1">
+            <li>
+              <a href="https://github.com/rath/orrery" className="text-purple-600 underline" target="_blank" rel="noopener noreferrer">@orrery/core</a>
+              {' — © 2026 Jang-Ho Hwang, MIT License'}
+            </li>
+          </ul>
+          <p className="mt-2 text-sm text-gray-500">
+            <a href="https://github.com/bkbkbk1/eastern-fortune-web/blob/main/NOTICE.md" className="text-purple-600 underline" target="_blank" rel="noopener noreferrer">
+              {isKo ? '전체 라이선스 전문 보기 (NOTICE)' : 'Full license text (NOTICE)'}
+            </a>
+          </p>
+        </section>
       </div>
 
       <div className="mt-8 pt-6 border-t border-gray-200 text-center text-sm text-gray-500">

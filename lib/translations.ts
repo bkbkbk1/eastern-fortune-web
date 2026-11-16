@@ -19,10 +19,22 @@ export const translations = {
       health: { title: "건강운", desc: "주의해야 할 건강 포인트" },
       cta: "지금 바로 운세를 확인하세요",
       button: "운세 보러 가기 →",
+      ziwei: {
+        title: "자미두수 (紫微斗數)",
+        desc: "중국 전통 자미두수 명반으로 12궁의 성요 배치를 통해 운명을 분석합니다",
+        button: "명반 보기"
+      },
+    },
+    footer: {
+      privacy: "개인정보처리방침",
+      terms: "이용약관",
+      creditBefore: "사주·자미두수 계산 엔진: ",
+      creditAfter: " © 2026 Jang-Ho Hwang · MIT License"
     },
     fortune: {
       title: "🔮 2026년 운세",
       subtitle: "양력 생년월일을 입력하세요",
+      ziweiLink: "⭐ 자미두수 명반 보기",
       birthDate: {
         label: "양력 생년월일",
         placeholder: "예: 19901225",
@@ -78,7 +90,19 @@ export const translations = {
         locked: "13가지 상세 운세가 잠겨있습니다",
         lockedDesc: "결제 후 취업/직장/재물/애정/건강 등 상세 운세를 확인하세요",
         webFree: "웹 버전은 무료로 전체 운세를 확인할 수 있습니다",
-        viewFull: "전체 운세 보기 →"
+        viewFull: "전체 운세 보기 →",
+        webReadMore: "▼ 아래 버튼을 누르면 전체 운세를 무료로 확인할 수 있습니다",
+        webLocked: "13가지 상세 운세가 준비되어 있습니다",
+        webLockedDesc: "웹 버전에서는 무료로 전부 확인할 수 있습니다"
+      },
+      share: {
+        button: "🔗 결과 공유하기",
+        copy: "🔗 링크 복사",
+        copied: "링크가 복사되었습니다!",
+        title: "2026 병오년 AI 사주·자미두수 운세",
+        text: "AI가 풀어주는 2026년 병오년 사주·자미두수 운세, 나도 확인해보세요! 👉 https://saju2026.com",
+        manualCopy: "아래 링크를 복사해서 공유하세요:",
+        shareResult: "📋 내 사주 결과 공유하기"
       },
       payment: {
         title: "🔮 운세 결과 보기",
@@ -137,6 +161,44 @@ export const translations = {
       }
     },
     ziwei: {
+      labels: {
+        title: "⭐ 자미두수 (紫微斗數)",
+        subtitle: "중국 전통 자미두수 명반으로 12궁을 풀이합니다",
+        birthDate: {
+          label: "생년월일 (양력)",
+          placeholder: "예: 19900115",
+          helper: "양력 8자리를 입력해주세요"
+        },
+        birthTime: {
+          label: "태어난 시간",
+          hour: "시",
+          minute: "분",
+          helper: "모르시면 12시로 입력하세요"
+        },
+        gender: { title: "성별 선택", male: "남성", female: "여성" },
+        buttons: {
+          next: "다음",
+          prev: "이전",
+          calculate: "명반 보기",
+          calculating: "계산 중...",
+          retry: "다시 시작"
+        },
+        board: "자미두수 명반 (命盤)",
+        daxian: "대한(大限) 운세",
+        interpretation: "AI 명반 해석",
+        current: "현재",
+        loading: "자미두수 명반을 계산하고 있습니다...",
+        brightness: "밝기 등급",
+        table: { age: "나이", ganzhi: "간지", palace: "궁명", stars: "주요 성" },
+        mingGong: "명궁(命宮)",
+        wuXingJu: "오행국",
+        backHome: "← 처음으로",
+        sajuLink: "사주 운세도 보기 →",
+        errors: {
+          apiError: "오류: ",
+          birthDateInvalid: "생년월일 8자리를 입력해주세요"
+        }
+      },
       preview: {
         title: "⭐ 자미두수 명반 미리보기",
         readMore: "▼ 전체 해석을 보려면 결제하세요",
@@ -174,10 +236,22 @@ export const translations = {
       health: { title: "Health Fortune", desc: "Health points to watch" },
       cta: "Discover your fortune now",
       button: "Get My Fortune →",
+      ziwei: {
+        title: "Zi Wei Dou Shu",
+        desc: "Chinese Purple Star Astrology — a comprehensive 12-palace star chart analysis",
+        button: "View Star Chart"
+      },
+    },
+    footer: {
+      privacy: "Privacy Policy",
+      terms: "Terms of Service",
+      creditBefore: "Saju & Zi Wei calculation engine: ",
+      creditAfter: " © 2026 Jang-Ho Hwang · MIT License"
     },
     fortune: {
       title: "🔮 2026 Fortune Reading",
       subtitle: "Enter your birth date (Solar calendar)",
+      ziweiLink: "⭐ See the Zi Wei star chart",
       birthDate: {
         label: "Birth Date (Solar)",
         placeholder: "e.g., 19901225",
@@ -233,7 +307,19 @@ export const translations = {
         locked: "13 detailed fortune categories are locked",
         lockedDesc: "Unlock career, wealth, love, health & more after payment",
         webFree: "Web version: view the full reading for free",
-        viewFull: "View Full Fortune →"
+        viewFull: "View Full Fortune →",
+        webReadMore: "▼ Tap the button below to read the full fortune for free",
+        webLocked: "13 detailed fortune readings are ready",
+        webLockedDesc: "The web version is free to read in full"
+      },
+      share: {
+        button: "🔗 Share result",
+        copy: "🔗 Copy link",
+        copied: "Link copied!",
+        title: "2026 Fire Horse AI Saju & Zi Wei Fortune",
+        text: "Check out my 2026 Saju and Zi Wei Dou Shu reading 👉 https://saju2026.com",
+        manualCopy: "Copy and share this link:",
+        shareResult: "📋 Share my reading"
       },
       payment: {
         title: "🔮 Unlock Your Fortune",
@@ -292,6 +378,44 @@ export const translations = {
       }
     },
     ziwei: {
+      labels: {
+        title: "⭐ Zi Wei Dou Shu (紫微斗數)",
+        subtitle: "Chinese Purple Star Astrology — a 12-palace star chart reading",
+        birthDate: {
+          label: "Birth Date (Solar)",
+          placeholder: "e.g., 19900115",
+          helper: "Enter your solar calendar date (8 digits)"
+        },
+        birthTime: {
+          label: "Birth Time",
+          hour: "Hr",
+          minute: "Min",
+          helper: "If unknown, enter 12:00"
+        },
+        gender: { title: "Select Gender", male: "Male", female: "Female" },
+        buttons: {
+          next: "Next",
+          prev: "Previous",
+          calculate: "View Star Chart",
+          calculating: "Calculating...",
+          retry: "Start Over"
+        },
+        board: "Zi Wei Star Chart (命盤)",
+        daxian: "Major Periods (大限)",
+        interpretation: "AI Star Chart Reading",
+        current: "Current",
+        loading: "Calculating your Zi Wei star chart...",
+        brightness: "Brightness grades",
+        table: { age: "Age", ganzhi: "Gan-Zhi", palace: "Palace", stars: "Main stars" },
+        mingGong: "Life Palace (命宮)",
+        wuXingJu: "Five Element Bureau",
+        backHome: "← Home",
+        sajuLink: "See the Saju reading →",
+        errors: {
+          apiError: "Error: ",
+          birthDateInvalid: "Please enter birth date in 8 digits"
+        }
+      },
       preview: {
         title: "⭐ Zi Wei Dou Shu Preview",
         readMore: "▼ Pay to unlock the full interpretation",

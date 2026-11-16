@@ -12,15 +12,21 @@ interface LanguageContextType {
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
 export function LanguageProvider({ children }: { children: React.ReactNode }) {
-  const [language, setLanguageState] = useState<Language>('en');
+  // Korean is the default language; English is available through the toggle.
+  const [language, setLanguageState] = useState<Language>('ko');
 
-  // Load language from localStorage on mount
+  // Load the visitor's previous choice from localStorage on mount
   useEffect(() => {
     const saved = localStorage.getItem('language') as Language;
     if (saved && (saved === 'ko' || saved === 'en')) {
       setLanguageState(saved);
     }
   }, []);
+
+  // Keep <html lang> in sync with the selected language
+  useEffect(() => {
+    document.documentElement.lang = language;
+  }, [language]);
 
   const setLanguage = (lang: Language) => {
     setLanguageState(lang);
