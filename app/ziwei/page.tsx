@@ -245,9 +245,12 @@ export default function ZiweiPage() {
 
       {!loading && (
         <div className="max-w-2xl w-full bg-white rounded-3xl shadow-2xl p-8">
-          <div className="flex justify-between items-center mb-2 text-xs">
+          <div className="flex flex-wrap justify-between items-center gap-2 mb-2 text-xs">
             <a href="/" className="text-gray-400 hover:text-purple-600 transition-colors">{ziwei.labels.backHome}</a>
-            <a href="/fortune" className="text-gray-400 hover:text-purple-600 transition-colors">{ziwei.labels.sajuLink}</a>
+            <span className="flex flex-wrap items-center gap-3">
+              <a href="/fortune" className="text-gray-400 hover:text-purple-600 transition-colors">{ziwei.labels.sajuLink}</a>
+              <a href="/guide" className="text-gray-400 hover:text-emerald-600 transition-colors">📚 {t.footer.guide}</a>
+            </span>
           </div>
 
           {/* Step 1: Birth Date */}

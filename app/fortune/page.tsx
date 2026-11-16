@@ -166,9 +166,13 @@ export default function FortunePage() {
           <div className="text-center">
             <h1 className="text-4xl font-bold text-gray-800 mb-4">{t.fortune.title}</h1>
             <p className="text-xl text-gray-600 mb-3">{t.fortune.subtitle}</p>
-            <p className="mb-6">
+            <p className="mb-6 flex flex-wrap items-center justify-center gap-x-3 gap-y-2">
               <a href="/ziwei" className="text-sm text-violet-600 hover:text-violet-800 underline underline-offset-2 transition-colors">
                 {t.fortune.ziweiLink}
+              </a>
+              <span aria-hidden="true" className="text-gray-300">|</span>
+              <a href="/guide" className="text-sm text-emerald-700 hover:text-emerald-900 underline underline-offset-2 transition-colors">
+                📚 {t.footer.guide}
               </a>
             </p>
 

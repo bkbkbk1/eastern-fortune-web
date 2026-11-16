@@ -91,12 +91,38 @@ export default function Home() {
             </div>
           </div>
 
+          {/* Guide section */}
+          <div className="mt-8 p-6 bg-gradient-to-r from-emerald-50 to-teal-50 border-2 border-emerald-200 rounded-2xl">
+            <div className="flex items-center justify-center gap-2 mb-3">
+              <span className="text-3xl">📚</span>
+              <h2 className="text-2xl font-bold text-gray-800">{t.home.guide.title}</h2>
+            </div>
+            <p className="text-center text-gray-700 mb-4">{t.home.guide.desc}</p>
+            <div className="flex justify-center">
+              <a
+                href="/guide"
+                className="inline-block bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-semibold px-8 py-3 rounded-full hover:shadow-lg transition-all"
+              >
+                {t.home.guide.button}
+              </a>
+            </div>
+          </div>
+
           {/* Footer Links */}
-          <div className="mt-8 pt-6 border-t border-gray-200 flex justify-center gap-4 text-xs text-gray-400">
+          <div className="mt-8 pt-6 border-t border-gray-200 flex flex-wrap justify-center gap-x-4 gap-y-2 text-xs text-gray-400">
+            <a href="/guide" className="hover:text-purple-600 transition-colors">{t.footer.guide}</a>
+            <span>|</span>
             <a href="/privacy" className="hover:text-purple-600 transition-colors">{t.footer.privacy}</a>
             <span>|</span>
             <a href="/terms" className="hover:text-purple-600 transition-colors">{t.footer.terms}</a>
           </div>
+
+          <p className="mt-3 text-[11px] text-gray-400">
+            {t.footer.contactBefore}
+            <a href="mailto:winmbk99@gmail.com" className="underline hover:text-purple-600 transition-colors">
+              winmbk99@gmail.com
+            </a>
+          </p>
 
           {/* Open source credit */}
           <p className="mt-3 text-[11px] text-gray-400">

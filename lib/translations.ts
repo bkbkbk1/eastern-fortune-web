@@ -24,10 +24,17 @@ export const translations = {
         desc: "중국 전통 자미두수 명반으로 12궁의 성요 배치를 통해 운명을 분석합니다",
         button: "명반 보기"
       },
+      guide: {
+        title: "📚 사주·자미두수 가이드",
+        desc: "병오년의 의미부터 사주팔자 기초, 자미두수 12궁까지 — 풀이를 스스로 읽기 위한 해설을 모았습니다.",
+        button: "가이드 보기"
+      },
     },
     footer: {
       privacy: "개인정보처리방침",
       terms: "이용약관",
+      guide: "사주·자미두수 가이드",
+      contactBefore: "문의: ",
       creditBefore: "사주·자미두수 계산 엔진: ",
       creditAfter: " © 2026 Jang-Ho Hwang · MIT License"
     },
@@ -241,10 +248,17 @@ export const translations = {
         desc: "Chinese Purple Star Astrology — a comprehensive 12-palace star chart analysis",
         button: "View Star Chart"
       },
+      guide: {
+        title: "📚 Saju & Zi Wei Guides",
+        desc: "From the meaning of the Byeongo year to Saju basics and the 12 Zi Wei palaces — read your reading on your own terms.",
+        button: "Read the guides"
+      },
     },
     footer: {
       privacy: "Privacy Policy",
       terms: "Terms of Service",
+      guide: "Saju & Zi Wei Guides",
+      contactBefore: "Contact: ",
       creditBefore: "Saju & Zi Wei calculation engine: ",
       creditAfter: " © 2026 Jang-Ho Hwang · MIT License"
     },
