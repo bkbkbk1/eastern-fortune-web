@@ -253,7 +253,6 @@ export default function ZiweiPage() {
           {/* Step 1: Birth Date */}
           {step === 1 && (
             <div className="text-center">
-              <div className="text-5xl mb-3">⭐</div>
               <h1 className="text-3xl font-bold text-gray-800 mb-2">{ziwei.labels.title}</h1>
               <p className="text-gray-500 mb-8">{ziwei.labels.subtitle}</p>
               <div className="max-w-md mx-auto mb-8">
