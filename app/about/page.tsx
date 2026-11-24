@@ -281,7 +281,7 @@ export default function AboutPage() {
                 자미두수를 공부하면서 정리한 내용을 무료로 나누는 것이 목적이고, 상업적 제휴나
                 유료 상담은 하지 않습니다.
               </p>
-              <div className="mt-4 rounded-xl border border-slate-200 bg-slate-50 p-5">
+              <div id="contact" className="mt-4 scroll-mt-24 rounded-xl border border-slate-200 bg-slate-50 p-5">
                 <p className="text-sm font-semibold text-slate-900">문의·오류 제보</p>
                 <p className="mt-1 text-sm text-slate-600">
                   <a
