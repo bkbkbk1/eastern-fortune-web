@@ -15,6 +15,9 @@ export default function SiteHeader() {
           <a href="/guide" className="font-semibold text-purple-700 hover:text-purple-800 transition-colors">
             가이드
           </a>
+          <a href="/about" className="hover:text-purple-600 transition-colors">
+            소개
+          </a>
         </nav>
       </div>
     </header>

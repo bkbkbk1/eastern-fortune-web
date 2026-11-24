@@ -246,6 +246,12 @@ export default function Jeongmi2027Page() {
           >
             자미두수 12궁 알아보기 →
           </a>
+          <a
+            href="/guide/zodiac-2027"
+            className="rounded-full bg-slate-100 px-4 py-2 font-medium text-slate-700 hover:bg-slate-200 transition-colors"
+          >
+            2027년 12띠별 운세 →
+          </a>
         </div>
       </article>
 

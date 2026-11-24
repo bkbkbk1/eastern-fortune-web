@@ -29,6 +29,12 @@ export default function SiteFooter() {
           <span aria-hidden="true" className="text-slate-300">
             |
           </span>
+          <a href="/about" className="hover:text-purple-600 transition-colors">
+            사이트 소개
+          </a>
+          <span aria-hidden="true" className="text-slate-300">
+            |
+          </span>
           <a href="/privacy" className="hover:text-purple-600 transition-colors">
             개인정보처리방침
           </a>

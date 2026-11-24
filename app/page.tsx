@@ -112,6 +112,8 @@ export default function Home() {
           <div className="mt-8 pt-6 border-t border-gray-200 flex flex-wrap justify-center gap-x-4 gap-y-2 text-xs text-gray-400">
             <a href="/guide" className="hover:text-purple-600 transition-colors">{t.footer.guide}</a>
             <span>|</span>
+            <a href="/about" className="hover:text-purple-600 transition-colors">{t.footer.about}</a>
+            <span>|</span>
             <a href="/privacy" className="hover:text-purple-600 transition-colors">{t.footer.privacy}</a>
             <span>|</span>
             <a href="/terms" className="hover:text-purple-600 transition-colors">{t.footer.terms}</a>

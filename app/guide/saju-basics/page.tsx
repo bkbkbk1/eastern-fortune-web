@@ -289,6 +289,12 @@ export default function SajuBasicsPage() {
           >
             자미두수 12궁 알아보기 →
           </a>
+          <a
+            href="/guide/ten-gods"
+            className="rounded-full bg-slate-100 px-4 py-2 font-medium text-slate-700 hover:bg-slate-200 transition-colors"
+          >
+            십성 자세히 보기 →
+          </a>
         </div>
       </article>
 

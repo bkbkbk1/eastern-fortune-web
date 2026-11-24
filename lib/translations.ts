@@ -34,6 +34,7 @@ export const translations = {
       privacy: "개인정보처리방침",
       terms: "이용약관",
       guide: "사주·자미두수 가이드",
+      about: "사이트 소개",
       contactBefore: "문의: ",
       creditBefore: "사주·자미두수 계산 엔진: ",
       creditAfter: " © 2026 Jang-Ho Hwang · MIT License"
@@ -258,6 +259,7 @@ export const translations = {
       privacy: "Privacy Policy",
       terms: "Terms of Service",
       guide: "Saju & Zi Wei Guides",
+      about: "About",
       contactBefore: "Contact: ",
       creditBefore: "Saju & Zi Wei calculation engine: ",
       creditAfter: " © 2026 Jang-Ho Hwang · MIT License"

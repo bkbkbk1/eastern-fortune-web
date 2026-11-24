@@ -234,6 +234,12 @@ export default function ZiweiTwelvePalacesPage() {
           >
             2027년 정미년 해설 →
           </a>
+          <a
+            href="/guide/ziwei-stars"
+            className="rounded-full bg-slate-100 px-4 py-2 font-medium text-slate-700 hover:bg-slate-200 transition-colors"
+          >
+            14주성 입문 →
+          </a>
         </div>
       </article>
 
