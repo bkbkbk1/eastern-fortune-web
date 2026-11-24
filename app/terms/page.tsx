@@ -23,13 +23,13 @@ export default function TermsPage() {
         <section>
           <h2 className="text-xl font-semibold mb-2">{isKo ? '1. 이용약관 동의' : '1. Acceptance of Terms'}</h2>
           <p>{isKo
-            ? 'Eastern Fortune 2026을 이용함으로써 본 약관에 동의하는 것으로 간주됩니다. 동의하지 않으시면 서비스를 이용하지 마세요. 만 13세 이상(EU 지역은 16세 이상)부터 이용 가능합니다.'
-            : 'By using Eastern Fortune 2026, you agree to these terms. If you do not agree, please do not use the app. You must be at least 13 years old (16 in EU) to use this service.'}</p>
+            ? 'Eastern Fortune 2027을 이용함으로써 본 약관에 동의하는 것으로 간주됩니다. 동의하지 않으시면 서비스를 이용하지 마세요. 만 13세 이상(EU 지역은 16세 이상)부터 이용 가능합니다.'
+            : 'By using Eastern Fortune 2027, you agree to these terms. If you do not agree, please do not use the app. You must be at least 13 years old (16 in EU) to use this service.'}</p>
         </section>
 
         <section>
           <h2 className="text-xl font-semibold mb-2">{isKo ? '2. 서비스 설명' : '2. Service Description'}</h2>
-          <p>{isKo ? 'Eastern Fortune 2026은 두 가지 시스템으로 운세를 제공합니다:' : 'Eastern Fortune 2026 provides fortune readings based on two systems:'}</p>
+          <p>{isKo ? 'Eastern Fortune 2027은 두 가지 시스템으로 운세를 제공합니다:' : 'Eastern Fortune 2027 provides fortune readings based on two systems:'}</p>
           <ul className="list-disc ml-6 mt-2 space-y-1">
             <li><strong>{isKo ? '사주명리 (四柱命理)' : 'Saju (Four Pillars of Destiny)'}</strong> - {isKo ? '연/월/일/시 기반 동양 전통 운세 분석' : 'East Asian astrology analyzing birth year, month, day, and hour'}</li>
             <li><strong>{isKo ? '자미두수 (紫微斗數)' : 'Zi Wei Dou Shu (Purple Star Astrology)'}</strong> - {isKo ? '12궁 성요 배치 기반 중국 전통 운명 분석' : 'Chinese astrology using a 12-palace star chart system'}</li>
@@ -81,15 +81,15 @@ export default function TermsPage() {
         <section>
           <h2 className="text-xl font-semibold mb-2">{isKo ? '7. 지적재산권' : '7. Intellectual Property'}</h2>
           <p>{isKo
-            ? 'Eastern Fortune 2026의 모든 콘텐츠, 디자인, 코드는 개발자에게 귀속됩니다. 허가 없이 앱을 복사, 수정, 배포할 수 없습니다.'
-            : 'All content, design, and code in Eastern Fortune 2026 is owned by the developer. You may not copy, modify, or distribute the app without permission.'}</p>
+            ? 'Eastern Fortune 2027의 모든 콘텐츠, 디자인, 코드는 개발자에게 귀속됩니다. 허가 없이 앱을 복사, 수정, 배포할 수 없습니다.'
+            : 'All content, design, and code in Eastern Fortune 2027 is owned by the developer. You may not copy, modify, or distribute the app without permission.'}</p>
         </section>
 
         <section>
           <h2 className="text-xl font-semibold mb-2">{isKo ? '8. 책임 제한' : '8. Limitation of Liability'}</h2>
           <p>{isKo
-            ? 'Eastern Fortune 2026은 "있는 그대로" 제공되며 어떠한 보증도 하지 않습니다. 블록체인 거래로 인한 재정적 손실을 포함하여 앱 사용으로 발생하는 어떠한 손해에 대해서도 책임지지 않습니다. 최대 책임 한도는 $10 또는 지난 12개월간 결제 금액 중 적은 금액입니다.'
-            : 'Eastern Fortune 2026 is provided "as is" without warranties. We are not liable for any damages arising from use of the app, including but not limited to financial losses from blockchain transactions. Maximum liability is limited to $10 or payments made in the past 12 months, whichever is less.'}</p>
+            ? 'Eastern Fortune 2027은 "있는 그대로" 제공되며 어떠한 보증도 하지 않습니다. 블록체인 거래로 인한 재정적 손실을 포함하여 앱 사용으로 발생하는 어떠한 손해에 대해서도 책임지지 않습니다. 최대 책임 한도는 $10 또는 지난 12개월간 결제 금액 중 적은 금액입니다.'
+            : 'Eastern Fortune 2027 is provided "as is" without warranties. We are not liable for any damages arising from use of the app, including but not limited to financial losses from blockchain transactions. Maximum liability is limited to $10 or payments made in the past 12 months, whichever is less.'}</p>
         </section>
 
         <section>

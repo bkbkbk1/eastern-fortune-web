@@ -225,7 +225,7 @@ export const translations = {
   },
   en: {
     home: {
-      title: "🔮 Eastern Fortune 2026",
+      title: "🔮 Eastern Fortune 2027",
       subtitle: "Discover Your 2027 Fire Sheep Fortune Through the Four Pillars",
       description: "Enter your birth date, time, and gender\nGet your 2027 Year of the Fire Sheep fortune analyzed by AI",
       sajuIntro: {

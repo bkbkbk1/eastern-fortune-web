@@ -23,8 +23,8 @@ export default function PrivacyPage() {
         <section>
           <h2 className="text-xl font-semibold mb-2">{isKo ? '1. 수집하는 정보' : '1. Information We Collect'}</h2>
           <p>{isKo
-            ? 'Eastern Fortune 2026은 운세 분석 및 자미두수(紫微斗數) 명반 분석을 제공하기 위해 다음 정보만 수집합니다:'
-            : 'Eastern Fortune 2026 collects the following information solely to provide fortune readings and Zi Wei Dou Shu (Purple Star Astrology) analysis:'}</p>
+            ? 'Eastern Fortune 2027은 운세 분석 및 자미두수(紫微斗數) 명반 분석을 제공하기 위해 다음 정보만 수집합니다:'
+            : 'Eastern Fortune 2027 collects the following information solely to provide fortune readings and Zi Wei Dou Shu (Purple Star Astrology) analysis:'}</p>
           <ul className="list-disc ml-6 mt-2 space-y-1">
             <li>{isKo ? '생년월일, 출생시간, 성별 (사용자가 직접 입력)' : 'Birth date, birth time, and gender (entered by you)'}</li>
             <li>{isKo ? '언어 설정' : 'Language preference'}</li>
