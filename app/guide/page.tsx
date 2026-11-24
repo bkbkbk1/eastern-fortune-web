@@ -1,13 +1,13 @@
 export default function GuideIndexPage() {
   const articles = [
     {
-      href: "/guide/byeongo-2026",
-      icon: "🔥",
-      title: "2026년 병오년, 붉은 말의 해",
+      href: "/guide/jeongmi-2027",
+      icon: "🐑",
+      title: "2027년 정미년, 붉은 양의 해",
       tag: "연운(年運)",
       description:
-        "2026년이 왜 병오년인지, 천간 병화(丙火)와 지지 오화(午火)가 겹칠 때 어떤 기운이 만들어지는지 정리했습니다. 재물·직장·건강의 흐름을 사주 논리로 읽는 법과, 내 명식에서 확인해야 할 세 가지 지점까지 다룹니다.",
-      points: ["병화와 오화의 성질", "화가 강한 해의 재물 구조", "직장·건강에서 조심할 지점"],
+        "2027년이 왜 정미년인지, 천간 정화(丁火)와 지지 미토(未土)가 만날 때 어떤 기운이 만들어지는지 정리했습니다. 불이 흙을 낳는 상생 구조에서 나오는 재물·직장·건강의 흐름을 사주 논리로 읽는 법과, 내 명식에서 확인해야 할 세 가지 지점까지 다룹니다.",
+      points: ["정화와 미토의 성질", "화생토가 만드는 재물 구조", "직장·건강에서 조심할 지점"],
     },
     {
       href: "/guide/saju-basics",
@@ -44,7 +44,7 @@ export default function GuideIndexPage() {
       <p className="mt-4 text-[15px] leading-8 text-slate-700">
         운세 풀이는 결과만 읽어도 재미있지만, 그 결과가 어떤 원리에서 나온 것인지 알면 훨씬
         쓸모가 있습니다. 같은 &lsquo;재물운이 좋다&rsquo;는 말도 내 사주에서 재성이 무엇을
-        가리키는지에 따라 해석이 달라지고, 같은 병오년이라도 타고난 오행의 구성에 따라 체감이
+        가리키는지에 따라 해석이 달라지고, 같은 정미년이라도 타고난 오행의 구성에 따라 체감이
         정반대로 갈립니다. 이 가이드는 사주와 자미두수를 처음 접하는 분이 풀이 결과를 스스로
         읽어낼 수 있도록, 꼭 필요한 개념만 순서대로 정리한 세 편의 해설을 담았습니다.
       </p>
@@ -117,18 +117,18 @@ export default function GuideIndexPage() {
       <section className="mt-12 rounded-2xl border border-amber-200 bg-amber-50 p-6">
         <h2 className="text-lg font-bold text-slate-900">어떤 순서로 읽으면 좋을까요?</h2>
         <p className="mt-2 text-[15px] leading-7 text-slate-700">
-          처음이라면 <strong>사주팔자 기초</strong> → <strong>2026년 병오년</strong> →{" "}
+          처음이라면 <strong>사주팔자 기초</strong> → <strong>2027년 정미년</strong> →{" "}
           <strong>자미두수 12궁</strong> 순서를 권합니다. 첫 글에서 네 기둥과 오행·십신이라는
           언어를 익히고, 두 번째 글에서 그 언어로 올해라는 시간을 읽고, 세 번째 글에서 사주와는
           다른 방식으로 삶을 구획하는 도구를 만나게 됩니다. 이미 사주를 어느 정도 아는 분이라면
-          병오년 해설부터 읽어도 좋습니다.
+          정미년 해설부터 읽어도 좋습니다.
         </p>
       </section>
 
       <section className="mt-10 rounded-2xl bg-gradient-to-r from-purple-600 to-indigo-600 p-7 text-center text-white">
         <h2 className="text-xl font-bold">내 명식으로 바로 확인해 보기</h2>
         <p className="mt-2 text-sm text-purple-50">
-          생년월일시만 입력하면 2026년 병오년 사주 풀이와 자미두수 명반을 무료로 볼 수 있습니다.
+          생년월일시만 입력하면 2027년 정미년 사주 풀이와 자미두수 명반을 무료로 볼 수 있습니다.
         </p>
         <div className="mt-5 flex flex-wrap justify-center gap-3">
           <a

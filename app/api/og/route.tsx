@@ -50,7 +50,7 @@ export async function GET(req: NextRequest) {
         >
           {/* 제목 */}
           <div style={{ fontSize: 48, fontWeight: 'bold', marginBottom: 40 }}>
-            🔮 2026년 병오년 운세
+            🔮 2027년 정미년 운세
           </div>
 
           {/* 사주팔자 */}

@@ -161,8 +161,8 @@ export default function ZiweiTwelvePalacesPage() {
           <section>
             <h2 className="mb-2 text-xl font-bold text-slate-900">유년(流年): 한 해의 초점</h2>
             <p>
-              유년은 해마다 바뀌는 운으로, 그해의 지지에 해당하는 궁이 유년 명궁이 됩니다. 2026년은
-              오(午)의 해이므로 유년 명궁이 오에 놓이고, 그 자리와 삼방사정에 어떤 별이 있는지가
+              유년은 해마다 바뀌는 운으로, 그해의 지지에 해당하는 궁이 유년 명궁이 됩니다. 2027년은
+              미(未)의 해이므로 유년 명궁이 미에 놓이고, 그 자리와 삼방사정에 어떤 별이 있는지가
               한 해의 화두를 정합니다. 대한이 배경이라면 유년은 그 위에 얹히는 조명입니다. 배경이
               어두워도 조명이 밝으면 좋은 한 해가 되고, 배경이 좋아도 조명이 흐리면 힘겨운 한 해가
               됩니다.
@@ -229,10 +229,10 @@ export default function ZiweiTwelvePalacesPage() {
             ← 사주팔자 기초 읽기
           </a>
           <a
-            href="/guide/byeongo-2026"
+            href="/guide/jeongmi-2027"
             className="rounded-full bg-slate-100 px-4 py-2 font-medium text-slate-700 hover:bg-slate-200 transition-colors"
           >
-            2026년 병오년 해설 →
+            2027년 정미년 해설 →
           </a>
         </div>
       </article>
@@ -253,7 +253,7 @@ export default function ZiweiTwelvePalacesPage() {
             href="/fortune"
             className="rounded-full border border-white/70 px-6 py-2.5 text-sm font-semibold text-white hover:bg-white/10 transition-colors"
           >
-            2026 사주 풀이 보기
+            2027 사주 풀이 보기
           </a>
         </div>
       </section>

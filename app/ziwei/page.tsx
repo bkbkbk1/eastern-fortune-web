@@ -6,6 +6,7 @@ import LanguageToggle from '../components/LanguageToggle';
 import ShareButton from '../components/ShareButton';
 import { isInNativeApp, requestPayment, type PaymentToken } from '@/lib/solana-bridge';
 import type { ZiweiChart, ZiweiPalace } from '@orrery/core/types';
+import { FORTUNE_YEAR } from '@/lib/fortune-year';
 
 interface DaxianItem {
   ageStart: number;
@@ -218,7 +219,8 @@ export default function ZiweiPage() {
     setPaid(false);
   };
 
-  const currentYear = new Date().getFullYear();
+  // 기준 연도는 lib/fortune-year.ts 에서 관리한다(2027 정미년).
+  const currentYear = FORTUNE_YEAR;
   const getCurrentDaxian = (daxianList: DaxianItem[]) => {
     if (!result) return null;
     const currentAge = currentYear - result.chart.solarYear;

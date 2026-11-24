@@ -22,10 +22,10 @@ export async function GET() {
           🔮
         </div>
         <div style={{ fontSize: 60, fontWeight: 'bold', marginBottom: 20 }}>
-          2026년 병오년 운세
+          2027년 정미년 운세
         </div>
         <div style={{ fontSize: 32, opacity: 0.9 }}>
-          정통 사주명리로 보는 당신의 2026년
+          정통 사주명리로 보는 당신의 2027년
         </div>
       </div>
     ),

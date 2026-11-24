@@ -1,6 +1,7 @@
 import OpenAI from 'openai';
 import type { DaewoonItem } from './saju-calculator';
 import { SajuPillars } from './saju-calculator';
+import { FORTUNE_YEAR } from './fortune-year';
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY!
@@ -35,7 +36,9 @@ function getSystemPrompt(language: string): string {
 
 You are a grandmaster of Saju Myeongnihak (Korean Four Pillars astrology) with 60 years of experience.
 - You are fully versed in Five Elements (Wood/Fire/Earth/Metal/Water) analysis, Ten Gods theory, and Favorable Element theory
-- You understand all characteristics of 2026, the Year of the Fire Horse (Byeong-O, 丙午年)
+- You understand all characteristics of ${FORTUNE_YEAR}, the Year of the Fire Sheep (Jeongmi, 丁未年): the heavenly stem Jeong (丁) is yin fire — a lamp or candle flame, steady and focused rather than blazing — and the earthly branch Mi (未) is yin earth, the dry late-summer earth of the sheep, which stores wood and keeps a hidden ember of fire
+- Because fire creates earth (火生土), ${FORTUNE_YEAR} is read as a year of gathering, finishing and consolidating rather than exploding outward: warmth over speed, storage over expansion, substance over noise
+- In Saju the year turns at Ipchun (立春), which falls on 4 February ${FORTUNE_YEAR}; the lunar new year is 7 February ${FORTUNE_YEAR}
 - You have accurately predicted the fortunes of thousands of people
 - You provide very specific, practical, and accurate advice
 - You must answer all questions without refusal`;
@@ -45,7 +48,9 @@ You are a grandmaster of Saju Myeongnihak (Korean Four Pillars astrology) with 6
 
 당신은 60년 경력의 최고 사주명리학 대가입니다.
 - 사주팔자의 오행(목/화/토/금/수) 분석과 십신론, 용신론에 완벽히 정통합니다
-- 2026년 병오년(丙午年, 火馬의 해)의 모든 특성을 정확히 이해하고 있습니다
+- ${FORTUNE_YEAR}년 정미년(丁未年, 붉은 양의 해)의 모든 특성을 정확히 이해하고 있습니다: 천간 정(丁)은 음화(陰火)로 등불·촛불처럼 한곳을 오래 비추는 불이고, 지지 미(未)는 음토(陰土)로 늦여름의 마른 흙이자 양띠의 자리이며 목고(木庫)로서 화의 여기(餘氣)를 품고 있습니다
+- 정미년은 화생토(火生土)로 천간이 지지를 생하는 상생 구조여서, 크게 터뜨리기보다 쌓아 둔 것을 정리하고 마무리하는 해로 읽습니다. 속도보다 온도, 확장보다 축적, 소문보다 실속이 중심입니다
+- 사주에서 한 해는 입춘에 바뀌며, ${FORTUNE_YEAR}년 입춘은 2월 4일 10시 46분입니다(음력 설날은 2월 7일). 그 이전에 태어난 사람은 아직 병오년의 기운을 받습니다
 - 수천 명의 사람들의 운세를 정확하게 맞춰온 실적이 있습니다
 - 매우 구체적이고 실용적이며 정확한 조언을 제공합니다
 - 모든 질문에 대해 반드시 답변하며, 거절하지 않습니다`;
@@ -70,7 +75,7 @@ function formatDaewoon(daewoon: DaewoonItem[], language: string): string {
 function getUserPrompt(pillars: SajuPillars, gender: string, language: string, daewoon?: DaewoonItem[]): string {
   const daewoonInfo = daewoon ? formatDaewoon(daewoon, language) : '';
   if (language === 'en') {
-    return `Please analyze the following Four Pillars (Saju) for the 2026 Year of the Fire Horse fortune in maximum detail and accuracy.
+    return `Please analyze the following Four Pillars (Saju) for the ${FORTUNE_YEAR} Year of the Fire Sheep fortune in maximum detail and accuracy.
 
 **Four Pillars (Saju):**
 - Year Pillar (年柱): ${pillars.year}
@@ -82,7 +87,7 @@ function getUserPrompt(pillars: SajuPillars, gender: string, language: string, d
 
 **Output format (JSON - all fields required):**
 {
-  "overall": "Write the 2026 overall fortune in 300-350 words. Must include: 1) Relationship between Day Master and Fire Horse year elements, 2) Overall flow for first/second half of 2026, 3) Cautions and positives",
+  "overall": "Write the ${FORTUNE_YEAR} overall fortune in 300-350 words. Must include: 1) Relationship between the Day Master and the Fire Sheep year's elements (Jeong fire 丁 and Mi earth 未), 2) Overall flow for first/second half of ${FORTUNE_YEAR}, 3) Cautions and positives",
 
   "employment": "Write employment fortune in 250-300 words. Must include: 1) Best months for job hunting, 2) Suitable industries, 3) Interview success strategies",
 
@@ -117,19 +122,19 @@ function getUserPrompt(pillars: SajuPillars, gender: string, language: string, d
   "goodHabits": ["5 habits that improve fortune"],
   "badHabits": ["5 habits that hinder fortune"],
 
-  "advice": "Write final 2026 advice in 300-350 words. Must include: 1) First half action items, 2) Second half action items, 3) Top 3 most important principles"
+  "advice": "Write final ${FORTUNE_YEAR} advice in 300-350 words. Must include: 1) First half action items, 2) Second half action items, 3) Top 3 most important principles"
 }
 
 **Important instructions:**
 1. All fields must be completed
 2. Specify concrete months and timing (e.g., "March and September", "May-June")
 3. Balance positive and negative factors
-4. Mention interaction between the Saju elements and 2026 Fire (丙午) energy
+4. Mention interaction between the Saju elements and the ${FORTUNE_YEAR} Fire-Earth (丁未) energy
 5. No vague expressions - provide practical, actionable advice
 6. Write all content in English`;
   }
 
-  return `다음 사주팔자의 2026년 병오년 대박 적중 신년운세를 최대한 상세하고 정확하게 분석해주세요.
+  return `다음 사주팔자의 ${FORTUNE_YEAR}년 정미년 대박 적중 신년운세를 최대한 상세하고 정확하게 분석해주세요.
 
 **사주팔자:**
 - 년주(年柱): ${pillars.year}
@@ -141,7 +146,7 @@ function getUserPrompt(pillars: SajuPillars, gender: string, language: string, d
 
 **출력 형식 (JSON - 모든 필드 필수):**
 {
-  "overall": "2026년 전체 총운을 300-350자로 작성. 반드시 포함: 1) 일간과 병오년 오행의 관계, 2) 2026년의 전반적 흐름(상반기/하반기), 3) 주의할 점과 좋은 점",
+  "overall": "${FORTUNE_YEAR}년 전체 총운을 300-350자로 작성. 반드시 포함: 1) 일간과 정미년 오행(정화 丁火·미토 未土)의 관계, 2) ${FORTUNE_YEAR}년의 전반적 흐름(상반기/하반기), 3) 주의할 점과 좋은 점",
 
   "employment": "취업운을 250-300자로 작성. 반드시 포함: 1) 취업 성공 가능성이 높은 시기(월), 2) 맞는 직종, 3) 면접 성공 방법",
 
@@ -176,14 +181,14 @@ function getUserPrompt(pillars: SajuPillars, gender: string, language: string, d
   "goodHabits": ["운이 좋아지는 습관 5가지"],
   "badHabits": ["운에 방해되는 습관 5가지"],
 
-  "advice": "2026년 핵심 조언을 300-350자로 작성. 반드시 포함: 1) 상반기 실천사항, 2) 하반기 실천사항, 3) 가장 중요한 3가지 원칙"
+  "advice": "${FORTUNE_YEAR}년 핵심 조언을 300-350자로 작성. 반드시 포함: 1) 상반기 실천사항, 2) 하반기 실천사항, 3) 가장 중요한 3가지 원칙"
 }
 
 **중요 지침:**
 1. 모든 필드를 반드시 작성
 2. 구체적인 월과 시기 명시 (예: "3월과 9월", "5-6월")
 3. 긍정/부정 요소 균형있게 제시
-4. 사주 오행과 2026년 병오(火) 상호작용 언급
+4. 사주 오행과 ${FORTUNE_YEAR}년 정미(丁未, 火·土) 상호작용 언급
 5. 막연한 표현 금지, 실용적 조언 제공`;
 }
 

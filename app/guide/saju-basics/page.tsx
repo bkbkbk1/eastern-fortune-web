@@ -278,10 +278,10 @@ export default function SajuBasicsPage() {
 
         <div className="mt-8 flex flex-wrap gap-3 border-t border-slate-100 pt-6 text-sm">
           <a
-            href="/guide/byeongo-2026"
+            href="/guide/jeongmi-2027"
             className="rounded-full bg-slate-100 px-4 py-2 font-medium text-slate-700 hover:bg-slate-200 transition-colors"
           >
-            ← 2026년 병오년 해설 읽기
+            ← 2027년 정미년 해설 읽기
           </a>
           <a
             href="/guide/ziwei-12palaces"
@@ -295,7 +295,7 @@ export default function SajuBasicsPage() {
       <section className="mt-8 rounded-2xl bg-gradient-to-r from-purple-600 to-indigo-600 p-7 text-center text-white">
         <h2 className="text-xl font-bold">내 사주팔자 직접 세워 보기</h2>
         <p className="mt-2 text-sm text-purple-50">
-          생년월일시를 입력하면 네 기둥과 오행 구성을 계산해 2026년 해석까지 무료로 보여드립니다.
+          생년월일시를 입력하면 네 기둥과 오행 구성을 계산해 2027년 해석까지 무료로 보여드립니다.
         </p>
         <div className="mt-5 flex flex-wrap justify-center gap-3">
           <a

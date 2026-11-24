@@ -1,9 +1,9 @@
 export const translations = {
   ko: {
     home: {
-      title: "🔮 2026년 병오년 운세",
-      subtitle: "정통 사주명리로 보는 당신의 2026년",
-      description: "생년월일시와 성별을 입력하면\nChatGPT가 2026년 병오년 운세를 해석해드립니다",
+      title: "🔮 2027년 정미년 운세",
+      subtitle: "정통 사주명리로 보는 당신의 2027년",
+      description: "생년월일시와 성별을 입력하면\nChatGPT가 2027년 정미년 운세를 해석해드립니다",
       sajuIntro: {
         title: "사주(四柱)란?",
         description: "사주명리학은 출생 연/월/일/시를 기반으로 천간과 지지를 분석하여 인생의 흐름과 운세를 파악하는 동양 전통 학문입니다.",
@@ -14,7 +14,7 @@ export const translations = {
           "시주(時柱) - 자녀와 노년기의 운"
         ]
       },
-      wealth: { title: "재물운", desc: "2026년 재테크 방향성" },
+      wealth: { title: "재물운", desc: "2027년 재테크 방향성" },
       career: { title: "직업운", desc: "커리어 전환 타이밍" },
       health: { title: "건강운", desc: "주의해야 할 건강 포인트" },
       cta: "지금 바로 운세를 확인하세요",
@@ -26,7 +26,7 @@ export const translations = {
       },
       guide: {
         title: "📚 사주·자미두수 가이드",
-        desc: "병오년의 의미부터 사주팔자 기초, 자미두수 12궁까지 — 풀이를 스스로 읽기 위한 해설을 모았습니다.",
+        desc: "정미년의 의미부터 사주팔자 기초, 자미두수 12궁까지 — 풀이를 스스로 읽기 위한 해설을 모았습니다.",
         button: "가이드 보기"
       },
     },
@@ -39,7 +39,7 @@ export const translations = {
       creditAfter: " © 2026 Jang-Ho Hwang · MIT License"
     },
     fortune: {
-      title: "🔮 2026년 운세",
+      title: "🔮 2027년 운세",
       subtitle: "양력 생년월일을 입력하세요",
       ziweiLink: "⭐ 자미두수 명반 보기",
       birthDate: {
@@ -81,7 +81,7 @@ export const translations = {
       loadingMessages: [
         "🔮 사주팔자 계산 중...",
         "📊 음양오행 분석 중...",
-        "✨ 2026년 병오년과의 상호작용 분석 중...",
+        "✨ 2027년 정미년과의 상호작용 분석 중...",
         "💫 십신론 적용 중...",
         "🌟 용신 파악 중...",
         "💰 재물운과 투자운 분석 중...",
@@ -106,20 +106,20 @@ export const translations = {
         button: "🔗 결과 공유하기",
         copy: "🔗 링크 복사",
         copied: "링크가 복사되었습니다!",
-        title: "2026 병오년 AI 사주·자미두수 운세",
-        text: "AI가 풀어주는 2026년 병오년 사주·자미두수 운세, 나도 확인해보세요! 👉 https://saju2026.com",
+        title: "2027 정미년 AI 사주·자미두수 운세",
+        text: "AI가 풀어주는 2027년 정미년 사주·자미두수 운세, 나도 확인해보세요! 👉 https://saju2026.com",
         manualCopy: "아래 링크를 복사해서 공유하세요:",
         shareResult: "📋 내 사주 결과 공유하기"
       },
       payment: {
         title: "🔮 운세 결과 보기",
         subtitle: "Solana 지갑으로 결제하고 상세 운세를 확인하세요",
-        fortuneTitle: "2026년 병오년 운세",
+        fortuneTitle: "2027년 정미년 운세",
         fortuneDesc: "사주팔자와 ChatGPT 상세 해석",
         priceNote: "약 $1.00 상당",
         includes: {
           pillars: "사주팔자 (년/월/일/시)",
-          analysis: "2026년 상세 운세 해석",
+          analysis: "2027년 상세 운세 해석",
           categories: "13가지 운세 카테고리 분석",
           advice: "AI 맞춤 조언 & 행운 아이템"
         },
@@ -127,14 +127,14 @@ export const translations = {
         processing: "처리 중...",
       },
       result: {
-        title: "🔮 2026년 병오년 운세",
+        title: "🔮 2027년 정미년 운세",
         pillarsTitle: "사주팔자",
         year: "년주",
         month: "월주",
         day: "일주",
         hour: "시주",
         sections: {
-          overall: "2026년 총운",
+          overall: "2027년 총운",
           employment: "취업운 풀이",
           workplace: "직장운 풀이",
           jobChange: "이직운 풀이",
@@ -148,14 +148,14 @@ export const translations = {
           business: "사업운 풀이",
           consumption: "소비운 풀이",
           academic: "학업운 풀이",
-          luckyItems: "🍀 2026년 나에게 이로운 아이템",
+          luckyItems: "🍀 2027년 나에게 이로운 아이템",
           luckyColor: "행운의 색",
           luckyNumber: "행운의 숫자",
           luckyDirection: "행운의 방향",
-          fortuneFlow: "⚡ 2026년의 극과 극",
+          fortuneFlow: "⚡ 2027년의 극과 극",
           goodHabits: "✅ 운의 흐름이 좋아집니다",
           badHabits: "⚠️ 운의 흐름에 방해를 받습니다",
-          advice: "2026년 최종 조언"
+          advice: "2027년 최종 조언"
         }
       },
       errors: {
@@ -226,8 +226,8 @@ export const translations = {
   en: {
     home: {
       title: "🔮 Eastern Fortune 2026",
-      subtitle: "Discover Your Destiny Through the Four Pillars",
-      description: "Enter your birth date, time, and gender\nGet your 2026 Year of Fire Horse fortune analyzed by AI",
+      subtitle: "Discover Your 2027 Fire Sheep Fortune Through the Four Pillars",
+      description: "Enter your birth date, time, and gender\nGet your 2027 Year of the Fire Sheep fortune analyzed by AI",
       sajuIntro: {
         title: "What is Saju (Four Pillars of Destiny)?",
         description: "Saju Myeongnihak (Four Pillars of Destiny) is an ancient East Asian astrology system that analyzes the Heavenly Stems and Earthly Branches of your birth year, month, day, and hour to reveal the flow of your life and fortune.",
@@ -238,7 +238,7 @@ export const translations = {
           "Hour Pillar - Children and later-life fortune"
         ]
       },
-      wealth: { title: "Wealth Fortune", desc: "Financial direction for 2026" },
+      wealth: { title: "Wealth Fortune", desc: "Financial direction for 2027" },
       career: { title: "Career Fortune", desc: "Career transition timing" },
       health: { title: "Health Fortune", desc: "Health points to watch" },
       cta: "Discover your fortune now",
@@ -250,7 +250,7 @@ export const translations = {
       },
       guide: {
         title: "📚 Saju & Zi Wei Guides",
-        desc: "From the meaning of the Byeongo year to Saju basics and the 12 Zi Wei palaces — read your reading on your own terms.",
+        desc: "From the meaning of the Jeongmi year to Saju basics and the 12 Zi Wei palaces — read your reading on your own terms.",
         button: "Read the guides"
       },
     },
@@ -263,7 +263,7 @@ export const translations = {
       creditAfter: " © 2026 Jang-Ho Hwang · MIT License"
     },
     fortune: {
-      title: "🔮 2026 Fortune Reading",
+      title: "🔮 2027 Fortune Reading",
       subtitle: "Enter your birth date (Solar calendar)",
       ziweiLink: "⭐ See the Zi Wei star chart",
       birthDate: {
@@ -305,7 +305,7 @@ export const translations = {
       loadingMessages: [
         "🔮 Calculating Four Pillars...",
         "📊 Analyzing Yin-Yang Five Elements...",
-        "✨ Analyzing interaction with 2026 Fire Horse year...",
+        "✨ Analyzing interaction with the 2027 Fire Sheep year...",
         "💫 Applying Ten Gods theory...",
         "🌟 Identifying favorable elements...",
         "💰 Analyzing wealth and investment fortune...",
@@ -330,20 +330,20 @@ export const translations = {
         button: "🔗 Share result",
         copy: "🔗 Copy link",
         copied: "Link copied!",
-        title: "2026 Fire Horse AI Saju & Zi Wei Fortune",
-        text: "Check out my 2026 Saju and Zi Wei Dou Shu reading 👉 https://saju2026.com",
+        title: "2027 Fire Sheep AI Saju & Zi Wei Fortune",
+        text: "Check out my 2027 Saju and Zi Wei Dou Shu reading 👉 https://saju2026.com",
         manualCopy: "Copy and share this link:",
         shareResult: "📋 Share my reading"
       },
       payment: {
         title: "🔮 Unlock Your Fortune",
         subtitle: "Pay with your Solana wallet to view your detailed fortune reading",
-        fortuneTitle: "2026 Year of Fire Horse Fortune",
+        fortuneTitle: "2027 Year of the Fire Sheep Fortune",
         fortuneDesc: "Four Pillars Analysis & AI Interpretation",
         priceNote: "Approximately $1.00",
         includes: {
           pillars: "Four Pillars of Destiny (Year/Month/Day/Hour)",
-          analysis: "Detailed 2026 fortune interpretation",
+          analysis: "Detailed 2027 fortune interpretation",
           categories: "13 fortune category analysis",
           advice: "AI personalized advice & lucky items"
         },
@@ -351,14 +351,14 @@ export const translations = {
         processing: "Processing...",
       },
       result: {
-        title: "🔮 2026 Year of Fire Horse Fortune",
+        title: "🔮 2027 Year of the Fire Sheep Fortune",
         pillarsTitle: "Four Pillars of Destiny",
         year: "Year",
         month: "Month",
         day: "Day",
         hour: "Hour",
         sections: {
-          overall: "2026 Overall Fortune",
+          overall: "2027 Overall Fortune",
           employment: "Employment Fortune",
           workplace: "Workplace Fortune",
           jobChange: "Job Change Fortune",
@@ -372,14 +372,14 @@ export const translations = {
           business: "Business Fortune",
           consumption: "Spending Fortune",
           academic: "Academic Fortune",
-          luckyItems: "🍀 Your Lucky Items for 2026",
+          luckyItems: "🍀 Your Lucky Items for 2027",
           luckyColor: "Lucky Colors",
           luckyNumber: "Lucky Numbers",
           luckyDirection: "Lucky Directions",
-          fortuneFlow: "⚡ Highs & Lows of 2026",
+          fortuneFlow: "⚡ Highs & Lows of 2027",
           goodHabits: "✅ Habits that improve your fortune",
           badHabits: "⚠️ Habits that hinder your fortune",
-          advice: "Final Advice for 2026"
+          advice: "Final Advice for 2027"
         }
       },
       errors: {

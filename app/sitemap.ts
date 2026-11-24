@@ -31,10 +31,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
     },
     {
-      url: `${SITE_URL}/guide/byeongo-2026`,
+      url: `${SITE_URL}/guide/jeongmi-2027`,
       lastModified,
       changeFrequency: "monthly",
-      priority: 0.7,
+      priority: 0.8,
     },
     {
       url: `${SITE_URL}/guide/saju-basics`,

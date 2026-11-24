@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { createChart, getDaxianList, calculateLiunian } from '@orrery/core/ziwei';
 import type { ZiweiChart } from '@orrery/core/types';
 import OpenAI from 'openai';
+import { FORTUNE_YEAR } from '@/lib/fortune-year';
 
 const openaiClient = () => {
   const apiKey = process.env.OPENAI_API_KEY;
@@ -27,7 +28,8 @@ async function interpretZiwei(
   language: string
 ): Promise<string> {
   const palaceText = formatPalacesForGPT(chart);
-  const currentYear = new Date().getFullYear();
+  // 신년운세 기준 연도(정미년). lib/fortune-year.ts 값만 바꾸면 함께 움직인다.
+  const currentYear = FORTUNE_YEAR;
   const liunian = calculateLiunian(chart, currentYear);
   const daxianList = getDaxianList(chart);
   const currentAge = currentYear - chart.solarYear;
@@ -59,7 +61,7 @@ ${palaceText}
 
 ${currentDaxian ? `**Current Major Period (大限):** ${currentDaxian.ganZhi} (ages ${currentDaxian.ageStart}-${currentDaxian.ageEnd}, main stars: ${currentDaxian.mainStars.join(', ')})` : ''}
 
-**${currentYear} annual (流年) analysis:**
+**${currentYear} annual (流年, Year of the Fire Sheep 丁未) analysis:**
 - Annual Life Palace: ${liunian.mingGongZhi}
 - Transformations: ${Object.entries(liunian.siHua).map(([k, v]) => `${k}${v}`).join(', ')}
 
@@ -87,7 +89,7 @@ ${palaceText}
 
 ${currentDaxian ? `**현재 대한(大限):** ${currentDaxian.ganZhi} (${currentDaxian.ageStart}~${currentDaxian.ageEnd}세, 주요 성: ${currentDaxian.mainStars.join(', ')})` : ''}
 
-**${currentYear}년 유년(流年) 분석:**
+**${currentYear}년 정미년 유년(流年) 분석:**
 - 유년 명궁: ${liunian.mingGongZhi}
 - 화록/화권/화과/화기: ${Object.entries(liunian.siHua).map(([k, v]) => `${k}${v}`).join(', ')}
 
@@ -143,7 +145,7 @@ export async function POST(req: NextRequest) {
 
     const chart = createChart(year, month, day, hour, minute, isMale);
     const daxianList = getDaxianList(chart);
-    const currentYear = new Date().getFullYear();
+    const currentYear = FORTUNE_YEAR;
     const liunian = calculateLiunian(chart, currentYear);
 
     const genderLabel =
