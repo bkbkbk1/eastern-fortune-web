@@ -1,4 +1,4 @@
-const CONTACT_EMAIL = "winmbk99@gmail.com";
+const CONTACT_EMAIL = "person.bk.scholarship@gmail.com";
 
 export default function SiteFooter() {
   return (

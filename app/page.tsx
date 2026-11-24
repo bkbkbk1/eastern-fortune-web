@@ -121,8 +121,8 @@ export default function Home() {
 
           <p className="mt-3 text-[11px] text-gray-400">
             {t.footer.contactBefore}
-            <a href="mailto:winmbk99@gmail.com" className="underline hover:text-purple-600 transition-colors">
-              winmbk99@gmail.com
+            <a href="mailto:person.bk.scholarship@gmail.com" className="underline hover:text-purple-600 transition-colors">
+              person.bk.scholarship@gmail.com
             </a>
           </p>
 
