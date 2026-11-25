@@ -18,15 +18,15 @@ export const metadata: Metadata = {
     "사주 오행 부족",
   ],
   alternates: {
-    canonical: "https://saju2026.com/guide/five-elements",
+    canonical: "https://saju-free.vercel.app/guide/five-elements",
   },
   openGraph: {
     title: "오행 상생·상극과 용신 이해하기",
     description:
       "목·화·토·금·수의 상생과 상극, 계절에 따른 힘의 변화, 오행의 과부족과 용신을 정리한 입문 가이드.",
-    url: "https://saju2026.com/guide/five-elements",
-    siteName: "saju2026.com",
-    images: ["https://saju2026.com/og-welcome.png"],
+    url: "https://saju-free.vercel.app/guide/five-elements",
+    siteName: "saju-free.vercel.app",
+    images: ["https://saju-free.vercel.app/og-welcome.png"],
     locale: "ko_KR",
     type: "article",
   },
@@ -41,9 +41,9 @@ const articleJsonLd = {
   inLanguage: "ko-KR",
   datePublished: "2026-11-24",
   dateModified: "2026-11-24",
-  author: { "@type": "Organization", name: "saju2026.com" },
-  publisher: { "@type": "Organization", name: "saju2026.com", url: "https://saju2026.com" },
-  mainEntityOfPage: "https://saju2026.com/guide/five-elements",
+  author: { "@type": "Organization", name: "saju-free.vercel.app" },
+  publisher: { "@type": "Organization", name: "saju-free.vercel.app", url: "https://saju-free.vercel.app" },
+  mainEntityOfPage: "https://saju-free.vercel.app/guide/five-elements",
 };
 
 const elements = [

@@ -17,15 +17,15 @@ export const metadata: Metadata = {
     "배우자궁",
   ],
   alternates: {
-    canonical: "https://saju2026.com/guide/saju-compatibility",
+    canonical: "https://saju-free.vercel.app/guide/saju-compatibility",
   },
   openGraph: {
     title: "사주 궁합 보는 핵심 기준 — 일주·오행·합충",
     description:
       "일간과 일지의 관계, 오행 보완, 합·충·형·해의 해석과 궁합을 보는 순서를 정리한 가이드.",
-    url: "https://saju2026.com/guide/saju-compatibility",
-    siteName: "saju2026.com",
-    images: ["https://saju2026.com/og-welcome.png"],
+    url: "https://saju-free.vercel.app/guide/saju-compatibility",
+    siteName: "saju-free.vercel.app",
+    images: ["https://saju-free.vercel.app/og-welcome.png"],
     locale: "ko_KR",
     type: "article",
   },
@@ -40,9 +40,9 @@ const articleJsonLd = {
   inLanguage: "ko-KR",
   datePublished: "2026-11-24",
   dateModified: "2026-11-24",
-  author: { "@type": "Organization", name: "saju2026.com" },
-  publisher: { "@type": "Organization", name: "saju2026.com", url: "https://saju2026.com" },
-  mainEntityOfPage: "https://saju2026.com/guide/saju-compatibility",
+  author: { "@type": "Organization", name: "saju-free.vercel.app" },
+  publisher: { "@type": "Organization", name: "saju-free.vercel.app", url: "https://saju-free.vercel.app" },
+  mainEntityOfPage: "https://saju-free.vercel.app/guide/saju-compatibility",
 };
 
 const relations = [

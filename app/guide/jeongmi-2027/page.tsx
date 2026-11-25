@@ -15,15 +15,15 @@ export const metadata: Metadata = {
     "육십갑자",
   ],
   alternates: {
-    canonical: "https://saju2026.com/guide/jeongmi-2027",
+    canonical: "https://saju-free.vercel.app/guide/jeongmi-2027",
   },
   openGraph: {
     title: "2027년 정미년, 붉은 양의 해 — 정화와 미토의 기운",
     description:
       "등불 같은 불과 늦여름의 마른 흙이 만난 2027년, 재물·직장·건강 흐름을 사주 논리로 읽는 법.",
-    url: "https://saju2026.com/guide/jeongmi-2027",
-    siteName: "saju2026.com",
-    images: ["https://saju2026.com/og-welcome.png"],
+    url: "https://saju-free.vercel.app/guide/jeongmi-2027",
+    siteName: "saju-free.vercel.app",
+    images: ["https://saju-free.vercel.app/og-welcome.png"],
     locale: "ko_KR",
     type: "article",
   },
@@ -38,9 +38,9 @@ const articleJsonLd = {
   inLanguage: "ko-KR",
   datePublished: "2026-11-24",
   dateModified: "2026-11-24",
-  author: { "@type": "Organization", name: "saju2026.com" },
-  publisher: { "@type": "Organization", name: "saju2026.com", url: "https://saju2026.com" },
-  mainEntityOfPage: "https://saju2026.com/guide/jeongmi-2027",
+  author: { "@type": "Organization", name: "saju-free.vercel.app" },
+  publisher: { "@type": "Organization", name: "saju-free.vercel.app", url: "https://saju-free.vercel.app" },
+  mainEntityOfPage: "https://saju-free.vercel.app/guide/jeongmi-2027",
 };
 
 export default function Jeongmi2027Page() {

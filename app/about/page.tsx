@@ -5,11 +5,11 @@ import SiteFooter from "../components/SiteFooter";
 const CONTACT_EMAIL = "person.bk.scholarship@gmail.com";
 
 export const metadata: Metadata = {
-  title: "사이트 소개와 문의 | saju2026.com",
+  title: "사이트 소개와 문의 | saju-free.vercel.app",
   description:
-    "saju2026.com은 2027년 정미년(丁未年) 사주팔자와 자미두수 명반을 무료로 풀어 주는 운세 정보 서비스입니다. 계산 방식과 오픈소스 엔진, AI 해석 원리, 콘텐츠 편집 원칙, 운영자 문의처를 안내합니다.",
+    "saju-free.vercel.app은 2027년 정미년(丁未年) 사주팔자와 자미두수 명반을 무료로 풀어 주는 운세 정보 서비스입니다. 계산 방식과 오픈소스 엔진, AI 해석 원리, 콘텐츠 편집 원칙, 운영자 문의처를 안내합니다.",
   keywords: [
-    "saju2026 소개",
+    "saju-free 소개",
     "사주 사이트 소개",
     "자미두수 무료",
     "2027 정미년 운세",
@@ -18,15 +18,15 @@ export const metadata: Metadata = {
     "운세 사이트 문의",
   ],
   alternates: {
-    canonical: "https://saju2026.com/about",
+    canonical: "https://saju-free.vercel.app/about",
   },
   openGraph: {
-    title: "사이트 소개와 문의 | saju2026.com",
+    title: "사이트 소개와 문의 | saju-free.vercel.app",
     description:
       "2027년 정미년 사주·자미두수 무료 운세 서비스의 계산 방식, AI 해석 원리, 편집 원칙과 문의처를 안내합니다.",
-    url: "https://saju2026.com/about",
-    siteName: "saju2026.com",
-    images: ["https://saju2026.com/og-welcome.png"],
+    url: "https://saju-free.vercel.app/about",
+    siteName: "saju-free.vercel.app",
+    images: ["https://saju-free.vercel.app/og-welcome.png"],
     locale: "ko_KR",
     type: "website",
   },
@@ -37,13 +37,13 @@ const aboutJsonLd = {
   "@type": "AboutPage",
   name: "사이트 소개와 문의",
   description:
-    "2027년 정미년 사주팔자·자미두수 무료 운세 서비스 saju2026.com의 목적, 계산 방식, AI 해석 원리, 편집 원칙과 운영자 문의 안내.",
+    "2027년 정미년 사주팔자·자미두수 무료 운세 서비스 saju-free.vercel.app의 목적, 계산 방식, AI 해석 원리, 편집 원칙과 운영자 문의 안내.",
   inLanguage: "ko-KR",
-  url: "https://saju2026.com/about",
+  url: "https://saju-free.vercel.app/about",
   mainEntity: {
     "@type": "Organization",
-    name: "saju2026.com",
-    url: "https://saju2026.com",
+    name: "saju-free.vercel.app",
+    url: "https://saju-free.vercel.app",
     email: CONTACT_EMAIL,
     description:
       "전통 사주명리학과 자미두수 12궁을 바탕으로 2027년 정미년 운세를 무료로 제공하는 정보 서비스.",
@@ -92,7 +92,7 @@ export default function AboutPage() {
         <article className="rounded-2xl border border-slate-200 bg-white p-6 md:p-9">
           <p className="text-xs font-semibold tracking-wide text-purple-600">사이트 안내</p>
           <h1 className="mt-2 text-3xl font-bold tracking-tight text-slate-900">
-            saju2026.com 소개와 문의
+            saju-free.vercel.app 소개와 문의
           </h1>
           <p className="mt-3 text-sm text-slate-400">최종 수정 2026년 11월 24일</p>
 
@@ -102,7 +102,7 @@ export default function AboutPage() {
                 왜 이 사이트를 만들었는가
               </h2>
               <p>
-                saju2026.com은 2027년 정미년(丁未年, 붉은 양의 해)을 앞두고, 전통 사주명리학과
+                saju-free.vercel.app은 2027년 정미년(丁未年, 붉은 양의 해)을 앞두고, 전통 사주명리학과
                 자미두수(紫微斗數)를 같은 자리에서 무료로 볼 수 있게 만든 정보 서비스입니다.
                 운세 사이트는 대개 결과만 짧게 보여 주고 끝나기 때문에, 그 결과가 어떤 계산과 어떤
                 이론에서 나왔는지 알기 어렵습니다. 이 사이트는 반대로 갑니다. 생년월일시로 세운
@@ -277,7 +277,7 @@ export default function AboutPage() {
             <section>
               <h2 className="mb-2 text-xl font-bold text-slate-900">운영자와 문의</h2>
               <p>
-                saju2026.com은 법인 없이 개인이 직접 만들고 운영하는 정보 서비스입니다. 명리학과
+                saju-free.vercel.app은 법인 없이 개인이 직접 만들고 운영하는 정보 서비스입니다. 명리학과
                 자미두수를 공부하면서 정리한 내용을 무료로 나누는 것이 목적이고, 상업적 제휴나
                 유료 상담은 하지 않습니다.
               </p>

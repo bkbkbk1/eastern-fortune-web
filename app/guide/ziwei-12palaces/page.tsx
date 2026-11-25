@@ -6,14 +6,14 @@ export const metadata: Metadata = {
     "자미두수 명반의 명궁과 신궁, 명궁부터 부모궁까지 12궁이 보여주는 삶의 영역, 10년 단위 대한과 해마다의 유년, 그리고 사주와 자미두수의 차이를 정리한 해설입니다.",
   keywords: ["자미두수", "자미두수 12궁", "명궁", "신궁", "대한", "유년", "삼방사정", "사주와 자미두수 차이"],
   alternates: {
-    canonical: "https://saju2026.com/guide/ziwei-12palaces",
+    canonical: "https://saju-free.vercel.app/guide/ziwei-12palaces",
   },
   openGraph: {
     title: "자미두수 12궁과 대한·유년 — 명궁·신궁 쉽게 이해하기",
     description: "12궁의 의미와 대한·유년이 겹치는 방식, 사주와 무엇이 다른지 정리했습니다.",
-    url: "https://saju2026.com/guide/ziwei-12palaces",
-    siteName: "saju2026.com",
-    images: ["https://saju2026.com/og-welcome.png"],
+    url: "https://saju-free.vercel.app/guide/ziwei-12palaces",
+    siteName: "saju-free.vercel.app",
+    images: ["https://saju-free.vercel.app/og-welcome.png"],
     locale: "ko_KR",
     type: "article",
   },
@@ -28,9 +28,9 @@ const articleJsonLd = {
   inLanguage: "ko-KR",
   datePublished: "2026-11-16",
   dateModified: "2026-11-16",
-  author: { "@type": "Organization", name: "saju2026.com" },
-  publisher: { "@type": "Organization", name: "saju2026.com", url: "https://saju2026.com" },
-  mainEntityOfPage: "https://saju2026.com/guide/ziwei-12palaces",
+  author: { "@type": "Organization", name: "saju-free.vercel.app" },
+  publisher: { "@type": "Organization", name: "saju-free.vercel.app", url: "https://saju-free.vercel.app" },
+  mainEntityOfPage: "https://saju-free.vercel.app/guide/ziwei-12palaces",
 };
 
 const palaces = [
