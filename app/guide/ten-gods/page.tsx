@@ -18,15 +18,15 @@ export const metadata: Metadata = {
     "사주 용어",
   ],
   alternates: {
-    canonical: "https://saju-free.vercel.app/guide/ten-gods",
+    canonical: "https://sajuopen.com/guide/ten-gods",
   },
   openGraph: {
     title: "사주 십성 완벽 정리 — 열 가지 관계로 사람과 사건을 읽는 법",
     description:
       "비겁·식상·재성·관성·인성 열 가지 십성의 의미와 강약, 식상생재·관인상생 같은 조합까지 한 번에 정리합니다.",
-    url: "https://saju-free.vercel.app/guide/ten-gods",
-    siteName: "saju-free.vercel.app",
-    images: ["https://saju-free.vercel.app/og-welcome.png"],
+    url: "https://sajuopen.com/guide/ten-gods",
+    siteName: "sajuopen.com",
+    images: ["https://sajuopen.com/og-welcome.png"],
     locale: "ko_KR",
     type: "article",
   },
@@ -41,9 +41,9 @@ const articleJsonLd = {
   inLanguage: "ko-KR",
   datePublished: "2026-11-24",
   dateModified: "2026-11-24",
-  author: { "@type": "Organization", name: "saju-free.vercel.app" },
-  publisher: { "@type": "Organization", name: "saju-free.vercel.app", url: "https://saju-free.vercel.app" },
-  mainEntityOfPage: "https://saju-free.vercel.app/guide/ten-gods",
+  author: { "@type": "Organization", name: "sajuopen.com" },
+  publisher: { "@type": "Organization", name: "sajuopen.com", url: "https://sajuopen.com" },
+  mainEntityOfPage: "https://sajuopen.com/guide/ten-gods",
 };
 
 const tenGodRows = [

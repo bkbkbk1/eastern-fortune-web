@@ -15,8 +15,8 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-const SITE_URL = "https://saju-free.vercel.app";
-const SITE_TITLE = "2027 정미년 AI 사주 & 자미두수 운세 | saju-free.vercel.app";
+const SITE_URL = "https://sajuopen.com";
+const SITE_TITLE = "2027 정미년 AI 사주 & 자미두수 운세 | sajuopen.com";
 
 /*
  * Google AdSense 연동 지점.
@@ -37,7 +37,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: SITE_TITLE,
   description: SITE_DESCRIPTION,
-  applicationName: "saju-free.vercel.app",
+  applicationName: "sajuopen.com",
   keywords: [
     "2027 운세",
     "2027 정미년",
@@ -64,7 +64,7 @@ export const metadata: Metadata = {
     description:
       "AI가 풀어주는 2027년 정미년 사주·자미두수 운세. 재물운, 직업운, 건강운, 애정운 13가지 상세 해설을 무료로 확인하세요.",
     url: SITE_URL,
-    siteName: "saju-free.vercel.app",
+    siteName: "sajuopen.com",
     images: [
       {
         url: `${SITE_URL}/og-welcome.png`,

@@ -25,15 +25,15 @@ export const metadata: Metadata = {
     "정미년 합충",
   ],
   alternates: {
-    canonical: "https://saju-free.vercel.app/guide/zodiac-2027",
+    canonical: "https://sajuopen.com/guide/zodiac-2027",
   },
   openGraph: {
     title: "2027년 정미년 12띠별 운세 총정리",
     description:
       "열두 띠가 정미년의 미토와 맺는 합·충·형·해 관계와, 띠별로 조심할 지점과 살릴 지점을 정리했습니다.",
-    url: "https://saju-free.vercel.app/guide/zodiac-2027",
-    siteName: "saju-free.vercel.app",
-    images: ["https://saju-free.vercel.app/og-welcome.png"],
+    url: "https://sajuopen.com/guide/zodiac-2027",
+    siteName: "sajuopen.com",
+    images: ["https://sajuopen.com/og-welcome.png"],
     locale: "ko_KR",
     type: "article",
   },
@@ -48,9 +48,9 @@ const articleJsonLd = {
   inLanguage: "ko-KR",
   datePublished: "2026-11-24",
   dateModified: "2026-11-24",
-  author: { "@type": "Organization", name: "saju-free.vercel.app" },
-  publisher: { "@type": "Organization", name: "saju-free.vercel.app", url: "https://saju-free.vercel.app" },
-  mainEntityOfPage: "https://saju-free.vercel.app/guide/zodiac-2027",
+  author: { "@type": "Organization", name: "sajuopen.com" },
+  publisher: { "@type": "Organization", name: "sajuopen.com", url: "https://sajuopen.com" },
+  mainEntityOfPage: "https://sajuopen.com/guide/zodiac-2027",
 };
 
 const zodiacRelations = [

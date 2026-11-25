@@ -108,7 +108,7 @@ export const translations = {
         copy: "🔗 링크 복사",
         copied: "링크가 복사되었습니다!",
         title: "2027 정미년 AI 사주·자미두수 운세",
-        text: "AI가 풀어주는 2027년 정미년 사주·자미두수 운세, 나도 확인해보세요! 👉 https://saju-free.vercel.app",
+        text: "AI가 풀어주는 2027년 정미년 사주·자미두수 운세, 나도 확인해보세요! 👉 https://sajuopen.com",
         manualCopy: "아래 링크를 복사해서 공유하세요:",
         shareResult: "📋 내 사주 결과 공유하기"
       },
@@ -333,7 +333,7 @@ export const translations = {
         copy: "🔗 Copy link",
         copied: "Link copied!",
         title: "2027 Fire Sheep AI Saju & Zi Wei Fortune",
-        text: "Check out my 2027 Saju and Zi Wei Dou Shu reading 👉 https://saju-free.vercel.app",
+        text: "Check out my 2027 Saju and Zi Wei Dou Shu reading 👉 https://sajuopen.com",
         manualCopy: "Copy and share this link:",
         shareResult: "📋 Share my reading"
       },

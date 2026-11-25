@@ -17,15 +17,15 @@ export const metadata: Metadata = {
     "월운",
   ],
   alternates: {
-    canonical: "https://saju-free.vercel.app/guide/daewoon-saewoon",
+    canonical: "https://sajuopen.com/guide/daewoon-saewoon",
   },
   openGraph: {
     title: "대운과 세운 보는 법 — 10년의 흐름과 한 해의 사건",
     description:
       "대운수 계산부터 순행·역행, 대운과 세운을 겹쳐 읽는 법, 2027 정미년 세운의 작용까지 정리한 가이드.",
-    url: "https://saju-free.vercel.app/guide/daewoon-saewoon",
-    siteName: "saju-free.vercel.app",
-    images: ["https://saju-free.vercel.app/og-welcome.png"],
+    url: "https://sajuopen.com/guide/daewoon-saewoon",
+    siteName: "sajuopen.com",
+    images: ["https://sajuopen.com/og-welcome.png"],
     locale: "ko_KR",
     type: "article",
   },
@@ -40,9 +40,9 @@ const articleJsonLd = {
   inLanguage: "ko-KR",
   datePublished: "2026-11-24",
   dateModified: "2026-11-24",
-  author: { "@type": "Organization", name: "saju-free.vercel.app" },
-  publisher: { "@type": "Organization", name: "saju-free.vercel.app", url: "https://saju-free.vercel.app" },
-  mainEntityOfPage: "https://saju-free.vercel.app/guide/daewoon-saewoon",
+  author: { "@type": "Organization", name: "sajuopen.com" },
+  publisher: { "@type": "Organization", name: "sajuopen.com", url: "https://sajuopen.com" },
+  mainEntityOfPage: "https://sajuopen.com/guide/daewoon-saewoon",
 };
 
 const layers = [

@@ -1,19 +1,19 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "사주팔자 기초: 년주·월주·일주·시주와 음양오행·십신 | saju-free 가이드",
+  title: "사주팔자 기초: 년주·월주·일주·시주와 음양오행·십신 | sajuopen.com 가이드",
   description:
     "사주팔자 여덟 글자의 구조와 년주·월주·일주·시주가 뜻하는 바, 음양오행의 상생·상극, 십신(비겁·식상·재성·관성·인성)의 기초를 순서대로 설명한 입문 가이드입니다.",
   keywords: ["사주팔자 기초", "년주 월주 일주 시주", "음양오행", "상생상극", "십신", "비겁 식상 재성 관성 인성", "사주 보는 법"],
   alternates: {
-    canonical: "https://saju-free.vercel.app/guide/saju-basics",
+    canonical: "https://sajuopen.com/guide/saju-basics",
   },
   openGraph: {
     title: "사주팔자 기초: 네 기둥과 다섯 기운, 열 가지 관계",
     description: "년주·월주·일주·시주, 음양오행의 상생상극, 십신의 기초를 한 번에 정리합니다.",
-    url: "https://saju-free.vercel.app/guide/saju-basics",
-    siteName: "saju-free.vercel.app",
-    images: ["https://saju-free.vercel.app/og-welcome.png"],
+    url: "https://sajuopen.com/guide/saju-basics",
+    siteName: "sajuopen.com",
+    images: ["https://sajuopen.com/og-welcome.png"],
     locale: "ko_KR",
     type: "article",
   },
@@ -28,9 +28,9 @@ const articleJsonLd = {
   inLanguage: "ko-KR",
   datePublished: "2026-11-16",
   dateModified: "2026-11-16",
-  author: { "@type": "Organization", name: "saju-free.vercel.app" },
-  publisher: { "@type": "Organization", name: "saju-free.vercel.app", url: "https://saju-free.vercel.app" },
-  mainEntityOfPage: "https://saju-free.vercel.app/guide/saju-basics",
+  author: { "@type": "Organization", name: "sajuopen.com" },
+  publisher: { "@type": "Organization", name: "sajuopen.com", url: "https://sajuopen.com" },
+  mainEntityOfPage: "https://sajuopen.com/guide/saju-basics",
 };
 
 const fiveElements = [

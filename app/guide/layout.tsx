@@ -22,15 +22,15 @@ export const metadata: Metadata = {
     "사주 궁합",
   ],
   alternates: {
-    canonical: "https://saju-free.vercel.app/guide",
+    canonical: "https://sajuopen.com/guide",
   },
   openGraph: {
     title: "사주·자미두수 가이드 | 2027년 정미년 운세 읽는 법",
     description:
       "정미년의 의미부터 12띠 운세, 오행과 십성, 대운·세운, 궁합, 자미두수 14주성까지 — 운세를 제대로 읽기 위한 한국어 해설 가이드.",
-    url: "https://saju-free.vercel.app/guide",
-    siteName: "saju-free.vercel.app",
-    images: ["https://saju-free.vercel.app/og-welcome.png"],
+    url: "https://sajuopen.com/guide",
+    siteName: "sajuopen.com",
+    images: ["https://sajuopen.com/og-welcome.png"],
     locale: "ko_KR",
     type: "website",
   },

@@ -2,7 +2,7 @@
  * ads.txt for Google AdSense.
  *
  * NEXT_PUBLIC_ADSENSE_ID 에 게시자 ID(pub-xxxxxxxxxxxxxxxx)를 설정하면
- * https://saju-free.vercel.app/ads.txt 가 실제 내용으로 응답합니다.
+ * https://sajuopen.com/ads.txt 가 실제 내용으로 응답합니다.
  * 설정하지 않으면 404 를 반환하므로, 승인 전에 가짜 ID가 노출되지 않습니다.
  */
 // 환경변수를 요청 시점에 읽어, 값을 추가한 뒤 재배포 없이도 바로 반영되게 한다.

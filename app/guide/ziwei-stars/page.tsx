@@ -25,15 +25,15 @@ export const metadata: Metadata = {
     "삼방사정",
   ],
   alternates: {
-    canonical: "https://saju-free.vercel.app/guide/ziwei-stars",
+    canonical: "https://sajuopen.com/guide/ziwei-stars",
   },
   openGraph: {
     title: "자미두수 14주성 입문 — 열네 별의 성질과 명궁 해석",
     description:
       "자미·천기·태양부터 칠살·파군까지 열네 주성의 오행과 성질, 사화와 삼방사정을 정리한 입문 가이드.",
-    url: "https://saju-free.vercel.app/guide/ziwei-stars",
-    siteName: "saju-free.vercel.app",
-    images: ["https://saju-free.vercel.app/og-welcome.png"],
+    url: "https://sajuopen.com/guide/ziwei-stars",
+    siteName: "sajuopen.com",
+    images: ["https://sajuopen.com/og-welcome.png"],
     locale: "ko_KR",
     type: "article",
   },
@@ -48,9 +48,9 @@ const articleJsonLd = {
   inLanguage: "ko-KR",
   datePublished: "2026-11-24",
   dateModified: "2026-11-24",
-  author: { "@type": "Organization", name: "saju-free.vercel.app" },
-  publisher: { "@type": "Organization", name: "saju-free.vercel.app", url: "https://saju-free.vercel.app" },
-  mainEntityOfPage: "https://saju-free.vercel.app/guide/ziwei-stars",
+  author: { "@type": "Organization", name: "sajuopen.com" },
+  publisher: { "@type": "Organization", name: "sajuopen.com", url: "https://sajuopen.com" },
+  mainEntityOfPage: "https://sajuopen.com/guide/ziwei-stars",
 };
 
 const ziweiSystem = [

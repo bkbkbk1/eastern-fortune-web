@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 
-const SITE_URL = "https://saju-free.vercel.app";
+const SITE_URL = "https://sajuopen.com";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const lastModified = new Date();

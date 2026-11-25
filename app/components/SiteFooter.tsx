@@ -53,11 +53,11 @@ export default function SiteFooter() {
           </a>
         </p>
         <p className="mb-2 leading-relaxed">
-          saju-free.vercel.app의 모든 운세 해설은 동아시아 전통 명리·자미두수 이론을 바탕으로 AI가 생성한
+          sajuopen.com의 모든 운세 해설은 동아시아 전통 명리·자미두수 이론을 바탕으로 AI가 생성한
           오락 목적의 콘텐츠이며, 의료·법률·투자 등 전문적 판단을 대신하지 않습니다.
         </p>
         <p className="text-xs text-slate-400">
-          © 2026 saju-free.vercel.app · 사주·자미두수 계산 엔진: @orrery/core (MIT License)
+          © 2026 sajuopen.com · 사주·자미두수 계산 엔진: @orrery/core (MIT License)
         </p>
       </div>
     </footer>
