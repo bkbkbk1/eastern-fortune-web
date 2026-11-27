@@ -89,6 +89,12 @@ export const metadata: Metadata = {
     index: true,
     follow: true,
   },
+  verification: {
+    other: {
+      "google-site-verification": "Lhx6off4Bgvja2zSYt3gtNs0gPwmMpFDefAi-bQaukY",
+      "naver-site-verification": "42ec4478cd4127ec8f16c4f7c0bed704d0e0482a",
+    },
+  },
   ...(ADSENSE_CLIENT
     ? { other: { "google-adsense-account": `ca-${ADSENSE_CLIENT}` } }
     : {}),
